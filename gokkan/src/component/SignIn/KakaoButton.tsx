@@ -12,10 +12,9 @@ const StyledButton = styled.button`
 
 export default function KakaoButton() {
   const kakaoLogin = async () => {
-    const login = await window.Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:5173/signin',
+    await window.Kakao.Auth.authorize({
+      redirectUri: 'http://localhost:5173/signup',
     });
-    console.log(login);
   };
 
   return <StyledButton onClick={kakaoLogin} />;
