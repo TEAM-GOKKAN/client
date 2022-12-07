@@ -11,11 +11,12 @@ const StyledButton = styled.button`
 `;
 
 export default function KakaoButton() {
-  return (
-    <StyledButton
-      onClick={() => {
-        console.log('hi');
-      }}
-    />
-  );
+  const kakaoLogin = async () => {
+    const login = await window.Kakao.Auth.authorize({
+      redirectUri: 'http://localhost:5173/signin',
+    });
+    console.log(login);
+  };
+
+  return <StyledButton onClick={kakaoLogin} />;
 }

@@ -9,13 +9,11 @@ import { queryClientAtom } from 'jotai-tanstack-query';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider initialValues={[[queryClientAtom, queryClient]]}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Provider initialValues={[[queryClientAtom, queryClient]]}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </QueryClientProvider>
 );
