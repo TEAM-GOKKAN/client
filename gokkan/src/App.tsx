@@ -21,10 +21,10 @@ function App() {
           <Route path="expertworkdetail" element={<ExpertWorkDetailPage />} />
           <Route path="expertworklist" element={<ExpertWorkListPage />} />
           <Route path="setting" element={<SettingPage />} />
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="signin" element={<SignInPage />} />
-        <Route path="signup" element={<SignUpPage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );

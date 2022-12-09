@@ -5,30 +5,32 @@ import styled from 'styled-components';
 
 const NameWrapper = styled.div`
   display: flex;
-  font-size: 30px;
-  margin-top: 20px;
+  font-size: 18px;
+  margin-top: 3vh;
+  width: 100%;
   input {
-    padding-left: 10px;
-    margin-left: 10px;
-    font-size: 30px;
+    margin-left: calc(2vw + 18px);
+    padding-left: 2vw;
+    width: 70vw;
+    font-size: 18px;
   }
 `;
 
 const UserName = () => {
   const [name, setName] = useAtom(userNameAtom);
 
-  const inputNickName = (e) => {
+  const inputName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
   return (
     <NameWrapper>
-      <div>닉네임 : </div>
+      <div>이름</div>
       <input
         type="text"
-        placeholder="닉네임을 지어주세요"
+        placeholder="이름을 입력해주세요"
         value={name}
-        onChange={inputNickName}
+        onChange={inputName}
       />
     </NameWrapper>
   );
