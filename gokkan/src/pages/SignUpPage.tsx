@@ -3,7 +3,7 @@ import useCheckSignUp from '../component/SignUp/useCheckSignUp';
 import UserName from '../component/SignUp/UserName';
 import UserNickName from '../component/SignUp/UserNickName';
 import UserAddress from '../component/SignUp/UserAddress';
-import UserProfileImage from '../component/SignUp/UserProfileImageContainer';
+import UserProfileImageContainer from '../component/SignUp/UserProfileImageContainer';
 import UserPhone from '../component/SignUp/UserPhone';
 import SingUpConfirmButton from '../component/SignUp/SingUpConfirmButton';
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ const SignUpPage = () => {
 
   return (
     <SignUpWrapper>
-      <UserProfileImage />
+      <UserProfileImageContainer />
       <UserName />
       <UserNickName />
       <UserPhone />
