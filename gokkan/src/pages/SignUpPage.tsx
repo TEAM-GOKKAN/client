@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useCheckSignUp from '../component/SignUp/useCheckSignUp';
 import UserName from '../component/SignUp/UserName';
 import UserNickName from '../component/SignUp/UserNickName';
 import UserAddress from '../component/SignUp/UserAddress';
-import UserProfileImage from '../component/SignUp/UserProfileImage';
+import UserProfileImage from '../component/SignUp/UserProfileImageContainer';
 import UserPhone from '../component/SignUp/UserPhone';
 import SingUpConfirmButton from '../component/SignUp/SingUpConfirmButton';
 import styled from 'styled-components';
+import queryString from 'query-string';
 
 const SignUpWrapper = styled.div`
   width: 94vw;
@@ -20,6 +21,11 @@ const SignUpWrapper = styled.div`
 
 const SignUpPage = () => {
   // const checkSignIn = useCheckSignUp();
+
+  useEffect(() => {
+    const queryParam = queryString.parse(window.location.search);
+    console.log(queryParam);
+  }, []);
   return (
     <SignUpWrapper>
       <UserProfileImage />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { userPhoneAtom } from '../../store/signUpAtom';
 import { useAtom } from 'jotai';
@@ -29,7 +29,21 @@ const UserPhone = () => {
   };
   const phoneCertificate = () => {
     const { IMP } = window;
-    console.log(IMP);
+    IMP.init('imp15165453');
+    IMP.certification(
+      {
+        merchant_uid: 'ORD20180131-0000011', // 주문 번호
+        m_redirect_url: 'http://127.0.0.1:5173/signup', //redirect
+      },
+      function (rsp) {
+        if (rsp.success) {
+          console.log('인증 성공');
+        } else {
+          console.log(rsp);
+          console.log('인증 실패');
+        }
+      }
+    );
   };
 
   useEffect(() => {
