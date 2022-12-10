@@ -24,8 +24,8 @@ const SignUpPage = () => {
 
   useEffect(() => {
     const queryParam = queryString.parse(window.location.search);
-    console.log(queryParam);
   }, []);
+
   return (
     <SignUpWrapper>
       <UserProfileImage />

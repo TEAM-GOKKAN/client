@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ProfileWrapper = styled.div`
+const ProfileImgWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,19 +25,33 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-const UserProfileImage = () => {
+//props 타입 정리
+type Info = {
+  imgUrl: string;
+  profileChangeButtonClick: () => void;
+  changeImg: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  fileInputRef: null | React.RefObject<HTMLInputElement>;
+  warn: string;
+};
+type InfoProps = {
+  info: Info;
+};
+
+const UserProfileImage = ({ info }: InfoProps) => {
+  const { imgUrl, profileChangeButtonClick, changeImg, fileInputRef, warn } =
+    info;
   return (
-    <ProfileWrapper>
+    <ProfileImgWrapper>
       <img alt="유저 프로필 이미지" src={imgUrl} />
       <button onClick={profileChangeButtonClick}>프로필 이미지 변경</button>
       <input
         type="file"
         accept="image/jpg,impge/png,image/jpeg,image/gif"
         onChange={changeImg}
-        ref={fileInput}
+        ref={fileInputRef}
       />
       {warn !== '' && <p>*{warn}</p>}
-    </ProfileWrapper>
+    </ProfileImgWrapper>
   );
 };
 

@@ -9,8 +9,8 @@ const resizeFileToFile = (file: File) =>
       'JPEG',
       100,
       0,
-      (file) => {
-        resolve(file);
+      (newfile) => {
+        resolve(newfile);
       },
       'file'
     );
