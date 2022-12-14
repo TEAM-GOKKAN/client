@@ -7,6 +7,7 @@ const rawImageFileAtom = atom<File[]>([]);
 const productNameAtom = atom('');
 const firstDepthCategoryAtom = atom('');
 const secondDepthCategoryAtom = atom('');
+const productStartPriceAtom = atom('');
 
 export {
   uploadImageUrlAtom,
@@ -15,4 +16,5 @@ export {
   productNameAtom,
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
+  productStartPriceAtom,
 };
