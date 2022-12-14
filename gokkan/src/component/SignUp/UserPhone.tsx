@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { userPhoneAtom } from '../../store/signUpAtom';
 import { useAtom } from 'jotai';
+import queryString from 'query-string';
 
 const PhoneWrapper = styled.div`
   display: flex;
@@ -28,21 +29,19 @@ const UserPhone = () => {
     }
   };
   const phoneCertificate = () => {
+    if (phoneNumber.length !== 13) {
+      window.alert('휴대번호를 모두 입력해주세요');
+      return;
+    }
+    //@ts-ignore
     const { IMP } = window;
     IMP.init('imp15165453');
     IMP.certification(
       {
         merchant_uid: 'ORD20180131-0000011', // 주문 번호
-        m_redirect_url: 'http://127.0.0.1:5173/signup', //redirect
+        m_redirect_url: 'http://localhost:5173/signup', //redirect
       },
-      function (rsp) {
-        if (rsp.success) {
-          console.log('인증 성공');
-        } else {
-          console.log(rsp);
-          console.log('인증 실패');
-        }
-      }
+      () => {}
     );
   };
 
@@ -58,6 +57,16 @@ const UserPhone = () => {
       );
     }
   }, [phoneNumber]);
+
+  useEffect(() => {
+    const queryParam = queryString.parse(window.location.search);
+    const uid = queryParam?.imp_uid;
+    const success = queryParam?.success;
+    if (success) {
+      console.log(uid);
+    }
+    console.log(uid, success);
+  }, []);
 
   return (
     <PhoneWrapper>

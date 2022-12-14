@@ -8,7 +8,7 @@ const useCheckSignUp = () => {
   useEffect(() => {
     const queryParam = queryString.parse(window.location.search);
     const code = queryParam?.code;
-    mutate(code);
+    // mutate(code);
   }, []);
 
   return post;
