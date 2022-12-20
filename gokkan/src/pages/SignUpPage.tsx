@@ -1,38 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import useCheckSignUp from '../component/SignUp/useCheckSignUp';
+import useGetAccessToken from '../component/SignUp/useGetAccessToken';
 import UserName from '../component/SignUp/UserName';
 import UserNickName from '../component/SignUp/UserNickName';
 import UserAddress from '../component/SignUp/UserAddress';
-// import UserProfileImageContainer from '../component/SignUp/UserProfileImageContainer';
+import UserProfileImageContainer from '../component/SignUp/UserProfileImageContainer';
 import UserPhone from '../component/SignUp/UserPhone';
 import SingUpConfirmButton from '../component/SignUp/SingUpConfirmButton';
+import useGetUserInfo from '../component/SignUp/useGetUserInfo';
 import styled from 'styled-components';
 import queryString from 'query-string';
 
 const SignUpWrapper = styled.div`
-  width: 94vw;
-  height: 94vh;
+  width: 100%;
+  height: 100%;
   display: flex;
-  border: 1px solid black;
   flex-direction: column;
-  padding-left: 2vw;
   position: relative;
 `;
 
 const SignUpPage = () => {
-  // const checkSignIn = useCheckSignUp();
-
-  useEffect(() => {
-    const queryParam = queryString.parse(window.location.search);
-  }, []);
-
+  useGetAccessToken();
+  useGetUserInfo();
   return (
     <SignUpWrapper>
-      {/* <UserProfileImageContainer /> */}
       <UserName />
       <UserNickName />
       <UserPhone />
       <UserAddress />
+      <UserProfileImageContainer />
       <SingUpConfirmButton />
     </SignUpWrapper>
   );

@@ -8,6 +8,23 @@ const productNameAtom = atom('');
 const firstDepthCategoryAtom = atom('');
 const secondDepthCategoryAtom = atom('');
 const productStartPriceAtom = atom('');
+const productDetailInfoAtom = atom('');
+const registerAtom = atom((get) => {
+  const imageFile = get(uploadImageFileAtom);
+  const productName = get(productNameAtom);
+  const firstCategory = get(firstDepthCategoryAtom);
+  const secondCategory = get(secondDepthCategoryAtom);
+  const price = get(productStartPriceAtom);
+  const detail = get(productDetailInfoAtom);
+  return {
+    imageFile,
+    productName,
+    firstCategory,
+    secondCategory,
+    price,
+    detail,
+  };
+});
 
 export {
   uploadImageUrlAtom,
@@ -17,4 +34,6 @@ export {
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
   productStartPriceAtom,
+  productDetailInfoAtom,
+  registerAtom,
 };

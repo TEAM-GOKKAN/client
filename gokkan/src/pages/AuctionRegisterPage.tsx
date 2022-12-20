@@ -3,6 +3,10 @@ import ImageUploader from '../component/register/ImageUploader';
 import ProductName from '../component/register/ProductName';
 import ProductCategorySelector from '../component/register/ProductCategorySelector';
 import ProductPrice from '../component/register/ProductPrice';
+import ProductDetailInfo from '../component/register/ProductDetailInfo';
+import RegisterSubmit from '../component/register/RegisterSubmit';
+import ProductFigure from '../component/register/ProductFigure';
+import ProductStyle from '../component/register/ProductStyle';
 import styled from 'styled-components';
 
 const RegisterWrapper = styled.div`
@@ -16,6 +20,10 @@ const AuctionRegister = () => {
       <ProductCategorySelector />
       <ProductPrice />
       <ImageUploader />
+      <ProductDetailInfo />
+      <RegisterSubmit />
+      <ProductFigure />
+      <ProductStyle />
     </RegisterWrapper>
   );
 };

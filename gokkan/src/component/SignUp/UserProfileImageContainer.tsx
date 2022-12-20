@@ -4,7 +4,10 @@ import {
   userProfileImageUrlAtom,
   userProfileImageFileAtom,
 } from '../../store/signUpAtom';
-import { fileListToBase64 } from '../../utils/resizeFile';
+import {
+  fileListToBase64,
+  fileListToNewFileList,
+} from '../../utils/resizeFile';
 import UserProfileImage from './UserProfileImage';
 
 const UserProfileImageContainer = () => {
@@ -19,10 +22,13 @@ const UserProfileImageContainer = () => {
     const type = fileUploaded.type?.split('/')[0];
     if (type === 'image') {
       setWarn('');
-      fileListToBase64([fileUploaded]).then((uriList) => setImgUrl(uriList[0]));
-      setImgFile(fileUploaded);
+      fileListToBase64([fileUploaded]).then((uriList) => {
+        setImgUrl(uriList[0]);
+      });
+      fileListToNewFileList([fileUploaded]).then((resizedFile) => {
+        setImgFile(resizedFile[0]);
+      });
     } else {
-      // 파일의 타입이 image가 아닐 때 처리를 해 줌
       setWarn('이미지 파일만 입력 가능합니다.');
     }
   };

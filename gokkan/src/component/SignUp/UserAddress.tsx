@@ -6,17 +6,38 @@ import DaumPostcode from 'react-daum-postcode';
 
 const AddressWrapper = styled.div`
   display: flex;
-  font-size: 18px;
-  margin-top: 3vh;
-  .address {
-    margin-left: calc(2vw + 18px);
-    padding-left: 2vw;
-    width: 50vw;
-    font-size: 18px;
-    border: 1px solid black;
+  flex-direction: column;
+  margin-bottom: 36px;
+  .address-find {
+    width: 100%;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    .address {
+      width: calc(100% - 84px);
+      height: 42px;
+      background-color: var(--color-brown100);
+      padding: 10px 12px;
+      font-family: 'Noto Sans KR';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 22px;
+      /* identical to box height */
+
+      letter-spacing: -0.04em;
+    }
+    button {
+      width: 80px;
+      height: 42px;
+      background-color: var(--color-purple);
+      color: var(--color-brown100);
+      margin-left: 10px;
+    }
   }
-  button {
-    margin-left: 2vw;
+  input {
+    border: none;
+    padding: 10px 12px;
   }
 `;
 
@@ -66,20 +87,18 @@ const UserAddress = () => {
   };
 
   return (
-    <>
-      <AddressWrapper>
-        <div>주소</div>
+    <AddressWrapper>
+      <div>주소</div>
+      <div className="address-find">
         <div className="address">{address}</div>
-        <button onClick={handleAddressButtonClick}>주소찾기</button>
-      </AddressWrapper>
-      <AddressDetailWrapper>
-        <input
-          type="text"
-          placeholder="상세 주소를 입력해주세요"
-          value={addressDetail}
-          onChange={inputAddressDetail}
-        />
-      </AddressDetailWrapper>
+        <button onClick={handleAddressButtonClick}>주소 검색</button>
+      </div>
+      <input
+        type="text"
+        placeholder="상세 주소를 입력해주세요"
+        value={addressDetail}
+        onChange={inputAddressDetail}
+      />
       {showAddress && (
         <AddressFindWrapper>
           <div className="daum-address">
@@ -87,7 +106,7 @@ const UserAddress = () => {
           </div>
         </AddressFindWrapper>
       )}
-    </>
+    </AddressWrapper>
   );
 };
 

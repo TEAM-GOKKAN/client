@@ -1,27 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { userPhoneAtom } from '../../store/signUpAtom';
+import { userPhoneAtom, userPhoneCheckAtom } from '../../store/signUpAtom';
 import { useAtom } from 'jotai';
 import queryString from 'query-string';
+import axios from 'axios';
 
 const PhoneWrapper = styled.div`
   display: flex;
-  font-size: 18px;
-  margin-top: 3vh;
-  input {
-    margin-left: 2vw;
-    padding-left: 2vw;
-    width: 50vw;
-    font-size: 18px;
+  flex-direction: column;
+  margin-bottom: 36px;
+  .button-wrapper {
+    input {
+      width: calc(100% - 86px);
+      background-color: #f4f2f1;
+      padding: 10px 12px;
+      margin-top: 10px;
+      border: none;
+    }
+    button {
+      width: 76px;
+      margin-left: 10px;
+      background-color: var(--color-brown200);
+      height: 42px;
+      &[data-submit='true'][data-check=''] {
+        background-color: var(--color-brown300);
+        color: var(--color-brown100);
+      }
+      &[data-check='false'] {
+        background-color: var(--color-orange);
+        color: var(--color-brown100);
+      }
+    }
   }
-  button {
-    margin-left: 5vw;
-    width: 15vw;
+  .available {
+    font-size: 12px;
+    color: var(--color-purple);
+    margin-top: 4px;
+  }
+  .unavailable {
+    font-size: 12px;
+    color: var(--color-orange);
+    margin-top: 4px;
   }
 `;
 
 const UserPhone = () => {
   const [phoneNumber, setPhoneNumber] = useAtom(userPhoneAtom);
+  const [phoneCheck, setPhoneCheck] = useAtom(userPhoneCheckAtom);
+  const [submitPossible, setSubmitPossible] = useState(false);
+
   const phoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regex = /^[0-9\b -]{0,13}$/;
     if (regex.test(e.target.value)) {
@@ -30,12 +57,11 @@ const UserPhone = () => {
   };
   const phoneCertificate = () => {
     if (phoneNumber.length !== 13) {
-      window.alert('휴대번호를 모두 입력해주세요');
       return;
     }
     //@ts-ignore
     const { IMP } = window;
-    IMP.init('imp15165453');
+    IMP.init('imp36780150');
     IMP.certification(
       {
         merchant_uid: 'ORD20180131-0000011', // 주문 번호
@@ -55,29 +81,62 @@ const UserPhone = () => {
           .replace(/-/g, '')
           .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
       );
+      setSubmitPossible(true);
+    } else {
+      setSubmitPossible(false);
     }
   }, [phoneNumber]);
 
   useEffect(() => {
+    setPhoneCheck('');
     const queryParam = queryString.parse(window.location.search);
     const uid = queryParam?.imp_uid;
     const success = queryParam?.success;
     if (success) {
-      console.log(uid);
+      axios
+        .get('http://3.38.59.40:8080/api/v1/certification', {
+          params: { imp_uid: uid },
+        })
+        .then(({ data }) => {
+          const targetPhoneNumber = phoneNumber.replace(/-/g, '');
+          if (data === targetPhoneNumber) {
+            setPhoneCheck('true');
+          } else {
+            setPhoneCheck('false');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    console.log(uid, success);
   }, []);
 
   return (
     <PhoneWrapper>
       <div>휴대폰</div>
-      <input
-        type="text"
-        onChange={phoneInput}
-        value={phoneNumber}
-        placeholder="010-xxxx-xxxx"
-      />
-      <button onClick={phoneCertificate}>인증</button>
+      <div className="button-wrapper">
+        <input
+          type="text"
+          onChange={phoneInput}
+          value={phoneNumber}
+          placeholder="010-xxxx-xxxx"
+          data-check={phoneCheck}
+        />
+        <button
+          onClick={phoneCertificate}
+          data-submit={submitPossible}
+          data-check={phoneCheck}
+        >
+          {phoneCheck === 'false' && '재시도'}
+          {phoneCheck !== 'false' && '인증'}
+        </button>
+      </div>
+      {phoneCheck === 'true' && (
+        <div className="available">본인인증을 완료하였습니다.</div>
+      )}
+      {phoneCheck === 'false' && (
+        <div className="unavailable">본인인증에 실패하셨습니다.</div>
+      )}
     </PhoneWrapper>
   );
 };

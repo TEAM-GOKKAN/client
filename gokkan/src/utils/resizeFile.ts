@@ -16,8 +16,11 @@ const fileListToBase64 = async (fileList: File[]) => {
   // here will be array of promisified functions
   const promises: Promise<string>[] = [];
 
+  // 파일 전처리
+  const newFileList = await fileListToNewFileList(fileList);
+
   // loop through fileList with for loop
-  fileList.forEach((file) => {
+  newFileList.forEach((file) => {
     promises.push(getBase64(file));
   });
 

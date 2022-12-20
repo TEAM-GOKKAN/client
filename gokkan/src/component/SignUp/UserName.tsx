@@ -5,14 +5,14 @@ import styled from 'styled-components';
 
 const NameWrapper = styled.div`
   display: flex;
-  font-size: 18px;
-  margin-top: 3vh;
-  width: 100%;
+  flex-direction: column;
+  margin-bottom: 36px;
   input {
-    margin-left: calc(2vw + 18px);
-    padding-left: 2vw;
-    width: 70vw;
-    font-size: 18px;
+    width: 100%;
+    background-color: #f4f2f1;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border: none;
   }
 `;
 
@@ -25,9 +25,10 @@ const UserName = () => {
 
   return (
     <NameWrapper>
-      <div>이름</div>
+      <label htmlFor="name">이름</label>
       <input
         type="text"
+        id="name"
         placeholder="이름을 입력해주세요"
         value={name}
         onChange={inputName}

@@ -3,16 +3,12 @@ import styled from 'styled-components';
 const ProfileImgWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3vh;
   width: 100%;
-  height: 30%;
+  margin-bottom: 100px;
   img {
-    width: 60%;
-    height: 60%;
-    border: 1px solid black;
-    border-radius: 50%;
+    margin-top: 10px;
+    width: 100%;
+    height: calc(100vw - 24px);
   }
   button {
     margin-top: 2vh;
@@ -42,8 +38,12 @@ const UserProfileImage = ({ info }: InfoProps) => {
     info;
   return (
     <ProfileImgWrapper>
-      <img alt="유저 프로필 이미지" src={imgUrl} />
-      <button onClick={profileChangeButtonClick}>프로필 이미지 변경</button>
+      <div>프로필 사진</div>
+      <img
+        alt="유저 프로필 이미지"
+        src={imgUrl}
+        onClick={profileChangeButtonClick}
+      />
       <input
         type="file"
         accept="image/jpg,impge/png,image/jpeg,image/gif"

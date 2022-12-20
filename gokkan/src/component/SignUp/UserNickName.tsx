@@ -1,76 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   userNickNameAtom,
   userNickNameCheckAtom,
 } from '../../store/signUpAtom';
 import { useAtom } from 'jotai';
-import { atomsWithQuery } from 'jotai-tanstack-query';
 import axios from 'axios';
 import styled from 'styled-components';
 
 const NickNameWrapper = styled.div`
-  position: relative;
   display: flex;
-  font-size: 18px;
-  margin-top: 3vh;
+  flex-direction: column;
+  margin-bottom: 36px;
   input {
-    margin-left: 2vw;
-    padding-left: 2vw;
-    width: 70vw;
-    font-size: 18px;
-    &[data-duplicate=''] {
-      border: 1px solid black;
-    }
-    &[data-duplicate='false'] {
-      border: 2px solid red;
-    }
-    &[data-duplicate='true'] {
-      border: 2px solid green;
-    }
-    &[data-duplicate='checking'] {
-      border: 2px solid orange;
-    }
+    width: 100%;
+    background-color: #f4f2f1;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border: none;
   }
   .available {
     font-size: 12px;
-    color: green;
-    position: absolute;
-    top: 3vh;
-    left: 15vw;
+    color: var(--color-purple);
+    margin-top: 4px;
   }
   .unavailable {
     font-size: 12px;
-    color: red;
-    position: absolute;
-    top: 3vh;
-    left: 15vw;
-  }
-  .checking {
-    font-size: 12px;
-    color: orange;
-    position: absolute;
-    top: 3vh;
-    left: 15vw;
+    color: --color-orange;
   }
 `;
 
 const UserNickName = () => {
   const [nickName, setNickName] = useAtom(userNickNameAtom);
-  const [isDuplicate, setIsDuplicate] = useAtom(userNickNameCheckAtom);
+  const [nickNameCheck, setNickNameCheck] = useAtom(userNickNameCheckAtom);
 
   const inputNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
   };
 
   const checkDuplicate = () => {
-    // const [checkNickNameAtom] = atomsWithQuery((get) => ({
-    //   queryKey: ['users', get(userNickNameAtom)],
-    //   queryFn: async ({ queryKey: [, id] }) => {
-    //     const res = await axios(`/${id}`);
-    //     return res.data;
-    //   },
-    // }));
+    if (nickName === '') return;
+    const baseUrl = 'http://3.38.59.40:8080/api/v1/users/nickName/duplicate';
+    axios
+      .get(baseUrl, { params: { nickName } })
+      .then(({ data }) => {
+        if (!data) {
+          setNickNameCheck('true');
+        } else {
+          setNickNameCheck('false');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    if (nickName === '') {
+      setNickNameCheck('');
+    }
+  }, [nickName]);
 
   return (
     <NickNameWrapper>
@@ -81,16 +69,13 @@ const UserNickName = () => {
         value={nickName}
         onChange={inputNickName}
         onBlur={checkDuplicate}
-        data-duplicate={isDuplicate}
+        data-duplicate={nickNameCheck}
       />
-      {isDuplicate === 'true' && (
-        <div className="available">* 사용 가능한 닉네임입니다.</div>
+      {nickNameCheck === 'true' && (
+        <div className="available">사용 가능한 닉네임입니다.</div>
       )}
-      {isDuplicate === 'false' && (
-        <div className="unavailable">* 중복된 닉네임입니다.</div>
-      )}
-      {isDuplicate === 'checking' && (
-        <div className="checking">* 닉네임 중복 확인 중입니다.</div>
+      {nickNameCheck === 'false' && (
+        <div className="unavailable">중복된 닉네임입니다.</div>
       )}
     </NickNameWrapper>
   );
