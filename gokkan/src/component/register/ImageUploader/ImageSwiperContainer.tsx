@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAtom } from 'jotai';
-import {
-  uploadImageUrlAtom,
-  uploadImageFileAtom,
-  rawImageFileAtom,
-} from '../../../store/registerAtom';
+import { useAtom, PrimitiveAtom } from 'jotai';
 import ImageSuspense from './ImageSuspense';
 import {
   fileListToBase64,
@@ -12,12 +7,10 @@ import {
 } from '../../../utils/resizeFile';
 import ImageSwiper from './ImageSwiper';
 
-const ImageSwiperContainer = () => {
-  const [imageUrlList, setImageUrlList] = useAtom(uploadImageUrlAtom);
-  const [imageFileList, setImageFileList] = useAtom(uploadImageFileAtom);
-  const [rawImageFileList, setRawImageFileList] = useAtom(rawImageFileAtom);
+const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
+  const [imageUrlList, setImageUrlList] = useAtom(urlAtom);
+  const [imageFileList, setImageFileList] = useAtom(fileAtom);
   const [isLoading, setIsLoading] = useState(false);
-  const [rawImageCount, setRawImageCount] = useState(0);
 
   const pretreatmentImageFileList = async (rawImageFileList: File[]) => {
     if (rawImageFileList.length === 0) return;
@@ -44,10 +37,6 @@ const ImageSwiperContainer = () => {
         return true;
       }
     }
-    // 원본 파일 삭제
-    setRawImageFileList((pre) => {
-      return pre.filter(deleteTarget);
-    });
     // url 삭제
     setImageUrlList((pre) => {
       return pre.filter(deleteTarget);
@@ -58,14 +47,6 @@ const ImageSwiperContainer = () => {
     });
   };
 
-  useEffect(() => {
-    // 이미지가 추가된 경우에만 이미지 추가 로직 작동해주기
-    if (rawImageFileList.length > rawImageCount) {
-      pretreatmentImageFileList(rawImageFileList);
-    }
-    setRawImageCount(rawImageFileList.length);
-  }, [rawImageFileList.length]);
-
   if (isLoading) {
     return <ImageSuspense />;
   }
@@ -74,8 +55,14 @@ const ImageSwiperContainer = () => {
     <ImageSwiper
       handleDeleteButton={handleDeleteButton}
       imageUrlList={imageUrlList}
+      preTreatment={pretreatmentImageFileList}
     />
   );
+};
+
+type ImageUploaderPropType = {
+  fileAtom: PrimitiveAtom<unknown[] | File[]>;
+  urlAtom: PrimitiveAtom<string[]>;
 };
 
 export default ImageSwiperContainer;

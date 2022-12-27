@@ -1,19 +1,25 @@
 import React from 'react';
-import { productStartPriceAtom } from '../../store/registerAtom';
+import { productStartPriceAtom } from '../../../store/registerAtom';
 import { useAtom } from 'jotai';
 import styled from 'styled-components';
 
 const StartPriceWrapper = styled.div`
-  width: 95vw;
-  height: 5vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .title {
+    margin-bottom: 10px;
+  }
   .price-holder {
     display: flex;
+    align-items: center;
     input {
       text-align: right;
-      width: 50vw;
+      width: 100%;
+      border: none;
+    }
+    .scale {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      background-color: var(--color-brown100);
     }
   }
 `;
@@ -30,7 +36,7 @@ const ProductPrice = () => {
 
   return (
     <StartPriceWrapper>
-      시작가격:
+      <div className="title">시작가</div>
       <div className="price-holder">
         <input
           type="text"
@@ -38,7 +44,7 @@ const ProductPrice = () => {
           onChange={handleStartValue}
           value={startPrice}
         />
-        원
+        <div className="scale">원</div>
       </div>
     </StartPriceWrapper>
   );

@@ -1,39 +1,74 @@
 import { atom } from 'jotai';
 import { atomsWithQuery } from 'jotai-tanstack-query';
 
+// productId
+const productIdAtom = atom('');
+
+// register page one
 const uploadImageUrlAtom = atom<string[]>([]);
 const uploadImageFileAtom = atom<File[] | unknown[]>([]);
-const rawImageFileAtom = atom<File[]>([]);
-const productNameAtom = atom('');
+const examineImageUrlAtom = atom<string[]>([]);
+const examineImageFileAtom = atom<File[] | unknown[]>([]);
+
+// register page two
 const firstDepthCategoryAtom = atom('');
 const secondDepthCategoryAtom = atom('');
+const productNameAtom = atom('');
+const productBrandAtom = atom('');
+const productDesignerAtom = atom('');
+const productStyleAtom = atom('');
+const productTypeAtom = atom('');
+
+// register page three
+const productMaterialAtom = atom('');
+const productAgeAtom = atom('');
+const productWidthAtom = atom('');
+const productLengthAtom = atom('');
+const productHeightAtom = atom('');
+const productConditionAtom = atom('');
+const productDetailConditionAtom = atom('');
+const productDescriptionAtom = atom('');
+
+// register page four
 const productStartPriceAtom = atom('');
-const productDetailInfoAtom = atom('');
+
+// for register submit
 const registerAtom = atom((get) => {
-  const imageFile = get(uploadImageFileAtom);
-  const productName = get(productNameAtom);
+  const itemId = Number(get(productIdAtom));
+  const name = get(productNameAtom);
+  const startPrice = Number(get(productStartPriceAtom));
   const firstCategory = get(firstDepthCategoryAtom);
   const secondCategory = get(secondDepthCategoryAtom);
   const price = get(productStartPriceAtom);
-  const detail = get(productDetailInfoAtom);
   return {
-    imageFile,
-    productName,
-    firstCategory,
-    secondCategory,
-    price,
-    detail,
+    itemId,
+    name,
+    startPrice,
+    category: secondCategory,
   };
 });
 
 export {
+  productIdAtom,
   uploadImageUrlAtom,
   uploadImageFileAtom,
-  rawImageFileAtom,
   productNameAtom,
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
   productStartPriceAtom,
-  productDetailInfoAtom,
   registerAtom,
+  examineImageUrlAtom,
+  examineImageFileAtom,
+  productBrandAtom,
+  productDesignerAtom,
+  productStyleAtom,
+  productTypeAtom,
+  productMaterialAtom,
+  productAgeAtom,
+  productWidthAtom,
+  productLengthAtom,
+  productHeightAtom,
+  productConditionAtom,
+  productDetailConditionAtom,
+  productDescriptionAtom,
 };

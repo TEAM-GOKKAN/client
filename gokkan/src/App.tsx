@@ -28,7 +28,10 @@ function App() {
           <Route path="test" element={<TestPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="register" element={<AuctionRegisterPage />} />
+        <Route
+          path="register/:pageNumber/:productId"
+          element={<AuctionRegisterPage />}
+        />
       </Routes>
     </Suspense>
   );

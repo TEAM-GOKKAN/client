@@ -12,10 +12,11 @@ const getCustomAxios = () => {
 
   customAxios.interceptors.request.use(
     (config) => {
-      const token = localAccessToken;
-      if (token) {
+      if (localAccessToken) {
         if (!config.headers) return config;
-        config.headers['Authorization'] = 'Bearer ' + token;
+        if (!config.headers.Authorization) {
+          config.headers['Authorization'] = 'Bearer ' + localAccessToken;
+        }
       }
       return config;
     },
@@ -34,15 +35,21 @@ const getCustomAxios = () => {
         // Access Token was expired
         if (err.response.status === 401 && !originalConfig._retry) {
           originalConfig._retry = true;
-
           try {
-            const rs = await customAxios.post('/auth/refresh', {
-              refreshToken: localRefreshToken,
-            });
-
-            const { accessToken } = rs.data;
+            const newAxios = axios.create();
+            delete newAxios.defaults.headers.common['Authorization'];
+            const rs = await newAxios.get(
+              'http://3.38.59.40:8080/api/v1/auth/refresh',
+              {
+                params: {
+                  refreshToken: localRefreshToken,
+                },
+              }
+            );
+            const accessToken = rs.data;
             setLocalAccessToken(accessToken);
 
+            originalConfig.headers.Authorization = 'Bearer ' + accessToken;
             return customAxios(originalConfig);
           } catch (_error) {
             return Promise.reject(_error);

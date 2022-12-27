@@ -5,13 +5,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import ImageDropZone from './ImageDropzone';
+import { BsTrash } from 'react-icons/Bs';
+import { PrimitiveAtom } from 'jotai';
 
 const SwiperWrapper = styled(Swiper)`
-  width: 90vw;
-  height: 90vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  .swiper-pagination {
+    top: 10px;
+  }
 `;
 const SwiperSliderWrapper = styled(SwiperSlide)`
   width: 100%;
@@ -23,27 +28,40 @@ const SwiperSliderWrapper = styled(SwiperSlide)`
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative;
+    flex-direction: column;
     img {
-      width: 80vw;
-      height: 80vw;
-      object-fit: cover;
+      width: 100%;
+      height: 258px;
+      object-fit: fill;
     }
     button {
-      width: 30vw;
-      color: red;
+      width: 100%;
+      height: 42px;
       border: none;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: #d9d6d4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .load-limit {
       position: absolute;
-      bottom: 10vw;
-      left: calc(50% - 15vw);
+      z-index: 20;
+      top: 10px;
+      right: 10px;
     }
   }
 `;
 
-const ImageSwiper = ({ imageUrlList, handleDeleteButton }: ImageSwiperProp) => {
+const ImageSwiper = ({
+  imageUrlList,
+  handleDeleteButton,
+  preTreatment,
+}: ImageSwiperProp) => {
   return (
     <SwiperWrapper
       modules={[Pagination]}
@@ -64,14 +82,15 @@ const ImageSwiper = ({ imageUrlList, handleDeleteButton }: ImageSwiperProp) => {
                   handleDeleteButton(index);
                 }}
               >
-                이미지 삭제
+                <BsTrash />
               </button>
+              <div className="load-limit">{imageUrlList.length}/5</div>
             </div>
           </SwiperSliderWrapper>
         );
       })}
       <SwiperSliderWrapper>
-        <ImageDropZone />
+        <ImageDropZone preTreatment={preTreatment} />
       </SwiperSliderWrapper>
     </SwiperWrapper>
   );
@@ -80,6 +99,7 @@ const ImageSwiper = ({ imageUrlList, handleDeleteButton }: ImageSwiperProp) => {
 type ImageSwiperProp = {
   imageUrlList: string[];
   handleDeleteButton: (targetIndex: number) => void;
+  preTreatment: (rawImageFileList: File[]) => void;
 };
 
 export default ImageSwiper;

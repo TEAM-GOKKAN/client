@@ -1,19 +1,21 @@
 import { DropEvent, useDropzone, FileRejection } from 'react-dropzone';
 import styled from 'styled-components';
-import { useAtom } from 'jotai';
-import { rawImageFileAtom } from '../../../store/registerAtom';
+import { BiImageAdd } from 'react-icons/bi';
 
 const StyledInputFileArea = styled.div`
-  width: 70vw;
-  height: 70vw;
-  border: 2px dashed black;
+  width: 100%;
+  height: 297px;
   display: flex;
   justify-content: center;
   align-items: center;
+  svg {
+    width: 72px;
+    height: 72px;
+    color: var(--color-brown200);
+  }
 `;
 
-const ImageDropZone = () => {
-  const [rawImage, setRawImage] = useAtom(rawImageFileAtom);
+const ImageDropZone = ({ preTreatment }: ImageDropzonePropType) => {
   // 파일이 입력되었을 때, 실행해줄 함수 선언
   const onDrop = <T extends File>(
     acceptedFiles: T[],
@@ -21,9 +23,7 @@ const ImageDropZone = () => {
     event: DropEvent
   ) => {
     if (acceptedFiles.length > 0) {
-      setRawImage((pre) => {
-        return [...pre, ...acceptedFiles];
-      });
+      preTreatment(acceptedFiles);
     }
   };
 
@@ -38,15 +38,13 @@ const ImageDropZone = () => {
   return (
     <StyledInputFileArea {...getRootProps()}>
       <input {...getInputProps()} />
-      <div>
-        {isDragActive ? (
-          <p>이미지 파일들을 여기에 넣어주세요</p>
-        ) : (
-          <p>이미지 파일들을 추가할 수 있습니다.</p>
-        )}
-      </div>
+      <BiImageAdd />
     </StyledInputFileArea>
   );
+};
+
+type ImageDropzonePropType = {
+  preTreatment: (rawImageFileList: File[]) => void;
 };
 
 export default ImageDropZone;
