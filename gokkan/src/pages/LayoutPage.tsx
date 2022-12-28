@@ -1,12 +1,19 @@
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import Header from '../components/Header/Header';
+
+const Main = styled.main`
+  margin-top: 32px;
+  padding: 0 16px;
+`;
 
 export default function LayoutPage() {
   return (
     <div>
-      <header>헤더 영역 입니다.</header>
-      <main>
+      <Header />
+      <Main>
         <Outlet />
-      </main>
+      </Main>
     </div>
   );
 }
