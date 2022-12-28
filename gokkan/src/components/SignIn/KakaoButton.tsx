@@ -40,6 +40,7 @@ export default function KakaoButton({ setSignIn }: SiginInType) {
             setSignIn(false);
             navigate('signup');
           } else {
+            console.log(data);
             setSignIn(false);
           }
         })

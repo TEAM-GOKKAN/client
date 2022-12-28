@@ -46,28 +46,28 @@ const setInitialUserInfo = atom(null, (get, set, update: InitialUserInfo) => {
 });
 const userInfoAtom = atom((get) => {
   const name = get(userNameAtom);
-  // const nickname = get(userNickNameAtom);
-  const adress = get(userAddressAtom);
-  // const adressDetail = get(userAddressDetailAtom);
+  const nickName = get(userNickNameAtom);
+  const address = get(userAddressAtom);
+  const addressDetail = get(userAddressDetailAtom);
   const phoneNumber = get(userPhoneAtom);
+  const cardNumber = get(userCardNumberAtom);
   return {
     name,
-    email: '',
+    nickName,
     phoneNumber,
     profileImageUrl: '',
-    adress,
-    cardNumber: '',
-    // nickname,
-    // adressDetail,
+    address,
+    addressDetail,
+    cardNumber,
   };
 });
 
 type InitialUserInfo = {
   name: string;
   profileImageUrl: string;
+  nickName?: string;
   address?: string;
   addressDetail?: string;
-  nickName?: string;
   phoneNumber?: string;
   cardNumber?: string;
 };

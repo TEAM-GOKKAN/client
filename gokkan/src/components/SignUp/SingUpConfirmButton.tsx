@@ -39,18 +39,21 @@ const SingUpConfirmButton = () => {
     if (
       nickNameCheck === 'true' &&
       phoneCheck === 'true' &&
-      userInfo?.adress !== '' &&
-      userInfo?.name !== ''
+      userInfo?.address !== '' &&
+      userInfo?.name !== '' &&
+      userInfo?.addressDetail !== ''
     ) {
       setSubmitPossible('true');
     } else {
       setSubmitPossible('false');
     }
-  }, [nickNameCheck, phoneCheck, userInfo?.adress, userInfo?.name]);
-
-  useEffect(() => {
-    console.log(submitPossible);
-  }, [submitPossible]);
+  }, [
+    nickNameCheck,
+    phoneCheck,
+    userInfo?.address,
+    userInfo?.name,
+    userInfo?.addressDetail,
+  ]);
 
   const handleUserInfoSubmit = () => {
     if (submitPossible !== 'true') return;
@@ -62,16 +65,15 @@ const SingUpConfirmButton = () => {
     transferData.append('requestUpdateDto', requestUpdateDto);
     transferData.append('profileImage', profileImageFile);
     customAxios
-      .put('api/v1/users', transferData, {
+      .patch('api/v1/users', transferData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {
-        console.log(res);
         // Atom에 저장된 값들을 전부 비워줌
         setClear('');
-        // 이전 페이지로 넘어감
+        // 이전 페이지로 넘어감(이게 제대로 안된 것 같은데)
         navigate(-1);
       })
       .catch((err) => {

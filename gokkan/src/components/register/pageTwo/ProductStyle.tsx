@@ -1,6 +1,6 @@
 import React from 'react';
 import { productStyleAtom } from '../../../store/registerAtom';
-import CategorySelector from '../../common/CategorySelector';
+import CategorySelector from '../../../components/common/CategorySelector';
 import { useAtom } from 'jotai';
 import styled from 'styled-components';
 

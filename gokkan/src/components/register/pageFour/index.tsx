@@ -12,7 +12,7 @@ const PageFour = () => {
   return (
     <PageFourWrapper>
       <ProductPrice />
-      <PageControlButton />
+      <PageControlButton active={false} />
     </PageFourWrapper>
   );
 };

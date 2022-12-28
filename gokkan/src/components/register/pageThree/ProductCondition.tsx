@@ -5,7 +5,7 @@ import {
 } from '../../../store/registerAtom';
 import { useAtom } from 'jotai';
 import styled from 'styled-components';
-import CategorySelector from '../../common/CategorySelector';
+import CategorySelector from '../../../components/common/CategorySelector';
 
 const ProductConditionWrapper = styled.div`
   margin-bottom: 32px;
