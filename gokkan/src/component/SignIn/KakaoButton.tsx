@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAtom } from 'jotai';
 import { accessTokenAtom } from '../../store/tokenAtom';
 import { getCustomAxios } from '../../utils/customAxios';
+import { useNavigate } from 'react-router-dom';
 
 const KakaoButtonWrapper = styled.section`
   button {
@@ -19,8 +20,9 @@ const KakaoButtonWrapper = styled.section`
   }
 `;
 
-export default function KakaoButton() {
+export default function KakaoButton({ setSignIn }: SiginInType) {
   const [accessToken] = useAtom(accessTokenAtom);
+  const navigate = useNavigate();
   const customAxios = getCustomAxios();
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const url =
@@ -33,15 +35,22 @@ export default function KakaoButton() {
       customAxios
         .get('api/v1/users')
         .then(({ data }) => {
-          console.log(data);
+          const phoneNumber = data?.phoneNumber;
+          if (!phoneNumber) {
+            setSignIn(false);
+            navigate('signup');
+          } else {
+            setSignIn(false);
+          }
         })
         .catch((err) => {
           console.error(err);
         });
+    } else {
+      const anchor = anchorRef.current;
+      if (!anchor) return;
+      anchor.click();
     }
-    const anchor = anchorRef.current;
-    if (!anchor) return;
-    anchor.click();
   };
 
   return (
@@ -51,3 +60,7 @@ export default function KakaoButton() {
     </KakaoButtonWrapper>
   );
 }
+
+type SiginInType = {
+  setSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+};

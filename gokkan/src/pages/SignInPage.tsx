@@ -72,7 +72,7 @@ const SignInPage = ({ setSignIn }: SiginInType) => {
           <div className="content">
             큐레이팅된 빈티지 가구들로 곳간을 채워보세요
           </div>
-          <KakaoButton />
+          <KakaoButton setSignIn={setSignIn} />
         </div>
         <button
           className="close"

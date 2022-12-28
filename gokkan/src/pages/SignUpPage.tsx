@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useGetAccessToken from '../component/SignUp/useGetToken';
+import useGetToken from '../component/SignUp/useGetToken';
 import UserName from '../component/SignUp/UserName';
 import UserNickName from '../component/SignUp/UserNickName';
 import UserAddress from '../component/SignUp/UserAddress';
@@ -19,7 +19,7 @@ const SignUpWrapper = styled.div`
 `;
 
 const SignUpPage = () => {
-  useGetAccessToken();
+  useGetToken();
   useGetUserInfo();
   return (
     <SignUpWrapper>

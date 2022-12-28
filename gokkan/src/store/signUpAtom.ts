@@ -13,6 +13,7 @@ const userProfileImageUrlAtom = atomWithStorage<string>(
   '/src/asset/userDefaultImage.png'
 );
 const userProfileImageFileAtom = atomWithStorage<string | File>('imgfile', '');
+const userCardNumberAtom = atomWithStorage('cardNumber', '');
 const clearAtom = atom(null, (get, set, update) => {
   set(userNameAtom, '');
   set(userNickNameAtom, '');
@@ -27,6 +28,21 @@ const clearAtom = atom(null, (get, set, update) => {
 const setInitialUserInfo = atom(null, (get, set, update: InitialUserInfo) => {
   set(userNameAtom, update.name);
   set(userProfileImageUrlAtom, update.profileImageUrl);
+  if (update.address) {
+    set(userAddressAtom, update.address);
+  }
+  if (update.addressDetail) {
+    set(userAddressDetailAtom, update.addressDetail);
+  }
+  if (update.nickName) {
+    set(userNickNameAtom, update.nickName);
+  }
+  if (update.phoneNumber) {
+    set(userPhoneAtom, update.phoneNumber);
+  }
+  if (update.cardNumber) {
+    set(userCardNumberAtom, update.cardNumber);
+  }
 });
 const userInfoAtom = atom((get) => {
   const name = get(userNameAtom);
@@ -49,6 +65,11 @@ const userInfoAtom = atom((get) => {
 type InitialUserInfo = {
   name: string;
   profileImageUrl: string;
+  address?: string;
+  addressDetail?: string;
+  nickName?: string;
+  phoneNumber?: string;
+  cardNumber?: string;
 };
 
 export {

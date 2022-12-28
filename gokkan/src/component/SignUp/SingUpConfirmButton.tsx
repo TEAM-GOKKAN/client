@@ -9,6 +9,7 @@ import {
   userPhoneCheckAtom,
 } from '../../store/signUpAtom';
 import { getCustomAxios } from '../../utils/customAxios';
+import { useNavigate } from 'react-router-dom';
 
 const ConfirmButtonWrapper = styled.button`
   position: fixed;
@@ -32,6 +33,7 @@ const SingUpConfirmButton = () => {
   const [nickNameCheck] = useAtom(userNickNameCheckAtom);
   const [phoneCheck] = useAtom(userPhoneCheckAtom);
   const customAxios = getCustomAxios();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -67,13 +69,14 @@ const SingUpConfirmButton = () => {
       })
       .then((res) => {
         console.log(res);
+        // Atom에 저장된 값들을 전부 비워줌
+        setClear('');
+        // 이전 페이지로 넘어감
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);
       });
-
-    // Atom에 저장된 값들을 전부 비워줌
-    setClear('');
   };
 
   return (
