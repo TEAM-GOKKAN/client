@@ -123,6 +123,11 @@ const GlobalStyle = createGlobalStyle`
       color: var(--color-brown300);
     }
   }
+
+  dialog {
+    border: 0;
+    background: none;
+  }
 `;
 
 export default GlobalStyle;
