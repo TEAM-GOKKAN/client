@@ -5,7 +5,7 @@ import {
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
 } from '../../../store/registerAtom';
-import CategorySelector from '../../common/CategorySelector';
+import CategorySelector from '../../../components/common/CategorySelector';
 
 const ProductCategoryWrapper = styled.div`
   display: flex;

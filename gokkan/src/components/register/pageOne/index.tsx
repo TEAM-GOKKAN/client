@@ -6,8 +6,6 @@ import {
   examineImageUrlAtom,
   uploadImageFileAtom,
   uploadImageUrlAtom,
-  rawExamineImageFileAtom,
-  rawImageFileAtom,
 } from '../../../store/registerAtom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';

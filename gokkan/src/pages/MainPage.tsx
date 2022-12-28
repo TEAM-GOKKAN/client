@@ -18,7 +18,7 @@ const MainWrapper = styled.div`
 export default function MainPage() {
   const navigate = useNavigate();
   const customAxios = getCustomAxios();
-  const [localRefreshToken] = useAtom(refreshTokenAtom);
+  const [localRefreshToken, setLocalRefreshToken] = useAtom(refreshTokenAtom);
   const [localAccessToken, setLocalAccessToken] = useAtom(accessTokenAtom);
   const handleNavigateClick = () => {
     const url = 'api/v1/users';
@@ -31,56 +31,25 @@ export default function MainPage() {
         console.log(err);
       });
   };
-
-  const handleProductCreateClick = () => {
-    const url = 'api/v1/items/temp';
+  const handleLogOutClick = () => {
+    const url = 'api/v1/users/logout';
     customAxios
       .post(url)
       .then(({ data }) => {
-        const productId = data;
-        navigate(`register/1/${productId}`);
+        console.log(data);
+        setLocalRefreshToken('');
+        setLocalAccessToken('');
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const handleProductDeleteClick = () => {
-    const url = 'api/v1/items';
-    customAxios
-      .delete(url, {
-        params: { itemId: 9 },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleToken = async () => {
-    const newAxios = axios.create();
-    delete newAxios.defaults.headers.common['Authorization'];
-    const rs = await newAxios.get(
-      'http://3.38.59.40:8080/api/v1/auth/refresh',
-      {
-        params: {
-          refreshToken: localRefreshToken,
-        },
-      }
-    );
-    const accessToken = rs.data;
-    setLocalAccessToken(accessToken);
   };
 
   return (
     <MainWrapper>
       Main page 입니다.
       <button onClick={handleNavigateClick}>사용자 정보 확인 테스트</button>
-      <button onClick={handleProductCreateClick}>상품 등록 테스트</button>
-      <button onClick={handleProductDeleteClick}>상품 삭제 테스트</button>
-      <button onClick={handleToken}>임시 토큰 발급</button>
+      <button onClick={handleLogOutClick}>사용자 로그아웃 테스트</button>
     </MainWrapper>
   );
 }
