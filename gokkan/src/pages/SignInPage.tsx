@@ -1,5 +1,5 @@
 import React from 'react';
-import KakaoButton from '../component/SignIn/KakaoButton';
+import KakaoButton from '../components/SignIn/KakaoButton';
 import styled from 'styled-components';
 
 const SignInWrapper = styled.div`
