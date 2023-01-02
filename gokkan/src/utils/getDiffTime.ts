@@ -1,0 +1,42 @@
+// 남은 시간 구하는 함수
+const getRemainingTime = (targetTime: string) => {
+  // 마감 시간
+  const bidCloseTime = new Date(targetTime);
+  // 현재 시간
+  const currTime = new Date();
+  // 남은 시간 (ms)
+  const diff = Number(bidCloseTime) - Number(currTime);
+
+  const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const diffMin = Math.floor((diff / (1000 * 60)) % 60);
+  const diffSec = Math.floor((diff / 1000) % 60);
+
+  return `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+};
+
+// 경과 시간 구하는 함수
+const getElapsedTime = (targetTime: string) => {
+  // 지난 시간
+  const bidCloseTime = new Date(targetTime);
+  // 현재 시간
+  const currTime = new Date();
+  // 경과 시간 (ms)
+  const diff = Number(currTime) - Number(bidCloseTime);
+
+  if (diff < 1000 * 60) {
+    const diffSec = Math.floor((diff / 1000) % 60);
+    return `${diffSec}초 전`;
+  } else if (diff < 1000 * 60 * 60) {
+    const diffMin = Math.floor((diff / (1000 * 60)) % 60);
+    return `${diffMin}분 전`;
+  } else if (diff < 1000 * 60 * 60 * 24) {
+    const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    return `${diffHour}시간 전`;
+  } else {
+    const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
+    return `${diffDay}일 전`;
+  }
+};
+
+export { getRemainingTime, getElapsedTime };
