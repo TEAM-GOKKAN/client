@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useGetToken from '../component/SignUp/useGetToken';
-import UserName from '../component/SignUp/UserName';
-import UserNickName from '../component/SignUp/UserNickName';
-import UserAddress from '../component/SignUp/UserAddress';
-import UserProfileImageContainer from '../component/SignUp/UserProfileImageContainer';
-import UserPhone from '../component/SignUp/UserPhone';
-import SingUpConfirmButton from '../component/SignUp/SingUpConfirmButton';
-import useGetUserInfo from '../component/SignUp/useGetUserInfo';
+import useGetToken from '../components/SignUp/useGetToken';
+import UserName from '../components/SignUp/UserName';
+import UserNickName from '../components/SignUp/UserNickName';
+import UserAddress from '../components/SignUp/UserAddress';
+import UserProfileImageContainer from '../components/SignUp/UserProfileImageContainer';
+import UserPhone from '../components/SignUp/UserPhone';
+import SingUpConfirmButton from '../components/SignUp/SingUpConfirmButton';
+import useGetUserInfo from '../components/SignUp/useGetUserInfo';
 import styled from 'styled-components';
 import queryString from 'query-string';
 

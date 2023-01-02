@@ -5,7 +5,7 @@ import { PrimitiveAtom } from 'jotai';
 
 const ImgInputWrapper = styled.div`
   width: 100%;
-  height: 297px;
+  height: 255px;
   display: flex;
   justify-content: center;
   align-items: center;

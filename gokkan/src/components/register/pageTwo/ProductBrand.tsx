@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import CustomProductInput from '../../common/CustomProductInput';
 import { productBrandAtom } from '../../../store/registerAtom';
+import CustomProductUnknownInput from '../../common/CustomProductUnknownInput';
 
 const ProductBrandWrapper = styled.div`
   margin-bottom: 32px;
@@ -10,10 +10,10 @@ const ProductBrandWrapper = styled.div`
 const ProductBrand = () => {
   return (
     <ProductBrandWrapper>
-      <CustomProductInput
+      <CustomProductUnknownInput
         title="브랜드"
         storeAtom={productBrandAtom}
-        placeHolder="모르면 비워주세요"
+        placeHolder="브랜드를 입력해주세요"
       />
     </ProductBrandWrapper>
   );

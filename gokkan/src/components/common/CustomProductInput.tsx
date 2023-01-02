@@ -9,7 +9,6 @@ const ProductInputWrapper = styled.div`
   height: 40px;
   input {
     width: 100%;
-    background-color: #f4f2f1;
     padding: 10px 12px;
     margin-top: 10px;
     border: none;

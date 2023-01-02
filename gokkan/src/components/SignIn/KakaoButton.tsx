@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const KakaoButtonWrapper = styled.section`
   button {
-    background-image: url('./src/asset/kakao_login_medium_wide.png');
+    background-image: url('./src/assets/kakao_login_medium_wide.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 321px;
@@ -20,7 +20,7 @@ const KakaoButtonWrapper = styled.section`
   }
 `;
 
-export default function KakaoButton({ setSignIn }: SiginInType) {
+export default function KakaoButton() {
   const [accessToken] = useAtom(accessTokenAtom);
   const navigate = useNavigate();
   const customAxios = getCustomAxios();
@@ -37,11 +37,9 @@ export default function KakaoButton({ setSignIn }: SiginInType) {
         .then(({ data }) => {
           const phoneNumber = data?.phoneNumber;
           if (!phoneNumber) {
-            setSignIn(false);
             navigate('signup');
           } else {
-            console.log(data);
-            setSignIn(false);
+            navigate(-1);
           }
         })
         .catch((err) => {

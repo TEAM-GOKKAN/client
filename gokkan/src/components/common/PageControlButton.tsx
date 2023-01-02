@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const PageControlButtonWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 50px;
   width: 100%;
@@ -45,8 +45,12 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
 
   const handleNextPageButton = () => {
     if (!active) return;
-    const nextPageNumber = String(Number(pageNumber) + 1);
-    navigate(`/register/${nextPageNumber}/${productId}`);
+    if (pageNumber !== '4') {
+      const nextPageNumber = String(Number(pageNumber) + 1);
+      navigate(`/register/${nextPageNumber}/${productId}`);
+    } else {
+      console.log('hello');
+    }
   };
 
   return (

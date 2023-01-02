@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import GlobalStyle from './lib/styles/global';
 
 const LayoutPage = lazy(() => import('./pages/LayoutPage'));
@@ -12,27 +12,32 @@ const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const TestPage = lazy(() => import('./pages/Testpage'));
 const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
+const SignInPage = lazy(() => import('./pages/SignInPage'));
 
 function App() {
+  const location = useLocation();
+  const background = location.state?.background;
+
+  console.log(background);
+  console.log(location);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <GlobalStyle />
-      <Routes>
+      <Routes location={background || location}>
         <Route path="/" element={<LayoutPage />}>
           <Route path="/" element={<MainPage />} />
-          <Route path="expertworkdetail" element={<ExpertWorkDetailPage />} />
-          <Route path="expertworklist" element={<ExpertWorkListPage />} />
-          <Route path="verify" element={<UserVerifyPage />} />
-          <Route path="setting" element={<SettingPage />} />
           <Route path="signup" element={<SignUpPage />} />
-          <Route path="test" element={<TestPage />} />
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route
           path="register/:pageNumber/:productId"
           element={<AuctionRegisterPage />}
         />
       </Routes>
+      {background && (
+        <Routes>
+          <Route path="/signin" element={<SignInPage />} />
+        </Routes>
+      )}
     </Suspense>
   );
 }

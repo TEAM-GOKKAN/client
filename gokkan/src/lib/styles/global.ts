@@ -27,13 +27,13 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     /* Color */
-    --color-brown100: #F0EFEE;
-    --color-brown200: #DAD8D5;
+    --color-brown100: #EEEDEC;
+    --color-brown200: #D9D6D4;
     --color-brown300: #9D9792;
     --color-brown400: #686059;
     --color-brown500: #4B433D;
     --color-purple: #808AD2;
-    --color-orange: #E8653B;
+    --color-orange: #E05326;
     --color-white: #ffffff;
 
     /* Font Size */
