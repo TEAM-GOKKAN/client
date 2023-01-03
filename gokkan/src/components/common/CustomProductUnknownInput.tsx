@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CategorySelector from './CategorySelector';
 import styled from 'styled-components';
 import { PrimitiveAtom, useAtom } from 'jotai';
@@ -37,6 +37,12 @@ const CustomProductUnknownInput = ({
   const handleTargetInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStoreValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (storeValue !== '') {
+      setCategory('직접입력');
+    }
+  }, [storeValue]);
 
   return (
     <CustomUnknownInputWrapper>

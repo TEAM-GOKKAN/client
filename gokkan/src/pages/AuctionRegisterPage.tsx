@@ -9,7 +9,7 @@ import PageFour from '../components/register/pageFour';
 import ProductTempSaveButton from '../components/register/ProductTempSaveButton';
 import { useAtom } from 'jotai';
 import { productIdAtom } from '../store/registerAtom';
-import useProductInfo from '../components/register/useProductInfo';
+import useProductTempInfo from '../components/register/useProductTempInfo';
 
 const RegisterWrapper = styled.div`
   header {
@@ -40,6 +40,8 @@ const AuctionRegister = () => {
   const { pageNumber, productId } = useParams();
   const [itemId, setItemId] = useAtom(productIdAtom);
   const [pageName, setPageName] = useState('');
+
+  useProductTempInfo(String(productId));
 
   useEffect(() => {
     switch (pageNumber) {

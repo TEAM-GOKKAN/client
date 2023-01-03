@@ -21,7 +21,7 @@ const ImageUploader = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
 };
 
 type ImageUploaderPropType = {
-  fileAtom: PrimitiveAtom<unknown[] | File[]>;
+  fileAtom: PrimitiveAtom<File[]>;
   urlAtom: PrimitiveAtom<string[]>;
 };
 

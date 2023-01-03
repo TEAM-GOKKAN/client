@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/logo/logo.png';
+import SignInButton from './SignInButton';
 import { HiOutlineMenu } from 'react-icons/hi';
-import { HiOutlineUser } from 'react-icons/hi';
-import { Link, useLocation } from 'react-router-dom';
 
 const Container = styled.header`
   display: fixed;
@@ -39,7 +38,6 @@ const LogoContainer = styled.div`
 `;
 
 const Header = () => {
-  const location = useLocation();
   return (
     <Container>
       <Fixed>
@@ -49,11 +47,7 @@ const Header = () => {
         <LogoContainer>
           <img src={logo} alt="gokkan" />
         </LogoContainer>
-        <Link to="signin" state={{ background: location }}>
-          <IconButton>
-            <HiOutlineUser size="22" color="var(--color-brown300)" />
-          </IconButton>
-        </Link>
+        <SignInButton />
       </Fixed>
     </Container>
   );

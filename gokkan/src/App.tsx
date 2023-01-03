@@ -18,8 +18,6 @@ function App() {
   const location = useLocation();
   const background = location.state?.background;
 
-  console.log(background);
-  console.log(location);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <GlobalStyle />

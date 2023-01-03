@@ -7,10 +7,10 @@ const productIdAtom = atom('');
 // register page one
 const uploadDbImageUrlAtom = atom<ImageUrl[]>([]);
 const uploadImageUrlAtom = atom<string[]>([]);
-const uploadImageFileAtom = atom<File[] | unknown[]>([]);
+const uploadImageFileAtom = atom<File[]>([]);
 const examineDbImageUrlAtom = atom<ImageUrl[]>([]);
 const examineImageUrlAtom = atom<string[]>([]);
-const examineImageFileAtom = atom<File[] | unknown[]>([]);
+const examineImageFileAtom = atom<File[]>([]);
 
 // register page two
 const firstDepthCategoryAtom = atom('');
