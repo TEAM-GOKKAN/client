@@ -54,6 +54,11 @@ interface ExpertValuation {
   styles: string;
 }
 
+interface SellerInfo {
+  name: string;
+  profileImageUrl: string;
+}
+
 const baseUrl = 'http://3.38.59.40:8080/api/v1';
 
 const lotIdAtom = atom(8);
@@ -119,4 +124,25 @@ const [expertValuationAtom] = atomsWithQuery((get) => ({
   },
 }));
 
-export { lotDetailAtom, auctionInfoAtom, bidHistoryAtom, expertValuationAtom };
+const [sellerInfoAtom] = atomsWithQuery((get) => ({
+  queryKey: ['sellerInfo', get(lotIdAtom)],
+  queryFn: async ({ queryKey: [, lotId] }): Promise<SellerInfo> => {
+    const res = await axios({
+      method: 'get',
+      url: `${baseUrl}/users/seller`,
+      params: {
+        itemId: lotId,
+      },
+    });
+
+    return res?.data;
+  },
+}));
+
+export {
+  lotDetailAtom,
+  auctionInfoAtom,
+  bidHistoryAtom,
+  expertValuationAtom,
+  sellerInfoAtom,
+};

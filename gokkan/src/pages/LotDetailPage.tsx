@@ -13,6 +13,7 @@ import {
   auctionInfoAtom,
   lotDetailAtom,
   expertValuationAtom,
+  sellerInfoAtom,
 } from '../store/lotDetailAtom';
 import { useAtomValue } from 'jotai';
 import BidModal from '../components/LotDetail/Bid/BidModal';
@@ -34,6 +35,7 @@ export default function LotDetailPage() {
   const auctionInfo = useAtomValue(auctionInfoAtom);
   const bidHistory = useAtomValue(bidHistoryAtom);
   const expertValuation = useAtomValue(expertValuationAtom);
+  const sellerInfo = useAtomValue(sellerInfoAtom);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -103,7 +105,7 @@ export default function LotDetailPage() {
       />
       <LotDescription content={lotDetail.text} />
       <BidHistory bidHistory={bidList} />
-      <SellerInfo />
+      <SellerInfo data={sellerInfo} />
       <BidBox
         currentPrice={currPrice}
         closeTime={auctionInfo.auctionEndDateTime}

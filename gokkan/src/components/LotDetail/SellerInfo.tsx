@@ -2,16 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsStarFill } from 'react-icons/bs';
 
-export default function SellerInfo() {
+interface Iprops {
+  data: {
+    name: string;
+    profileImageUrl: string;
+  };
+}
+
+export default function SellerInfo({ data }: Iprops) {
   return (
     <Container>
       <Title>판매자</Title>
       <Info>
         <Profile>
           <ProfileImageContainer>
-            {/* <img src="" alt="" /> */}
+            <img src={data.profileImageUrl || ''} alt="" />
           </ProfileImageContainer>
-          <span>김판매</span>
+          <span>{data.name}</span>
         </Profile>
         <Review>
           <span>2,111명</span>
