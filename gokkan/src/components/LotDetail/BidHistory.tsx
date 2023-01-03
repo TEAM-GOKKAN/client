@@ -21,14 +21,14 @@ export default function BidHistory({ bidHistory }: Iprops) {
         {bidHistory.map((bid) => {
           if (!bid) return '';
 
-          const convertTimeFormat = getElapsedTime(bid.bidTime);
-          const getPriceWithCommas = insertCommas(bid.price);
+          const elpasedTime = getElapsedTime(bid.bidTime);
+          const priceWithCommas = insertCommas(bid.price);
 
           return (
             <Bid key={`${bid?.memberId}${bid?.price}`}>
               <Bidder>{bid?.memberId}</Bidder>
-              <BidTime>{convertTimeFormat}</BidTime>
-              <BidPrice>{getPriceWithCommas}원</BidPrice>
+              <BidTime>{elpasedTime}</BidTime>
+              <BidPrice>{priceWithCommas}원</BidPrice>
             </Bid>
           );
         })}
@@ -85,6 +85,7 @@ const BidTime = styled.span`
   position: absolute;
   left: 33.33%;
   color: var(--color-brown300);
+  letter-spacing: normal;
 `;
 
 const BidPrice = styled.span`
