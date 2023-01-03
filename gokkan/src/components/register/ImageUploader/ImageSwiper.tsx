@@ -1,5 +1,5 @@
 import ImageDropZone from './ImageDropzone';
-import { BsTrash } from 'react-icons/Bs';
+import { BsTrash } from 'react-icons/bs';
 import ImageSlider from '../../common/ImageSlider';
 import styled from 'styled-components';
 
