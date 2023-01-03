@@ -1,31 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
+import { insertCommas } from '../../utils/handleCommas';
 
-export default function ExpertValuation() {
+interface Iprops {
+  data: {
+    name: string;
+    profileImageUrl: string;
+    comment: string;
+    minPrice: number;
+    maxPrice: number;
+    styles: string;
+  };
+}
+
+export default function ExpertValuation({ data }: Iprops) {
+  const { name, profileImageUrl, comment, minPrice, maxPrice, styles } = data;
+  const minPriceWithCommas = insertCommas(minPrice);
+  const maxPriceWithCommas = insertCommas(maxPrice);
+
   return (
     <Container>
       <Profile>
         <ProfileImageContainer>
-          {/* <img src="" alt="" /> */}
+          <img src={profileImageUrl || ''} alt="expert profile image" />
         </ProfileImageContainer>
         <ExpertInfo>
-          <div>김전문</div>
+          <div>{name}</div>
           <ExpertField>
-            <span>Mid-Century Modern</span>
-            <span>Art Deco</span>
+            {styles.split(', ').map((style) => (
+              <span key={style}>{style}</span>
+            ))}
           </ExpertField>
         </ExpertInfo>
       </Profile>
-      <Comment>
-        <span>희소성 있는 제품으로 어쩌고 저쩌고 얼른 응찰하세요.</span>
-      </Comment>
-      <Estimate>
+      <Comment>{comment}</Comment>
+      <EstimatedPrice>
         <span>예상 낙찰가</span>
         <div>
-          <EstimatePrice>120,000 - 130,000</EstimatePrice>
+          <span>{`${minPriceWithCommas} - ${maxPriceWithCommas}`}</span>
           <span>원</span>
         </div>
-      </Estimate>
+      </EstimatedPrice>
     </Container>
   );
 }
@@ -48,6 +63,7 @@ const Profile = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
+  width: 100%;
 `;
 
 const ProfileImageContainer = styled.div`
@@ -59,16 +75,21 @@ const ProfileImageContainer = styled.div`
 
   & > img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;
 
 const ExpertInfo = styled.div`
   font-weight: 500;
+  width: calc(100% - 48px - 10px);
 `;
 
 const ExpertField = styled.div`
-  margin-top: 4px;
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 
   & span {
     color: var(--color-brown300);
@@ -98,14 +119,18 @@ const ExpertField = styled.div`
 const Comment = styled.div`
   padding: 10px 12px;
   background: var(--color-brown100);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  font-size: var(--font-small);
+  line-height: calc(var(--font-small) * 1.3);
+  width: 100%;
+  white-space: pre-line;
 
   & > span {
     font-size: var(--font-small);
   }
 `;
 
-const Estimate = styled.div`
+const EstimatedPrice = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,5 +139,3 @@ const Estimate = styled.div`
     font-size: var(--font-micro);
   }
 `;
-
-const EstimatePrice = styled.span``;

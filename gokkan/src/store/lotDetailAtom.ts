@@ -45,19 +45,28 @@ interface BidInfo {
   bidTime: string;
 }
 
+interface ExpertValuation {
+  name: string;
+  profileImageUrl: string;
+  comment: string;
+  minPrice: number;
+  maxPrice: number;
+  styles: string;
+}
+
 const baseUrl = 'http://3.38.59.40:8080/api/v1';
 
-const lotNumberAtom = atom(8);
+const lotIdAtom = atom(8);
 const auctionIdAtom = atom(1);
 
 const [lotDetailAtom] = atomsWithQuery((get) => ({
-  queryKey: ['lotDetail', get(lotNumberAtom)],
-  queryFn: async ({ queryKey: [, lotNumber] }): Promise<LotDetail> => {
+  queryKey: ['lotDetail', get(lotIdAtom)],
+  queryFn: async ({ queryKey: [, lotId] }): Promise<LotDetail> => {
     const res = await axios({
       method: 'get',
       url: `${baseUrl}/items/details/auction`,
       params: {
-        itemId: lotNumber,
+        itemId: lotId,
       },
     });
 
@@ -95,4 +104,19 @@ const [bidHistoryAtom] = atomsWithQuery((get) => ({
   },
 }));
 
-export { lotDetailAtom, auctionInfoAtom, bidHistoryAtom };
+const [expertValuationAtom] = atomsWithQuery((get) => ({
+  queryKey: ['expertValuation', get(lotIdAtom)],
+  queryFn: async ({ queryKey: [, lotId] }): Promise<ExpertValuation> => {
+    const res = await axios({
+      method: 'get',
+      url: `${baseUrl}/expert/comment`,
+      params: {
+        itemId: lotId,
+      },
+    });
+
+    return res?.data;
+  },
+}));
+
+export { lotDetailAtom, auctionInfoAtom, bidHistoryAtom, expertValuationAtom };

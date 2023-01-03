@@ -12,6 +12,7 @@ import {
   bidHistoryAtom,
   auctionInfoAtom,
   lotDetailAtom,
+  expertValuationAtom,
 } from '../store/lotDetailAtom';
 import { useAtomValue } from 'jotai';
 import BidModal from '../components/LotDetail/Bid/BidModal';
@@ -32,6 +33,7 @@ export default function LotDetailPage() {
   const lotDetail = useAtomValue(lotDetailAtom);
   const auctionInfo = useAtomValue(auctionInfoAtom);
   const bidHistory = useAtomValue(bidHistoryAtom);
+  const expertValuation = useAtomValue(expertValuationAtom);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -89,7 +91,7 @@ export default function LotDetailPage() {
         lotImageUrls={lotDetail.imageItemUrls}
       />
       <Favorite />
-      <ExpertValuation />
+      <ExpertValuation data={expertValuation} />
       <InfoDetail
         brand={lotDetail.brand}
         designer={lotDetail.designer}
