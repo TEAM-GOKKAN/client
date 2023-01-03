@@ -34,6 +34,7 @@ export default function LotDetailPage() {
   const bidHistory = useAtomValue(bidHistoryAtom);
 
   const [modalOpen, setModalOpen] = useState(false);
+
   const handleOpenModal = () => {
     setModalOpen(true);
   };
@@ -82,35 +83,31 @@ export default function LotDetailPage() {
 
   return (
     <div>
-      {!modalOpen && (
-        <>
-          <InfoMain
-            lotName={lotDetail.name}
-            lotNumber={lotDetail.id}
-            lotImageUrls={lotDetail.imageItemUrls}
-          />
-          <Favorite />
-          <ExpertValuation />
-          <InfoDetail
-            brand={lotDetail.brand}
-            designer={lotDetail.designer}
-            material={lotDetail.material}
-            period={lotDetail.productionYear}
-            country={lotDetail.madeIn}
-            size={`${lotDetail.width} x ${lotDetail.depth} x ${lotDetail.height} cm`}
-            conditionGrade={lotDetail.conditionGrade}
-            conditionDescription={lotDetail.conditionDescription}
-          />
-          <LotDescription content={lotDetail.text} />
-          <BidHistory bidHistory={bidList} />
-          <SellerInfo />
-          <BidBox
-            currentPrice={currPrice}
-            closeTime={auctionInfo.auctionEndDateTime}
-            onOpenModal={handleOpenModal}
-          />
-        </>
-      )}
+      <InfoMain
+        lotName={lotDetail.name}
+        lotNumber={lotDetail.id}
+        lotImageUrls={lotDetail.imageItemUrls}
+      />
+      <Favorite />
+      <ExpertValuation />
+      <InfoDetail
+        brand={lotDetail.brand}
+        designer={lotDetail.designer}
+        material={lotDetail.material}
+        period={lotDetail.productionYear}
+        country={lotDetail.madeIn}
+        size={`${lotDetail.width} x ${lotDetail.depth} x ${lotDetail.height} cm`}
+        conditionGrade={lotDetail.conditionGrade}
+        conditionDescription={lotDetail.conditionDescription}
+      />
+      <LotDescription content={lotDetail.text} />
+      <BidHistory bidHistory={bidList} />
+      <SellerInfo />
+      <BidBox
+        currentPrice={currPrice}
+        closeTime={auctionInfo.auctionEndDateTime}
+        onOpenModal={handleOpenModal}
+      />
       {modalOpen && (
         <BidModal
           currentPrice={currPrice}

@@ -40,6 +40,7 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
+  z-index: 9999;
 `;
 
 const Dialog = styled.dialog`

@@ -45,7 +45,7 @@ export default function BidSection({ currentPrice, onPlaceBid }: Iprops) {
       </PriceInputContainer>
       <BidButtonsContainer>
         {/* <Link to="modal" state={{ background: location }}> */}
-        <BidOnceButton type="button" onClick={handleBidInput}>
+        <BidOnceButton type="button" onClick={handleOpenModal}>
           1회 응찰
         </BidOnceButton>
         {/* </Link> */}
