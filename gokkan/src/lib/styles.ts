@@ -64,6 +64,7 @@ const GlobalStyle = createGlobalStyle`
 
   *, *::before, *::after {
     box-sizing: border-box;
+    letter-spacing: -0.0625em;
   }
 
   *:focus {
@@ -106,8 +107,6 @@ const GlobalStyle = createGlobalStyle`
     height: 42px;
     color: var(--color-brown500);
     background: var(--color-brown100);
-    border: 0;
-    width: 100%;
 
     &::placeholder {
       color: var(--color-brown300);
@@ -122,11 +121,6 @@ const GlobalStyle = createGlobalStyle`
     &::placeholder {
       color: var(--color-brown300);
     }
-  }
-
-  dialog {
-    border: 0;
-    background: none;
   }
 `;
 

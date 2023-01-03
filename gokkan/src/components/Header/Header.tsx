@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/logo/logo.png';
+import SignInButton from './SignInButton';
 import { HiOutlineMenu } from 'react-icons/hi';
-import { HiOutlineUser } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
@@ -17,9 +17,7 @@ export default function Header() {
             <img src={logo} alt="gokkan" />
           </Link>
         </LogoContainer>
-        <IconButton>
-          <HiOutlineUser size="22" color="var(--color-brown300)" />
-        </IconButton>
+        <SignInButton />
       </Fixed>
     </Container>
   );
