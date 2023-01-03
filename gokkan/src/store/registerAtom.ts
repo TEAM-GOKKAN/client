@@ -34,7 +34,7 @@ const productDescriptionAtom = atom('');
 const productStartPriceAtom = atom('');
 
 // for register submit
-const registerAtom = atom((get) => {
+const productInfoAtom = atom((get) => {
   const itemId = Number(get(productIdAtom));
   const name = get(productNameAtom);
   const startPrice = Number(get(productStartPriceAtom));
@@ -49,7 +49,6 @@ const registerAtom = atom((get) => {
   const conditionGrade = get(productConditionAtom);
   const conditionDescription = get(productDetailConditionAtom);
   const text = get(productDescriptionAtom);
-  const madeIn = '';
   const designer = get(productDesignerAtom);
   const brand = get(productBrandAtom);
   const productionYear = Number(get(productAgeAtom));
@@ -68,7 +67,6 @@ const registerAtom = atom((get) => {
     conditionGrade,
     conditionDescription,
     text,
-    madeIn,
     designer,
     brand,
     productionYear,
@@ -85,7 +83,6 @@ export {
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
   productStartPriceAtom,
-  registerAtom,
   examineImageUrlAtom,
   examineImageFileAtom,
   productBrandAtom,
@@ -99,6 +96,7 @@ export {
   productConditionAtom,
   productDetailConditionAtom,
   productDescriptionAtom,
+  productInfoAtom,
 };
 
 type ImageUrl = {

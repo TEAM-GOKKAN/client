@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  registerAtom,
+  productInfoAtom,
   uploadImageFileAtom,
   examineImageFileAtom,
 } from '../../store/registerAtom';
@@ -39,7 +39,7 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
   const [buttonContent, setButtonContent] = useState('다음');
   const navigate = useNavigate();
   let { pageNumber, productId } = useParams();
-  const [productInfo] = useAtom(registerAtom);
+  const [productInfo] = useAtom(productInfoAtom);
   const [uploadImgList] = useAtom(uploadImageFileAtom);
   const [examineImgList] = useAtom(examineImageFileAtom);
   const customAxios = getCustomAxios();

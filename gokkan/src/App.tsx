@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import GlobalStyle from './lib/styles/global';
 
 const LayoutPage = lazy(() => import('./pages/LayoutPage'));
+const MyPage = lazy(() => import('./pages/MyPage'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const AuctionRegisterPage = lazy(() => import('./pages/AuctionRegisterPage'));
 const ExpertWorkDetailPage = lazy(() => import('./pages/ExpertWorkDetailPage'));
@@ -34,6 +35,7 @@ function App() {
       {background && (
         <Routes>
           <Route path="/signin" element={<SignInPage />} />
+          <Route path="/myPage" element={<MyPage />} />
         </Routes>
       )}
     </Suspense>
