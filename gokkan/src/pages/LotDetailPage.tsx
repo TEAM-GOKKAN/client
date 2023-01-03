@@ -91,7 +91,7 @@ export default function LotDetailPage() {
       <CategoryInfo category={lotDetail.category} />
       <InfoMain
         lotName={lotDetail.name}
-        lotNumber={lotDetail.id}
+        lotNumber={lotDetail.itemNumber}
         lotImageUrls={lotDetail.imageItemUrls}
       />
       <Favorite />
