@@ -19,6 +19,7 @@ import { useAtomValue } from 'jotai';
 import BidModal from '../components/LotDetail/Bid/BidModal';
 import { Client } from '@stomp/stompjs';
 import useStomp from '../lib/hooks/useStomp';
+import CategoryInfo from '../components/LotDetail/CategoryInfo';
 
 interface BidInfo {
   memberId: string;
@@ -87,6 +88,7 @@ export default function LotDetailPage() {
 
   return (
     <div>
+      <CategoryInfo category={lotDetail.category} />
       <InfoMain
         lotName={lotDetail.name}
         lotNumber={lotDetail.id}
