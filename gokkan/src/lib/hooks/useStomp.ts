@@ -1,5 +1,5 @@
 import React from 'react';
-import SockJS from 'sockjs-client/dist/sockjs';
+import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 
 const useStomp = (
