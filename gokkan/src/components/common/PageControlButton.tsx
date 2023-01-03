@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  productInfoAtom,
+  uploadImageFileAtom,
+  examineImageFileAtom,
+} from '../../store/registerAtom';
+import { useAtom } from 'jotai';
+import { getCustomAxios } from '../../utils/customAxios';
 
 const PageControlButtonWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 50px;
   width: 100%;
@@ -32,12 +39,17 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
   const [buttonContent, setButtonContent] = useState('다음');
   const navigate = useNavigate();
   let { pageNumber, productId } = useParams();
+  const [productInfo] = useAtom(productInfoAtom);
+  const [uploadImgList] = useAtom(uploadImageFileAtom);
+  const [examineImgList] = useAtom(examineImageFileAtom);
+  const customAxios = getCustomAxios();
 
   useEffect(() => {
     if (pageNumber === '4') {
       setButtonContent('제출');
     }
   }, [pageNumber]);
+
   const handlePrePageButton = () => {
     const prePageNumber = String(Number(pageNumber) - 1);
     navigate(`/register/${prePageNumber}/${productId}`);
@@ -45,8 +57,37 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
 
   const handleNextPageButton = () => {
     if (!active) return;
-    const nextPageNumber = String(Number(pageNumber) + 1);
-    navigate(`/register/${nextPageNumber}/${productId}`);
+    if (pageNumber !== '4') {
+      const nextPageNumber = String(Number(pageNumber) + 1);
+      navigate(`/register/${nextPageNumber}/${productId}`);
+    } else {
+      console.log('submit button clicked');
+
+      const transferData = new FormData();
+      const requestData = new Blob([JSON.stringify(productInfo)], {
+        type: 'application/json',
+      });
+      transferData.append('request', requestData);
+      uploadImgList.forEach((uploadImg) => {
+        transferData.append('imageItemFiles', uploadImg);
+      });
+      examineImgList.forEach((examineImg) => {
+        transferData.append('imageCheckFiles', examineImg);
+      });
+
+      customAxios
+        .post('api/v1/items', transferData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

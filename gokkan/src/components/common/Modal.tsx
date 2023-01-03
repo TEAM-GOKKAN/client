@@ -15,21 +15,32 @@ export default function Modal({ children, buttonText, onSubmit }: Iprops) {
   };
 
   return (
-    <Container>
-      <Dialog>{children}</Dialog>
-      <ModalButtons>
-        <button type="button" onClick={handleClose}>
-          닫기
-        </button>
-        {buttonText && (
-          <button type="button" onClick={onSubmit}>
-            {buttonText}
+    <ModalWrapper>
+      <Container>
+        <Dialog>{children}</Dialog>
+        <ModalButtons>
+          <button type="button" onClick={handleClose}>
+            닫기
           </button>
-        )}
-      </ModalButtons>
-    </Container>
+          {buttonText && (
+            <button type="button" onClick={onSubmit}>
+              {buttonText}
+            </button>
+          )}
+        </ModalButtons>
+      </Container>
+    </ModalWrapper>
   );
 }
+
+const ModalWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #9d9792ad;
+`;
 
 const Container = styled.div`
   width: calc(100% - 24px);

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { productDesignerAtom } from '../../../store/registerAtom';
-import CustomProductInput from '../../common/CustomProductInput';
+import CustomProductUnknownInput from '../../common/CustomProductUnknownInput';
 
 const ProductDesignerWrapper = styled.div`
   margin-bottom: 32px;
@@ -10,10 +10,10 @@ const ProductDesignerWrapper = styled.div`
 const ProductDesigner = () => {
   return (
     <ProductDesignerWrapper>
-      <CustomProductInput
+      <CustomProductUnknownInput
         title="디자이너"
         storeAtom={productDesignerAtom}
-        placeHolder="모르면 비워주세요"
+        placeHolder="디자이너를 입력해주세요"
       />
     </ProductDesignerWrapper>
   );

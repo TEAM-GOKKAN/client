@@ -24,13 +24,21 @@ const CategorySelector = ({
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
-          backgroundColor: '#EEEDEC',
+          border: `1px solid var(--color-brown100)`,
           height: '42px',
+          boxShadow: 'none',
+        }),
+        container: (baseStyles, state) => ({
+          ...baseStyles,
+          height: '42px',
+          padding: '0',
           marginBottom: '10px',
+          border: `1px solid var(--color-brown100)`,
         }),
         valueContainer: (baseStyles, state) => ({
           ...baseStyles,
           height: '42px',
+          padding: '0px 8px',
         }),
         input: (baseStyles, state) => ({
           ...baseStyles,
@@ -42,8 +50,31 @@ const CategorySelector = ({
         }),
         menu: (baseStyles, state) => ({
           ...baseStyles,
-          display: 'relative',
-          top: '42px',
+          position: 'relative',
+          top: '-10px',
+          border: `1px solid var(--color-brown100)`,
+          boxShadow: 'none',
+        }),
+        menuList: (baseStyles, state) => ({
+          ...baseStyles,
+          border: `1px solid var(--color-brown100)`,
+        }),
+        dropdownIndicator: (baseStyles, state) => ({
+          ...baseStyles,
+          transition: 'all .1s ease',
+          transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'null',
+        }),
+        option: (baseStyles, state) => ({
+          ...baseStyles,
+          height: '42px',
+          display: 'flex',
+          alignItems: 'center',
+          color: state.isSelected
+            ? 'var(--color-brown100)'
+            : 'var(--color-brown500)',
+          backgroundColor: state.isSelected
+            ? `var(--color-brown400)`
+            : `var(--color-white)`,
         }),
       }}
       placeholder="카테고리를 선택하세요"

@@ -4,14 +4,11 @@ import ProductName from './ProductName';
 import ProductBrand from './ProductBrand';
 import styled from 'styled-components';
 import ProductDesigner from './ProductDesigner';
-import ProductStyle from './ProductStyle';
-import ProductType from './ProductType';
 import PageControlButton from '../../common/PageControlButton';
 import {
   firstDepthCategoryAtom,
   secondDepthCategoryAtom,
-  productStyleAtom,
-  productTypeAtom,
+  productNameAtom,
 } from '../../../store/registerAtom';
 import { useAtom } from 'jotai';
 
@@ -25,21 +22,15 @@ const PageTwo = () => {
   const [active, setActive] = useState(false);
   const [firstCategory] = useAtom(firstDepthCategoryAtom);
   const [secondCategory] = useAtom(secondDepthCategoryAtom);
-  const [productStyle] = useAtom(productStyleAtom);
-  const [productType] = useAtom(productTypeAtom);
+  const [productName] = useAtom(productNameAtom);
 
   useEffect(() => {
-    if (
-      firstCategory !== '' &&
-      secondCategory !== '' &&
-      productStyle !== '' &&
-      productType !== ''
-    ) {
+    if (firstCategory !== '' && secondCategory !== '' && productName !== '') {
       setActive(true);
     } else {
       setActive(false);
     }
-  }, [firstCategory, secondCategory, productStyle, productType]);
+  }, [firstCategory, secondCategory, productName]);
 
   return (
     <ProductMainInfoWrapper>
@@ -47,8 +38,6 @@ const PageTwo = () => {
       <ProductName />
       <ProductBrand />
       <ProductDesigner />
-      <ProductStyle />
-      <ProductType />
       <PageControlButton active={active} />
     </ProductMainInfoWrapper>
   );

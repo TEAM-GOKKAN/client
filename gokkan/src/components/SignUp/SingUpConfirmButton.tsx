@@ -73,8 +73,8 @@ const SingUpConfirmButton = () => {
       .then((res) => {
         // Atom에 저장된 값들을 전부 비워줌
         setClear('');
-        // 이전 페이지로 넘어감(이게 제대로 안된 것 같은데)
-        navigate(-1);
+        // 이전 페이지로 넘어감(이거 어떻게 할지 몰라서, 일단 메인 페이지로 넘어가게 함)
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);

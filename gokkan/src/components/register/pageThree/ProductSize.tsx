@@ -5,7 +5,7 @@ import { useAtom, SetStateAction } from 'jotai';
 import {
   productWidthAtom,
   productHeightAtom,
-  productLengthAtom,
+  productDepthAtom,
 } from '../../../store/registerAtom';
 
 const ProductSizeWrapper = styled.div`
@@ -31,7 +31,7 @@ const ProductSizeWrapper = styled.div`
 
 const ProductSize = () => {
   const [productWidth, setProductWidth] = useAtom(productWidthAtom);
-  const [productLength, setProductLength] = useAtom(productLengthAtom);
+  const [productDepth, setProductDepth] = useAtom(productDepthAtom);
   const [productHeight, setProductHeight] = useAtom(productHeightAtom);
 
   const handleInputChange = (
@@ -58,9 +58,9 @@ const ProductSize = () => {
           type="number"
           placeholder="세로"
           onChange={(e) => {
-            handleInputChange(e, setProductLength);
+            handleInputChange(e, setProductDepth);
           }}
-          value={productLength}
+          value={productDepth}
         />
         <AiOutlineClose />
         <input

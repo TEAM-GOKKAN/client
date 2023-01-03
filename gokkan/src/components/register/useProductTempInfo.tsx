@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCustomAxios } from '../../utils/customAxios';
 
-const useProductInfo = (itemId: number) => {
+const useProductTempInfo = (itemId: string) => {
   const [productInfo, setProductInfo] = useState({});
   const customAxios = getCustomAxios();
 
@@ -9,10 +9,11 @@ const useProductInfo = (itemId: number) => {
     const url = 'api/v1/items/details/temp';
     customAxios
       .get(url, {
-        params: { itemId: itemId },
+        params: { itemId: Number(itemId) },
       })
       .then(({ data }) => {
-        setProductInfo(data);
+        console.log(data);
+        // setProductInfo(data);
       })
       .catch((err) => {
         console.log(err);
@@ -22,4 +23,4 @@ const useProductInfo = (itemId: number) => {
   return productInfo;
 };
 
-export default useProductInfo;
+export default useProductTempInfo;

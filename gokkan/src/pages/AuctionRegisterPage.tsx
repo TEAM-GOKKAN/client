@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
-import PageOne from '../component/register/pageOne';
-import PageTwo from '../component/register/pageTwo';
-import PageThree from '../component/register/pageThree';
-import PageFour from '../component/register/pageFour';
-import ProductTempSaveButton from '../component/register/ProductTempSaveButton';
+import PageOne from '../components/register/pageOne';
+import PageTwo from '../components/register/pageTwo';
+import PageThree from '../components/register/pageThree';
+import PageFour from '../components/register/pageFour';
+import ProductTempSaveButton from '../components/register/ProductTempSaveButton';
 import { useAtom } from 'jotai';
 import { productIdAtom } from '../store/registerAtom';
-import useProductInfo from '../component/register/useProductInfo';
+import useProductTempInfo from '../components/register/useProductTempInfo';
 
 const RegisterWrapper = styled.div`
   header {
@@ -41,7 +41,7 @@ const AuctionRegister = () => {
   const [itemId, setItemId] = useAtom(productIdAtom);
   const [pageName, setPageName] = useState('');
 
-  console.log(useProductInfo(Number(productId)));
+  useProductTempInfo(String(productId));
 
   useEffect(() => {
     switch (pageNumber) {

@@ -7,6 +7,7 @@ const DetailInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-bottom: 70px;
   label {
     margin-bottom: 10px;
   }
