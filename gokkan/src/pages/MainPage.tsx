@@ -1,4 +1,4 @@
-import KakaoButton from '../component/KakaoButton';
+import KakaoButton from '../components/KakaoButton';
 
 export default function MainPage() {
   return (
