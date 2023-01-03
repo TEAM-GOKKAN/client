@@ -5,6 +5,10 @@ import GlobalStyle from './lib/styles/global';
 const LayoutPage = lazy(() => import('./pages/LayoutPage'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const MainPage = lazy(() => import('./pages/MainPage'));
+const LotDetailPage = lazy(() => import('./pages/LotDetailPage'));
+const BidConfirmModal = lazy(
+  () => import('./components/LotDetail/Bid/BidConfirmModal')
+);
 const AuctionRegisterPage = lazy(() => import('./pages/AuctionRegisterPage'));
 const ExpertWorkDetailPage = lazy(() => import('./pages/ExpertWorkDetailPage'));
 const ExpertWorkListPage = lazy(() => import('./pages/ExpertWorkListPage'));
@@ -25,6 +29,7 @@ function App() {
       <Routes location={background || location}>
         <Route path="/" element={<LayoutPage />}>
           <Route path="/" element={<MainPage />} />
+          <Route path="auction/1" element={<LotDetailPage />} />
           <Route path="signup" element={<SignUpPage />} />
         </Route>
         <Route
@@ -34,6 +39,7 @@ function App() {
       </Routes>
       {background && (
         <Routes>
+          <Route path="/auction/1/bid" element={<BidConfirmModal />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
         </Routes>

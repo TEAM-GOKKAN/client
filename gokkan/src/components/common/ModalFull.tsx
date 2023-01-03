@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 interface Iprops {
   children: React.ReactNode | null;
   title?: string;
+  onClickBtn?: () => void;
 }
 
-export default function ModalFull({ children, title }: Iprops) {
+export default function ModalFull({ children, title, onClickBtn }: Iprops) {
   const navigate = useNavigate();
   const handleIconClick = () => {
-    navigate(-1);
+    if (onClickBtn) onClickBtn();
+    else navigate(-1);
   };
 
   return (
@@ -33,13 +35,10 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 9991;
 `;
 
 const Nav = styled.nav`
-  display: fixed;
-  top: 0;
   width: 100%;
   height: 60px;
   background: var(--color-white);

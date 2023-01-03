@@ -4,6 +4,22 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+export default function ImageSlider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  return <StyledSlider {...settings}>{children}</StyledSlider>;
+}
+
 const StyledSlider = styled(Slider)`
   width: 100%;
   height: 255px;
@@ -58,17 +74,3 @@ const StyledSlider = styled(Slider)`
     width: 100%;
   }
 `;
-
-const ImageSlider = ({ children }: { children: React.ReactNode }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
-  return <StyledSlider {...settings}>{children}</StyledSlider>;
-};
-
-export default ImageSlider;
