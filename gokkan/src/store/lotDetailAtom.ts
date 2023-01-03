@@ -4,10 +4,10 @@ import { atom } from 'jotai';
 
 interface LotDetail {
   id: number;
+  itemNumber: string;
   name: string;
+  thumbnail: string;
   startPrice: number;
-  state: string;
-  length: number;
   width: number;
   depth: number;
   height: number;
@@ -15,14 +15,15 @@ interface LotDetail {
   conditionGrade: string;
   conditionDescription: string;
   text: string;
-  madeIn: string;
   designer: string;
   brand: string;
   productionYear: number;
-  writer: string;
-  category: string;
+  writer: null | string;
+  category: {
+    name: string;
+    children: string[] | null[];
+  };
   imageItemUrls: ImageUrl[];
-  imageCheckUrls: ImageUrl[];
   styles: string[];
   created: string;
   updated: string;
@@ -45,7 +46,6 @@ interface BidInfo {
 }
 
 const baseUrl = 'http://3.38.59.40:8080/api/v1';
-const url = 'http://3.38.59.40:8080/api/v1/items/details';
 
 const lotNumberAtom = atom(8);
 const auctionIdAtom = atom(1);
@@ -55,7 +55,7 @@ const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryFn: async ({ queryKey: [, lotNumber] }): Promise<LotDetail> => {
     const res = await axios({
       method: 'get',
-      url,
+      url: `${baseUrl}/items/details/auction`,
       params: {
         itemId: lotNumber,
       },

@@ -95,7 +95,6 @@ export default function LotDetailPage() {
         designer={lotDetail.designer}
         material={lotDetail.material}
         period={lotDetail.productionYear}
-        country={lotDetail.madeIn}
         size={`${lotDetail.width} x ${lotDetail.depth} x ${lotDetail.height} cm`}
         conditionGrade={lotDetail.conditionGrade}
         conditionDescription={lotDetail.conditionDescription}
