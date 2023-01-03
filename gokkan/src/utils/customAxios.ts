@@ -14,8 +14,9 @@ const getCustomAxios = () => {
     (config) => {
       if (localAccessToken) {
         if (!config.headers) return config;
-        if (!config.headers.Authorization) {
-          config.headers['Authorization'] = 'Bearer ' + localAccessToken;
+        if (!(config.headers as any).Authorization) {
+          (config.headers as any)['Authorization'] =
+            'Bearer ' + localAccessToken;
         }
       }
       return config;
