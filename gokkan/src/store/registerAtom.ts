@@ -34,7 +34,7 @@ const productDescriptionAtom = atom('');
 const productStartPriceAtom = atom('');
 
 // for register submit
-const productInfoAtom = atom((get) => {
+const productGetInfoAtom = atom((get) => {
   const itemId = Number(get(productIdAtom));
   const name = get(productNameAtom);
   const startPrice = Number(get(productStartPriceAtom));
@@ -73,6 +73,97 @@ const productInfoAtom = atom((get) => {
   };
 });
 
+// for register first setup
+const productSetInfoAtom = atom(
+  null,
+  (get, set, productInfo: ProductInfoType) => {
+    const {
+      brand,
+      category,
+      conditionDescription,
+      conditionGrade,
+      depth,
+      designer,
+      height,
+      imageCheckUrls,
+      imageItemUrls,
+      material,
+      name,
+      productionYear,
+      startPrice,
+      styles,
+      text,
+      width,
+    } = productInfo;
+
+    const stringTypeProductInfo = [
+      brand,
+      conditionDescription,
+      conditionGrade,
+      designer,
+      material,
+      name,
+      text,
+    ];
+    const stringTypeProductInfoAtomList = [
+      productBrandAtom,
+      productDetailConditionAtom,
+      productConditionAtom,
+      productDesignerAtom,
+      productMaterialAtom,
+      productNameAtom,
+      productDescriptionAtom,
+    ];
+    const numberTypeProductInfo = [
+      depth,
+      height,
+      width,
+      productionYear,
+      startPrice,
+    ];
+    const numberTypeProductInfoAtomList = [
+      productDepthAtom,
+      productHeightAtom,
+      productWidthAtom,
+      productAgeAtom,
+      productStartPriceAtom,
+    ];
+
+    // string type check and set
+    stringTypeProductInfo.forEach((infoItem, index) => {
+      if (infoItem !== '') {
+        set(stringTypeProductInfoAtomList[index], infoItem);
+      }
+    });
+
+    // number type check and set
+    numberTypeProductInfo.forEach((infoItem, index) => {
+      if (infoItem !== 0) {
+        set(numberTypeProductInfoAtomList[index], String(infoItem));
+      }
+    });
+
+    // style check and set
+    if (styles.length !== 0) {
+      set(productStyleAtom, styles);
+    }
+
+    // category check and set
+    if (category.name) {
+      set(firstDepthCategoryAtom, category.name);
+      set(secondDepthCategoryAtom, category.children.name);
+    }
+
+    // imageUrl check and set
+    if (imageItemUrls.length !== 0) {
+      set(uploadDbImageUrlAtom, imageItemUrls);
+    }
+    if (imageCheckUrls.length !== 0) {
+      set(examineDbImageUrlAtom, imageCheckUrls);
+    }
+  }
+);
+
 export {
   uploadDbImageUrlAtom,
   examineDbImageUrlAtom,
@@ -96,10 +187,37 @@ export {
   productConditionAtom,
   productDetailConditionAtom,
   productDescriptionAtom,
-  productInfoAtom,
+  productGetInfoAtom,
+  productSetInfoAtom,
 };
 
 type ImageUrl = {
-  imageId: Number;
+  id: number;
   url: string;
+};
+
+type ProductInfoType = {
+  brand: string;
+  category: any;
+  conditionDescription: string;
+  conditionGrade: string;
+  created: string;
+  depth: number;
+  designer: string;
+  height: number;
+  id: number;
+  imageCheckUrls: ImageUrl[];
+  imageItemUrls: ImageUrl[];
+  itemNumber: string;
+  material: string;
+  name: string;
+  productionYear: number;
+  startPrice: number;
+  state: string;
+  styles: string[];
+  text: string;
+  thumbnail: string;
+  updated: string;
+  width: number;
+  writer: string;
 };

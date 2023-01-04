@@ -4,8 +4,10 @@ import ImageUploader from '../ImageUploader';
 import {
   examineImageFileAtom,
   examineImageUrlAtom,
+  examineDbImageUrlAtom,
   uploadImageFileAtom,
   uploadImageUrlAtom,
+  uploadDbImageUrlAtom,
 } from '../../../store/registerAtom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
@@ -64,6 +66,7 @@ const PageOne = () => {
         <ImageUploader
           fileAtom={uploadImageFileAtom}
           urlAtom={uploadImageUrlAtom}
+          dbUrlAtom={uploadDbImageUrlAtom}
         />
       </div>
       <div className="product-picture">
@@ -71,6 +74,7 @@ const PageOne = () => {
         <ImageUploader
           fileAtom={examineImageFileAtom}
           urlAtom={examineImageUrlAtom}
+          dbUrlAtom={examineDbImageUrlAtom}
         />
       </div>
       <button

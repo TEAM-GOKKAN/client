@@ -1,5 +1,5 @@
 import ImageDropZone from './ImageDropzone';
-import { BsTrash } from 'react-icons/Bs';
+import { BsTrash } from 'react-icons/bs';
 import ImageSlider from '../../common/ImageSlider';
 import styled from 'styled-components';
 
@@ -38,14 +38,14 @@ const ImageSwiper = ({
 }: ImageSwiperProp) => {
   return (
     <ImageSlider>
-      {imageUrlList.map((url, index) => {
+      {imageUrlList.map((url) => {
         return (
           <SliderElement className="img-swiper-wrapper" key={url}>
             <img src={url} alt="입력된 이미지" />
             <button
               className="delete"
               onClick={() => {
-                handleDeleteButton(index);
+                handleDeleteButton(url);
               }}
             >
               <BsTrash />
@@ -60,7 +60,7 @@ const ImageSwiper = ({
 
 type ImageSwiperProp = {
   imageUrlList: string[];
-  handleDeleteButton: (targetIndex: number) => void;
+  handleDeleteButton: (targetUrl: string) => void;
   preTreatment: (rawImageFileList: File[]) => void;
 };
 

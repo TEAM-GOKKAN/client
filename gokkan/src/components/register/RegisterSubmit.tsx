@@ -1,11 +1,11 @@
 import React from 'react';
-import { registerAtom } from '../../store/registerAtom';
+import { productInfoAtom } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
 
 const RegisterSubmit = () => {
-  const [registerInfo] = useAtom(registerAtom);
+  const [productInfo] = useAtom(productInfoAtom);
   const handleRegisterSubmit = () => {
-    console.log(registerInfo);
+    console.log(productInfo);
   };
 
   return <button onClick={handleRegisterSubmit}>제출하기</button>;

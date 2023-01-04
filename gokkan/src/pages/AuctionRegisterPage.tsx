@@ -10,6 +10,7 @@ import ProductTempSaveButton from '../components/register/ProductTempSaveButton'
 import { useAtom } from 'jotai';
 import { productIdAtom } from '../store/registerAtom';
 import useProductTempInfo from '../components/register/useProductTempInfo';
+import { RotatingLines } from 'react-loader-spinner';
 
 const RegisterWrapper = styled.div`
   header {
@@ -36,12 +37,25 @@ const RegisterWrapper = styled.div`
   }
 `;
 
+const LoadingIndicatorWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const AuctionRegister = () => {
   const { pageNumber, productId } = useParams();
   const [itemId, setItemId] = useAtom(productIdAtom);
   const [pageName, setPageName] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  useProductTempInfo(String(productId));
+  const loadingFinish = () => {
+    setLoading(false);
+  };
+
+  useProductTempInfo(String(productId), loadingFinish);
 
   useEffect(() => {
     switch (pageNumber) {
@@ -63,6 +77,20 @@ const AuctionRegister = () => {
   useEffect(() => {
     setItemId(String(productId));
   }, []);
+
+  if (loading) {
+    return (
+      <LoadingIndicatorWrapper>
+        <RotatingLines
+          strokeColor="black"
+          strokeWidth="3"
+          animationDuration="0.75"
+          width="50"
+          visible={true}
+        />
+      </LoadingIndicatorWrapper>
+    );
+  }
 
   return (
     <RegisterWrapper>
