@@ -41,11 +41,12 @@ const fileListToNewFileList = async (fileList: File[]) => {
     })
   );
 
-  const newFileList = newBlobList.map((blob) => {
-    return new File([blob], blob.name, {
-      type: blob.type,
+  const newFileList = newBlobList.map((blob, index) => {
+    return new File([blob], `.jpeg`, {
+      type: 'image/jpeg',
     });
   });
+  console.log(newFileList);
   return newFileList;
 };
 

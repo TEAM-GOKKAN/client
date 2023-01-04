@@ -43,7 +43,7 @@ const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
     // 이미지 파일 전처리
     const newFileList = await fileListToNewFileList(rawImageFileList);
     // 이미지 파일을 base64 url로 변환함
-    const base64UrlList = await fileListToBase64(newFileList);
+    const base64UrlList = await fileListToBase64(rawImageFileList);
 
     // base64url 및 파일을 할당함
     setImageUrlList([...imageUrlList, ...base64UrlList].slice(0, 5));
