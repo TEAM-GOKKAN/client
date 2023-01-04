@@ -1,1 +1,0 @@
-import{M as r}from"./ModalFull.74d0c468.js";import{j as u}from"./index.52785946.js";import"./iconBase.85d6155e.js";const i=()=>u(r,{title:"\uB9C8\uC774\uD398\uC774\uC9C0",children:u("div",{children:"\uC624\uD638\uD638 \uC774\uD788\uD788"})});export{i as default};

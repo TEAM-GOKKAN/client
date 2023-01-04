@@ -1,9 +1,9 @@
 import React from 'react';
-import { productInfoAtom } from '../../store/registerAtom';
+import { productGetInfoAtom } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
 
 const RegisterSubmit = () => {
-  const [productInfo] = useAtom(productInfoAtom);
+  const [productInfo] = useAtom(productGetInfoAtom);
   const handleRegisterSubmit = () => {
     console.log(productInfo);
   };
