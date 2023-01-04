@@ -12,10 +12,18 @@ const ImgInputWrapper = styled.div`
   background-color: var(--color-brown100);
 `;
 
-const ImageUploader = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
+const ImageUploader = ({
+  fileAtom,
+  urlAtom,
+  dbUrlAtom,
+}: ImageUploaderPropType) => {
   return (
     <ImgInputWrapper>
-      <ImageSwiperContainer fileAtom={fileAtom} urlAtom={urlAtom} />
+      <ImageSwiperContainer
+        fileAtom={fileAtom}
+        urlAtom={urlAtom}
+        dbUrlAtom={dbUrlAtom}
+      />
     </ImgInputWrapper>
   );
 };
@@ -23,6 +31,11 @@ const ImageUploader = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
 type ImageUploaderPropType = {
   fileAtom: PrimitiveAtom<File[]>;
   urlAtom: PrimitiveAtom<string[]>;
+  dbUrlAtom: PrimitiveAtom<ImageUrl[]>;
 };
 
+type ImageUrl = {
+  id: number;
+  url: string;
+};
 export default ImageUploader;

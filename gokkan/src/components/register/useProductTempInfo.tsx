@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getCustomAxios } from '../../utils/customAxios';
+import { productSetInfoAtom } from '../../store/registerAtom';
+import { useAtom } from 'jotai';
 
-const useProductTempInfo = (itemId: string) => {
-  const [productInfo, setProductInfo] = useState({});
+const useProductTempInfo = (itemId: string, loadingFinish: () => void) => {
   const customAxios = getCustomAxios();
+  const [, productSetInfo] = useAtom(productSetInfoAtom);
 
   useEffect(() => {
     const url = 'api/v1/items/details/temp';
@@ -12,15 +14,14 @@ const useProductTempInfo = (itemId: string) => {
         params: { itemId: Number(itemId) },
       })
       .then(({ data }) => {
-        console.log(data);
-        // setProductInfo(data);
+        // 초기 데이터 설정
+        productSetInfo(data);
+        loadingFinish();
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  return productInfo;
 };
 
 export default useProductTempInfo;

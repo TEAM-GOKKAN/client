@@ -32,7 +32,7 @@ const SpreadListItem = styled.li`
   margin-top: 10px;
 `;
 
-const SpreadList = ({ title, listItems = [] }: SpreadListPropType) => {
+const SpreadList = ({ title, listItems = [], clickFn }: SpreadListPropType) => {
   const [listOpen, setListOpen] = useState(false);
 
   const handleTitleClick = () => {
@@ -63,6 +63,7 @@ const SpreadList = ({ title, listItems = [] }: SpreadListPropType) => {
 type SpreadListPropType = {
   title: string;
   listItems?: ReactNode[];
+  clickFn?: () => null;
 };
 
 export default SpreadList;

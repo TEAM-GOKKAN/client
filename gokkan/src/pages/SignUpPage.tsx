@@ -16,6 +16,7 @@ const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  padding-top: 60px;
 `;
 
 const SignUpPage = () => {

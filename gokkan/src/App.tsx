@@ -18,6 +18,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const TestPage = lazy(() => import('./pages/Testpage'));
 const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
+const SignInSusPense = lazy(() => import('./components/SignIn/SignInSuspense'));
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="auction/1" element={<LotDetailPage />} />
           <Route path="signup" element={<SignUpPage />} />
+          <Route path="signInCheck" element={<SignInSusPense />} />
         </Route>
         <Route
           path="register/:pageNumber/:productId"

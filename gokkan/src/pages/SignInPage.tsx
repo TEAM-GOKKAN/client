@@ -9,7 +9,6 @@ const SignInWrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    height: 170px;
     .title {
       display: flex;
       flex-direction: row;

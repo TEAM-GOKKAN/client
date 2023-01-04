@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  productInfoAtom,
+  productGetInfoAtom,
   uploadImageFileAtom,
   examineImageFileAtom,
 } from '../../store/registerAtom';
@@ -8,7 +8,7 @@ import { useAtom } from 'jotai';
 import { getCustomAxios } from '../../utils/customAxios';
 
 const ProductTempSaveButton = () => {
-  const [productInfo] = useAtom(productInfoAtom);
+  const [productInfo] = useAtom(productGetInfoAtom);
   const [uploadImgFile] = useAtom(uploadImageFileAtom);
   const [examineImgFile] = useAtom(examineImageFileAtom);
   const customAxios = getCustomAxios();

@@ -30,9 +30,14 @@ const SwiperWrapper = styled.div`
   }
 `;
 
-const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
+const ImageSwiperContainer = ({
+  fileAtom,
+  urlAtom,
+  dbUrlAtom,
+}: ImageUploaderPropType) => {
   const [imageUrlList, setImageUrlList] = useAtom(urlAtom);
   const [imageFileList, setImageFileList] = useAtom(fileAtom);
+  const [dbUrlList, setDbUrlList] = useAtom(dbUrlAtom);
   const [isLoading, setIsLoading] = useState(false);
 
   const pretreatmentImageFileList = async (rawImageFileList: File[]) => {
@@ -53,9 +58,9 @@ const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
     setIsLoading(false);
   };
 
-  const handleDeleteButton = (targetIndex: number) => {
-    function deleteTarget<T>(value: T, index: number) {
-      if (index === targetIndex) {
+  const handleDeleteButton = (targetUrl: string) => {
+    function deleteTarget<T>(value: T) {
+      if (value === targetUrl) {
         return false;
       } else {
         return true;
@@ -69,7 +74,24 @@ const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
     setImageFileList((pre) => {
       return pre.filter(deleteTarget);
     });
+    // Db에 있는 데이터 삭제
+    setDbUrlList((pre) => {
+      return pre.filter((value) => {
+        if (value.url === targetUrl) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+    });
   };
+
+  // 처음 db에 원래 존재하는 url 넣어줌
+  useEffect(() => {
+    dbUrlList.forEach((dbUrl) => {
+      setImageUrlList((pre) => [dbUrl.url, ...pre]);
+    });
+  }, [dbUrlList.length]);
 
   if (isLoading) {
     return <ImageSuspense />;
@@ -92,6 +114,12 @@ const ImageSwiperContainer = ({ fileAtom, urlAtom }: ImageUploaderPropType) => {
 type ImageUploaderPropType = {
   fileAtom: PrimitiveAtom<File[]>;
   urlAtom: PrimitiveAtom<string[]>;
+  dbUrlAtom: PrimitiveAtom<ImageUrl[]>;
+};
+
+type ImageUrl = {
+  id: number;
+  url: string;
 };
 
 export default ImageSwiperContainer;
