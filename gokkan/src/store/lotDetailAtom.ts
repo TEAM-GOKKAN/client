@@ -1,6 +1,7 @@
 import { atomsWithQuery } from 'jotai-tanstack-query';
 import axios from 'axios';
 import { atom } from 'jotai';
+import { Client } from '@stomp/stompjs';
 
 interface LotDetail {
   id: number;
@@ -139,10 +140,35 @@ const [sellerInfoAtom] = atomsWithQuery((get) => ({
   },
 }));
 
+const StompClientAtom = atom<React.MutableRefObject<Client | undefined> | null>(
+  null
+);
+
+// const bidCloseTimeAtom = atom((get) => {
+//   const { auctionEndDateTime } = get(auctionInfoAtom);
+//   return auctionEndDateTime;
+// });
+
+const currBidPriceAtom = atom<number | string>(0);
+
+const currBidHistoryAtom = atom<BidInfo[] | null[]>([]);
+
+const bidCloseTimeAtom = atom('');
+
+const bidErrMsgAtom = atom('');
+
+const addedBidTimeAtom = atom('');
+
 export {
   lotDetailAtom,
   auctionInfoAtom,
   bidHistoryAtom,
   expertValuationAtom,
   sellerInfoAtom,
+  StompClientAtom,
+  currBidPriceAtom,
+  bidCloseTimeAtom,
+  bidErrMsgAtom,
+  addedBidTimeAtom,
+  currBidHistoryAtom,
 };

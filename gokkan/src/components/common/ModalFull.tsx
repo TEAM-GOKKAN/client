@@ -11,6 +11,7 @@ interface Iprops {
 
 export default function ModalFull({ children, title, onClickBtn }: Iprops) {
   const navigate = useNavigate();
+
   const handleIconClick = () => {
     if (onClickBtn) onClickBtn();
     else navigate(-1);
@@ -35,6 +36,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   z-index: 9991;
 `;
 

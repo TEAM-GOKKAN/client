@@ -25,8 +25,8 @@ export default function BidHistory({ bidHistory }: Iprops) {
           const priceWithCommas = insertCommas(bid.price);
 
           return (
-            <Bid key={`${bid?.memberId}${bid?.price}`}>
-              <Bidder>{bid?.memberId}</Bidder>
+            <Bid key={`${bid.memberId}${bid.price}`}>
+              <Bidder>{bid.memberId}</Bidder>
               <BidTime>{elpasedTime}</BidTime>
               <BidPrice>{priceWithCommas}원</BidPrice>
             </Bid>

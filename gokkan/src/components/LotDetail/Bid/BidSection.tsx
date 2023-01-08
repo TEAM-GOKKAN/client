@@ -1,51 +1,74 @@
-import React, { useRef } from 'react';
+import { Client } from '@stomp/stompjs';
+import { useUpdateAtom } from 'jotai/utils';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useInput from '../../../lib/hooks/useInput';
+import { insertCommas, removeCommas } from '../../../utils/handleCommas';
 
 interface Iprops {
   currentPrice: number | string;
-  onPlaceBid: (price: number | string) => void;
+  onConfirmOpen: () => void;
+  onSetBidPrice: (price: number) => void;
 }
 
-export default function BidSection({ currentPrice, onPlaceBid }: Iprops) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  console.log(location);
+export default function BidSection({
+  currentPrice,
+  onConfirmOpen,
+  onSetBidPrice,
+}: Iprops) {
+  const [minBidPrice, setMinBidPrice] = useState<number>(
+    Number(currentPrice) + 10000
+  );
+  const [inputErrMsg, setInputErrMsg] = useState('');
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const handleBidInput = () => {
-    if (!inputRef.current?.value) return;
+  const [value, , setValue] = useInput<string>('');
 
-    onPlaceBid(inputRef.current.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputPriceWithCommas = insertCommas(removeCommas(e.target.value));
+    setValue(inputPriceWithCommas);
   };
 
   // 모달 띄우기
-  const handleOpenModal = () => {
-    navigate('bid', {
-      state: {
-        background: location,
-      },
-    });
+  const handleClickBidButton = () => {
+    const bidPriceWithCommas = Number(removeCommas(value));
+    onSetBidPrice(bidPriceWithCommas);
+    onConfirmOpen();
   };
 
   return (
     <Container>
-      {/* <PriceButtonsContainer>
-        <button type="submit">{currentPrice}</button>
-        <button type="submit">{currentPrice}</button>
-        <button type="submit">{currentPrice}</button>
-      </PriceButtonsContainer> */}
+      <PriceButtonsContainer>
+        <button type="submit">
+          <span>{insertCommas(minBidPrice)}</span>
+          <span>원</span>
+        </button>
+        <button type="submit">
+          <span>{insertCommas(minBidPrice + 10000)}</span>
+          <span>원</span>
+        </button>
+        <button type="submit">
+          <span>{insertCommas(minBidPrice + 20000)}</span>
+          <span>원</span>
+        </button>
+      </PriceButtonsContainer>
       <PriceInputContainer>
         <input
-          type="text"
-          placeholder={`${currentPrice}원 이상`}
-          ref={inputRef}
+          placeholder={`${insertCommas(Number(currentPrice) + 10000)}원 이상`}
+          value={value}
+          onChange={handleInputChange}
         />
-        {/* <div>유효한 금액을 입력해주세요.</div> */}
+        {inputErrMsg && <div>{inputErrMsg}</div>}
       </PriceInputContainer>
       <BidButtonsContainer>
-        {/* <Link to="modal" state={{ background: location }}> */}
-        <BidOnceButton type="button" onClick={handleOpenModal}>
+        {/* <Link
+          to="bid"
+          state={{
+            background: location,
+            bidPrice: value,
+          }}
+        > */}
+        <BidOnceButton type="button" onClick={handleClickBidButton}>
           1회 응찰
         </BidOnceButton>
         {/* </Link> */}

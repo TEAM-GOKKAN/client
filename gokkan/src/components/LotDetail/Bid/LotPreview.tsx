@@ -5,13 +5,20 @@ interface Iprops {
   lotName: string;
   thumbnail: string | undefined;
   currentPrice: number | string;
+  closeTime: string;
 }
 
 export default function LotPreview({
   lotName,
   thumbnail,
   currentPrice,
+  closeTime,
 }: Iprops) {
+  const month = Number(closeTime.slice(5, 7));
+  const day = Number(closeTime.slice(8, 10));
+  const hour = Number(closeTime.slice(8, 10));
+  const min = Number(closeTime.slice(14, 16));
+
   return (
     <Container>
       <ImageContainer>
@@ -25,7 +32,7 @@ export default function LotPreview({
         </CurrentPrice>
         <CloseTime>
           <div>마감시간</div>
-          <div>12월 24일 11시 36분</div>
+          <div>{`${month}월 ${day}일 ${hour}시 ${min}분`}</div>
         </CloseTime>
       </LotInfo>
     </Container>
@@ -45,6 +52,7 @@ const ImageContainer = styled.div`
 
   & > img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;
