@@ -58,6 +58,7 @@ interface ExpertValuation {
 interface SellerInfo {
   name: string;
   profileImageUrl: string;
+  createdAt: string;
 }
 
 const baseUrl = 'http://3.38.59.40:8080/api/v1';

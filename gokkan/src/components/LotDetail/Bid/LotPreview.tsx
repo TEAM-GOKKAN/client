@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { convertDateFormat } from '../../../utils/convertDateFormat';
 
 interface Iprops {
   lotName: string;
@@ -14,10 +15,7 @@ export default function LotPreview({
   currentPrice,
   closeTime,
 }: Iprops) {
-  const month = Number(closeTime.slice(5, 7));
-  const day = Number(closeTime.slice(8, 10));
-  const hour = Number(closeTime.slice(8, 10));
-  const min = Number(closeTime.slice(14, 16));
+  const { month, day, hour, min } = convertDateFormat(closeTime);
 
   return (
     <Container>

@@ -1,15 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BsStarFill } from 'react-icons/bs';
+import { convertDateFormat } from '../../utils/convertDateFormat';
 
 interface Iprops {
   data: {
     name: string;
     profileImageUrl: string;
+    createdAt: string;
   };
 }
 
 export default function SellerInfo({ data }: Iprops) {
+  const { year, month } = convertDateFormat(data.createdAt);
+
   return (
     <Container>
       <Title>판매자</Title>
@@ -20,16 +24,10 @@ export default function SellerInfo({ data }: Iprops) {
           </ProfileImageContainer>
           <span>{data.name}</span>
         </Profile>
-        <Review>
-          <span>2,111명</span>
-          <StarRating>
-            <BsStarFill size="12" />
-            <BsStarFill size="12" />
-            <BsStarFill size="12" />
-            <BsStarFill size="12" />
-            <BsStarFill size="12" />
-          </StarRating>
-        </Review>
+        <SignedUpDate>
+          <span>since</span>
+          <span>{`${year}. ${month}`}</span>
+        </SignedUpDate>
       </Info>
     </Container>
   );
@@ -87,16 +85,12 @@ const ProfileImageContainer = styled.div`
   }
 `;
 
-const Review = styled.div`
+const SignedUpDate = styled.div`
   display: flex;
   gap: 10px;
 
   & > span {
     letter-spacing: normal;
-
-    &:first-child {
-      color: var(--color-brown300);
-    }
   }
 `;
 
