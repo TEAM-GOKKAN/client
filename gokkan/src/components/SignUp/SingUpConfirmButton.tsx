@@ -14,8 +14,8 @@ import { useNavigate } from 'react-router-dom';
 const ConfirmButtonWrapper = styled.button`
   position: fixed;
   bottom: 0px;
+  left: 0px;
   width: 100%;
-  margin: 0 -12px;
   height: 50px;
   background-color: var(--color-brown100);
   z-index: 10;
@@ -68,6 +68,7 @@ const SingUpConfirmButton = () => {
     const nullData = new Blob([], {
       type: 'application/json',
     });
+
     if (profileImageFile === '') {
       transferData.append('profileImage', nullData);
     } else {
