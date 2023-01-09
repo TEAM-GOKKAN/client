@@ -31,6 +31,7 @@ export default function BidModal() {
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [remainingTime, setRemainingTime] = useState('');
   const [isAutoBid, setIsAutoBid] = useState(false);
+  const [isAuctionClosed, setIsAuctionClosed] = useState(false);
 
   // 남은 시간 업데이트 함수
   const updateRemainingTime = () => {
@@ -41,6 +42,7 @@ export default function BidModal() {
   const handleOpenConfirmModal = useCallback(() => {
     setConfirmModalOpen(true);
   }, []);
+
   const handleCloseConfirmModal = useCallback(() => {
     setConfirmModalOpen(false);
   }, []);
@@ -65,9 +67,15 @@ export default function BidModal() {
     updateRemainingTime();
     const timeoutId = setInterval(updateRemainingTime, 1000);
 
+    // 경매 마감 시 타이머 해제 및 응찰 섹션 숨기기
+    if (remainingTime === '마감') {
+      setIsAuctionClosed(true);
+      clearInterval(timeoutId);
+    }
+
     // 타이머 해제
     return () => clearInterval(timeoutId);
-  }, [bidCloseTime]);
+  }, [bidCloseTime, remainingTime]);
 
   return (
     <ModalFull title={remainingTime}>
@@ -77,11 +85,14 @@ export default function BidModal() {
         currentPrice={insertCommas(currBidPrice)}
         closeTime={bidCloseTime}
       />
-      <BidSection
-        currentPrice={currBidPrice}
-        onSetBidPrice={handleSetBidPrice}
-        onConfirmOpen={handleOpenConfirmModal}
-      />
+      {!isAuctionClosed && (
+        <BidSection
+          currentPrice={currBidPrice}
+          onSetBidPrice={handleSetBidPrice}
+          onConfirmOpen={handleOpenConfirmModal}
+          onSetAutoBid={setIsAutoBid}
+        />
+      )}
       <BidHistory bidHistory={currBidHistory} />
       {confirmModalOpen && (
         <BidConfirmModal
