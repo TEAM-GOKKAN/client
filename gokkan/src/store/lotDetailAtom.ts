@@ -2,6 +2,7 @@ import { atomsWithQuery } from 'jotai-tanstack-query';
 import axios from 'axios';
 import { atom } from 'jotai';
 import { Client } from '@stomp/stompjs';
+import { getCustomAxios } from '../utils/customAxios';
 
 interface LotDetail {
   id: number;
@@ -63,13 +64,14 @@ interface SellerInfo {
 
 const baseUrl = 'http://3.38.59.40:8080/api/v1';
 
-const lotIdAtom = atom(8);
-const auctionIdAtom = atom(1);
+const lotIdAtom = atom(7);
+const auctionIdAtom = atom(2);
 
 const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['lotDetail', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<LotDetail> => {
-    const res = await axios({
+    const customAxios = getCustomAxios();
+    const res = await customAxios({
       method: 'get',
       url: `${baseUrl}/items/details/auction`,
       params: {
@@ -161,6 +163,8 @@ const bidErrMsgAtom = atom('');
 const addedBidTimeAtom = atom('');
 
 export {
+  lotIdAtom,
+  auctionIdAtom,
   lotDetailAtom,
   auctionInfoAtom,
   bidHistoryAtom,

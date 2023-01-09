@@ -23,7 +23,7 @@ export default function BidBox({ closeTime, currentPrice }: Iprops) {
 
   // 가격에 콤마 삽입
   const getPriceWithCommas = (price: number | string) => {
-    const priceWithCommas = insertCommas(price);
+    const priceWithCommas = insertCommas(Number(price));
     setCurrPrice(priceWithCommas);
   };
 

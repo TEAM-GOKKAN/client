@@ -1,6 +1,5 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Client } from '@stomp/stompjs';
 import {
   auctionInfoAtom,
   bidCloseTimeAtom,
@@ -82,7 +81,7 @@ export default function BidModal() {
       <LotPreview
         lotName={name}
         thumbnail={thumbnail}
-        currentPrice={insertCommas(currBidPrice)}
+        currentPrice={insertCommas(Number(currBidPrice))}
         closeTime={bidCloseTime}
       />
       {!isAuctionClosed && (

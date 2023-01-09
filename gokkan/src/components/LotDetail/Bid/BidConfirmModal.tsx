@@ -1,13 +1,15 @@
-import { useAtomValue } from 'jotai';
-import React, { useCallback, useRef, useState } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { StompClientAtom } from '../../../store/lotDetailAtom';
+import {
+  auctionIdAtom,
+  bidErrMsgAtom,
+  StompClientAtom,
+} from '../../../store/lotDetailAtom';
+import { accessTokenAtom } from '../../../store/tokenAtom';
+import { insertCommas } from '../../../utils/handleCommas';
 import Modal from '../../common/Modal';
-
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTY2MzE0NzQzIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MjgyMzM5OX0.zwqKkWgQOOfL8eTuQ-vyZDj3aQ3USB7NkCy7nZBSa7k';
-const auctionId = 1;
 
 interface Iprops {
   bidPrice: number;
@@ -21,25 +23,34 @@ export default function BidConfirmModal({
   onConfirmClose,
 }: Iprops) {
   const client = useAtomValue(StompClientAtom);
+  const auctionId = useAtomValue(auctionIdAtom);
   const destination = isAutoBid
     ? `/auction/auto/${auctionId}`
     : `/auction/${auctionId}`;
+  const accessToken = useAtomValue(accessTokenAtom);
+
+  const bidErrMsg = useAtom(bidErrMsgAtom);
 
   const handlePlaceBid = useCallback(async () => {
     client?.current?.publish({
       destination,
       body: JSON.stringify(bidPrice),
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
+    onConfirmClose();
   }, []);
+
+  useEffect(() => {
+    console.log(bidErrMsg);
+  }, [bidErrMsg]);
 
   return (
     <Modal buttonText="응찰" onSubmit={handlePlaceBid} onClose={onConfirmClose}>
       <BidPrice>
         <div>{isAutoBid ? '자동응찰가' : '응찰가'}</div>
-        <div>{bidPrice}</div>
+        <div>{insertCommas(Number(bidPrice))}</div>
       </BidPrice>
       <CautionMessage>
         <div>응찰 버튼을 누르시면 취소가 불가능합니다.</div>
