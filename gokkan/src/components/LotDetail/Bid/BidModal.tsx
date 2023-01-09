@@ -1,13 +1,13 @@
 import { useAtom, useAtomValue } from 'jotai';
 import React, { useCallback, useEffect, useState } from 'react';
+import { lotDetailAtom } from '../../../store/lotDetailAtom';
 import {
   auctionInfoAtom,
   bidCloseTimeAtom,
   bidHistoryAtom,
   currBidHistoryAtom,
   currBidPriceAtom,
-  lotDetailAtom,
-} from '../../../store/lotDetailAtom';
+} from '../../../store/bidAtom';
 import { insertCommas } from '../../../utils/handleCommas';
 import ModalFull from '../../common/ModalFull';
 import BidSection from './BidSection';

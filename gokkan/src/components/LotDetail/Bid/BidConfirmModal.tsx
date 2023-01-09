@@ -1,12 +1,11 @@
 import { useAtom, useAtomValue } from 'jotai';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   auctionIdAtom,
   bidErrMsgAtom,
   StompClientAtom,
-} from '../../../store/lotDetailAtom';
+} from '../../../store/bidAtom';
 import { accessTokenAtom } from '../../../store/tokenAtom';
 import { insertCommas } from '../../../utils/handleCommas';
 import Modal from '../../common/Modal';

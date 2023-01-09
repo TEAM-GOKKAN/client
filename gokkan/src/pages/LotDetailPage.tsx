@@ -8,18 +8,20 @@ import SellerInfo from '../components/LotDetail/SellerInfo';
 import BidBox from '../components/LotDetail/BidBox';
 import Favorite from '../components/LotDetail/Favorite';
 import {
-  bidHistoryAtom,
-  auctionInfoAtom,
   lotDetailAtom,
   expertValuationAtom,
   sellerInfoAtom,
+} from '../store/lotDetailAtom';
+import {
+  bidHistoryAtom,
+  auctionInfoAtom,
   StompClientAtom,
   currBidPriceAtom,
   bidErrMsgAtom,
   addedBidTimeAtom,
   currBidHistoryAtom,
   auctionIdAtom,
-} from '../store/lotDetailAtom';
+} from '../store/bidAtom';
 import { useAtom, useAtomValue } from 'jotai';
 import { Client, IMessage } from '@stomp/stompjs';
 import useStomp from '../lib/hooks/useStomp';
