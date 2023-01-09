@@ -11,15 +11,23 @@ const auctionId = 1;
 
 interface Iprops {
   bidPrice: number;
+  isAutoBid: boolean;
   onConfirmClose: () => void;
 }
 
-export default function BidConfirmModal({ bidPrice, onConfirmClose }: Iprops) {
+export default function BidConfirmModal({
+  bidPrice,
+  isAutoBid,
+  onConfirmClose,
+}: Iprops) {
   const client = useAtomValue(StompClientAtom);
+  const destination = isAutoBid
+    ? `/auction/auto/${auctionId}`
+    : `/auction/${auctionId}`;
 
   const handlePlaceBid = useCallback(async () => {
     client?.current?.publish({
-      destination: `/auction/${auctionId}`,
+      destination,
       body: JSON.stringify(bidPrice),
       headers: {
         Authorization: `Bearer ${token}`,
@@ -30,7 +38,7 @@ export default function BidConfirmModal({ bidPrice, onConfirmClose }: Iprops) {
   return (
     <Modal buttonText="응찰" onSubmit={handlePlaceBid} onClose={onConfirmClose}>
       <BidPrice>
-        <div>응찰가</div>
+        <div>{isAutoBid ? '자동응찰가' : '응찰가'}</div>
         <div>{bidPrice}</div>
       </BidPrice>
       <CautionMessage>

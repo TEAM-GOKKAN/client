@@ -30,6 +30,7 @@ export default function BidModal() {
   const [bidPrice, setBidPrice] = useState(0);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [remainingTime, setRemainingTime] = useState('');
+  const [isAutoBid, setIsAutoBid] = useState(false);
 
   // 남은 시간 업데이트 함수
   const updateRemainingTime = () => {
@@ -85,6 +86,7 @@ export default function BidModal() {
       {confirmModalOpen && (
         <BidConfirmModal
           bidPrice={bidPrice}
+          isAutoBid={isAutoBid}
           onConfirmClose={handleCloseConfirmModal}
         />
       )}
