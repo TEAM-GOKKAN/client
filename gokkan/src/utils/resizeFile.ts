@@ -46,7 +46,6 @@ const fileListToNewFileList = async (fileList: File[]) => {
       type: 'image/jpeg',
     });
   });
-  console.log(newFileList);
   return newFileList;
 };
 

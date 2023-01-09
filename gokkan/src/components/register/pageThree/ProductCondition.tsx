@@ -14,9 +14,9 @@ const ProductConditionWrapper = styled.div`
   }
   input {
     width: 100%;
-    background-color: #f4f2f1;
     padding: 10px 12px;
-    border: none;
+    background: none;
+    border: 1px solid var(--color-brown200);
   }
 `;
 
@@ -34,7 +34,7 @@ const ProductCondition = () => {
     { value: 'New', label: 'New' },
     { value: 'Best', label: 'Best' },
     { value: 'Good', label: 'Good' },
-    { value: 'Noraml', label: 'Normal' },
+    { value: 'Normal', label: 'Normal' },
     { value: 'Bad', label: 'Bad' },
   ];
 

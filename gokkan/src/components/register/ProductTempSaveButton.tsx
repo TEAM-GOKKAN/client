@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import {
   productGetInfoAtom,
   uploadImageFileAtom,
@@ -7,26 +7,26 @@ import {
 import { useAtom } from 'jotai';
 import { getCustomAxios } from '../../utils/customAxios';
 
-const ProductTempSaveButton = () => {
+const ProductTempSaveButton = ({ setLoading }: ProductTempSaveButtonProps) => {
   const [productInfo] = useAtom(productGetInfoAtom);
   const [uploadImgFile] = useAtom(uploadImageFileAtom);
   const [examineImgFile] = useAtom(examineImageFileAtom);
   const customAxios = getCustomAxios();
 
   const handleTempSaveButtonClick = () => {
-    console.log('tmp save button clicked');
+    setLoading(true);
     console.log(productInfo);
     const transferData = new FormData();
     const requestData = new Blob([JSON.stringify(productInfo)], {
       type: 'application/json',
     });
+    transferData.append('request', requestData);
 
     // 파일이 비워져 있을 때, 빈 배열을 보내기 위한 데이터
     const nullData = new Blob([], {
       type: 'application/json',
     });
 
-    transferData.append('request', requestData);
     if (uploadImgFile.length !== 0) {
       uploadImgFile.forEach((uploadImg) => {
         transferData.append('imageItemFiles', uploadImg);
@@ -50,9 +50,10 @@ const ProductTempSaveButton = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   };
@@ -62,6 +63,10 @@ const ProductTempSaveButton = () => {
       저장
     </button>
   );
+};
+
+type ProductTempSaveButtonProps = {
+  setLoading: Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default ProductTempSaveButton;

@@ -6,12 +6,11 @@ const ProductInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 36px;
-  height: 40px;
   input {
+    height: 42px;
     width: 100%;
     padding: 10px 12px;
     margin-top: 10px;
-    border: none;
   }
 `;
 

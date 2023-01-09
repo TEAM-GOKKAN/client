@@ -13,6 +13,7 @@ const SignInWrapper = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-bottom: 12px;
       .small {
         font-family: 'Noto Sans KR';
         font-style: normal;
@@ -28,6 +29,7 @@ const SignInWrapper = styled.div`
       font-size: 14px;
       line-height: 21px;
       color: #9d9792;
+      margin-bottom: 24px;
     }
   }
 `;

@@ -13,7 +13,6 @@ const CustomUnknownInputWrapper = styled.div`
     width: 100%;
     padding: 10px 12px;
     margin-top: 10px;
-    border: none;
   }
 `;
 
