@@ -9,19 +9,11 @@ interface Iprops {
 export default function LotDescription(props: Iprops) {
   return (
     <Container>
-      <Description>
-        {/* 현저하게 위하여 곳이 것이다. 얼음과 가치를 끓는 살았으며, 기관과 새가
-        그들은 아니다. 그들의 찾아다녀도, 무엇을 가치를 위하여 영락과 청춘이
-        있는가? 방지하는 수 무엇을 속잎나고,
-        <br />
-        <br />
-        밝은 그들의 찾아다녀도, 무엇을 가치를 */}
-        {props.content}
-      </Description>
-      <ShowMoreButton>
+      <Description>{props.content}</Description>
+      {/* <ShowMoreButton>
         <span>더보기</span>
         <FiChevronDown size="14" />
-      </ShowMoreButton>
+      </ShowMoreButton> */}
     </Container>
   );
 }

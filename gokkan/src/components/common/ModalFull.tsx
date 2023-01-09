@@ -11,6 +11,7 @@ interface Iprops {
 
 export default function ModalFull({ children, title, onClickBtn }: Iprops) {
   const navigate = useNavigate();
+
   const handleIconClick = () => {
     if (onClickBtn) onClickBtn();
     else navigate(-1);

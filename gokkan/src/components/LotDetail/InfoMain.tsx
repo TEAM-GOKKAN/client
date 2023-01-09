@@ -4,7 +4,7 @@ import ImageSlider from '../common/ImageSlider';
 
 interface Iprops {
   lotName: string;
-  lotNumber: number;
+  lotNumber: string;
   lotImageUrls: ImageUrl[];
 }
 
@@ -18,16 +18,14 @@ export default function InfoMain(props: Iprops) {
 
   return (
     <Container>
-      {/* <ImageContainer> */}
       <ImageSlider>
         {lotImageUrls.length &&
           lotImageUrls.map((image: ImageUrl) => (
             <img key={image.id} src={image.url} alt="image" />
           ))}
       </ImageSlider>
-      {/* </ImageContainer> */}
       <ProductName>{lotName}</ProductName>
-      <LotNumber>{'No.' + lotNumber}</LotNumber>
+      <LotNumber>{`No.${lotNumber}`}</LotNumber>
     </Container>
   );
 }
@@ -39,7 +37,7 @@ const Container = styled.div`
 const ProductName = styled.h1`
   font-size: var(--font-x-large);
   margin-top: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   letter-spacing: normal;
 `;
 

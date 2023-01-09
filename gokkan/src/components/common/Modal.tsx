@@ -5,13 +5,20 @@ import styled from 'styled-components';
 interface Iprops {
   children: React.ReactNode;
   buttonText?: string;
-  onSubmit?: () => void;
+  onSubmit?: (param?: any) => void;
+  onClose?: () => void;
 }
 
-export default function Modal({ children, buttonText, onSubmit }: Iprops) {
+export default function Modal({
+  children,
+  buttonText,
+  onSubmit,
+  onClose,
+}: Iprops) {
   const navigate = useNavigate();
   const handleClose = () => {
-    navigate(-1);
+    if (onClose) onClose();
+    else navigate(-1);
   };
 
   return (

@@ -6,7 +6,6 @@ interface Iprops {
   designer: string;
   material: string;
   period: number;
-  country: string;
   size: string;
   conditionGrade: string;
   conditionDescription: string | undefined;
@@ -18,7 +17,6 @@ export default function InfoDetail(props: Iprops) {
     designer,
     material,
     period,
-    country,
     size,
     conditionGrade,
     conditionDescription,
@@ -41,10 +39,6 @@ export default function InfoDetail(props: Iprops) {
       <Row>
         <InfoTitle>Period</InfoTitle>
         <InfoContent>{period}</InfoContent>
-      </Row>
-      <Row>
-        <InfoTitle>Country</InfoTitle>
-        <InfoContent>{country}</InfoContent>
       </Row>
       <Row>
         <InfoTitle>Size</InfoTitle>
