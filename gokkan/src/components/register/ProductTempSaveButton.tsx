@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  productInfoAtom,
+  productGetInfoAtom,
   uploadImageFileAtom,
   examineImageFileAtom,
 } from '../../store/registerAtom';
@@ -8,7 +8,7 @@ import { useAtom } from 'jotai';
 import { getCustomAxios } from '../../utils/customAxios';
 
 const ProductTempSaveButton = () => {
-  const [productInfo] = useAtom(productInfoAtom);
+  const [productInfo] = useAtom(productGetInfoAtom);
   const [uploadImgFile] = useAtom(uploadImageFileAtom);
   const [examineImgFile] = useAtom(examineImageFileAtom);
   const customAxios = getCustomAxios();
@@ -20,13 +20,28 @@ const ProductTempSaveButton = () => {
     const requestData = new Blob([JSON.stringify(productInfo)], {
       type: 'application/json',
     });
+
+    // 파일이 비워져 있을 때, 빈 배열을 보내기 위한 데이터
+    const nullData = new Blob([], {
+      type: 'application/json',
+    });
+
     transferData.append('request', requestData);
-    uploadImgFile.forEach((uploadImg) => {
-      transferData.append('imageItemFiles', uploadImg);
-    });
-    examineImgFile.forEach((examineImg) => {
-      transferData.append('imageCheckFiles', examineImg);
-    });
+    if (uploadImgFile.length !== 0) {
+      uploadImgFile.forEach((uploadImg) => {
+        transferData.append('imageItemFiles', uploadImg);
+      });
+    } else {
+      transferData.append('imageItemFiles', nullData);
+    }
+
+    if (examineImgFile.length !== 0) {
+      examineImgFile.forEach((examineImg) => {
+        transferData.append('imageCheckFiles', examineImg);
+      });
+    } else {
+      transferData.append('imageCheckFiles', nullData);
+    }
 
     customAxios
       .put('api/v1/items', transferData, {

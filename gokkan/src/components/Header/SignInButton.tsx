@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ProductRegisterButton from './ProductRegisterButton';
 import MyProductButton from './MyProductButton';
 import { HiOutlineUser } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
