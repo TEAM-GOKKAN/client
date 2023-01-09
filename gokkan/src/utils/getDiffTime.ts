@@ -7,6 +7,8 @@ const getRemainingTime = (targetTime: string) => {
   // 남은 시간 (ms)
   const diff = Number(bidCloseTime) - Number(currTime);
 
+  if (diff < 0) return '마감';
+
   const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
   const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const diffMin = Math.floor((diff / (1000 * 60)) % 60);
@@ -24,7 +26,9 @@ const getElapsedTime = (targetTime: string) => {
   // 경과 시간 (ms)
   const diff = Number(currTime) - Number(bidCloseTime);
 
-  if (diff < 1000 * 60) {
+  if (diff < 0) {
+    return '0초 전';
+  } else if (diff < 1000 * 60) {
     const diffSec = Math.floor((diff / 1000) % 60);
     return `${diffSec}초 전`;
   } else if (diff < 1000 * 60 * 60) {

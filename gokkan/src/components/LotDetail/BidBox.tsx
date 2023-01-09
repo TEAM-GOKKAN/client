@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getRemainingTime } from '../../utils/getDiffTime';
 import { insertCommas } from '../../utils/handleCommas';
@@ -6,14 +7,11 @@ import { insertCommas } from '../../utils/handleCommas';
 interface Iprops {
   closeTime: string;
   currentPrice: number | string;
-  onOpenModal: () => void;
 }
 
-export default function BidBox({
-  closeTime,
-  currentPrice,
-  onOpenModal,
-}: Iprops) {
+export default function BidBox({ closeTime, currentPrice }: Iprops) {
+  const location = useLocation();
+
   const [remainingTime, setRemainingTime] = useState('');
   const [currPrice, setCurrPrice] = useState('');
 
@@ -29,15 +27,6 @@ export default function BidBox({
     setCurrPrice(priceWithCommas);
   };
 
-  // 모달 띄우기
-  // const handleOpenModal = () => {
-  //   navigate('bid', {
-  //     state: {
-  //       background: location,
-  //     },
-  //   });
-  // };
-
   // 남은 시간 타이머 설정
   useEffect(() => {
     updateRemainingTime();
@@ -45,12 +34,16 @@ export default function BidBox({
 
     // 타이머 해제
     return () => clearInterval(timeoutId);
-  }, []);
+  }, [closeTime]);
 
   // 가격 변동 시마다 콤마 삽입
   useEffect(() => {
     getPriceWithCommas(currentPrice);
   }, [currentPrice]);
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
 
   return (
     <Container>
@@ -62,11 +55,9 @@ export default function BidBox({
         </div>
       </CurrentPrice>
       <RemainingTime>{remainingTime}</RemainingTime>
-      {/* <Link to="bid" state={{ background: location }}> */}
-      <PlaceBidButton type="button" onClick={onOpenModal}>
-        응찰하기
-      </PlaceBidButton>
-      {/* </Link> */}
+      <Link to="bid" state={{ background: location }}>
+        <PlaceBidButton type="button">응찰하기</PlaceBidButton>
+      </Link>
     </Container>
   );
 }

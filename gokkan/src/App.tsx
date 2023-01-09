@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import GlobalStyle from './lib/styles/global';
 
@@ -6,9 +6,7 @@ const LayoutPage = lazy(() => import('./pages/LayoutPage'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const LotDetailPage = lazy(() => import('./pages/LotDetailPage'));
-const BidConfirmModal = lazy(
-  () => import('./components/LotDetail/Bid/BidConfirmModal')
-);
+const BidModal = lazy(() => import('./components/LotDetail/Bid/BidModal'));
 const AuctionRegisterPage = lazy(() => import('./pages/AuctionRegisterPage'));
 const ExpertWorkDetailPage = lazy(() => import('./pages/ExpertWorkDetailPage'));
 const ExpertWorkListPage = lazy(() => import('./pages/ExpertWorkListPage'));
@@ -24,6 +22,7 @@ const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 function App() {
   const location = useLocation();
   const background = location.state?.background;
+  console.log(background);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -43,7 +42,7 @@ function App() {
       </Routes>
       {background && (
         <Routes>
-          <Route path="/auction/1/bid" element={<BidConfirmModal />} />
+          <Route path="/auction/1/bid" element={<BidModal />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
         </Routes>

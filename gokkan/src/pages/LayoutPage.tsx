@@ -4,16 +4,22 @@ import Header from '../components/Header/Header';
 
 export default function LayoutPage() {
   return (
-    <div>
+    <Container>
       <Header />
       <Main>
         <Outlet />
       </Main>
-    </div>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  width: 100%;
+  overflow-x: hidden;
+`;
+
 const Main = styled.main`
-  margin-top: 32px;
   padding: 0 16px;
+  margin-top: 60px;
+  padding-top: 32px;
 `;

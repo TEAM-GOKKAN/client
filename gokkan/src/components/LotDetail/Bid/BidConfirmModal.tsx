@@ -1,17 +1,37 @@
-import React, { useRef, useState } from 'react';
+import { useAtomValue } from 'jotai';
+import React, { useCallback, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { StompClientAtom } from '../../../store/lotDetailAtom';
 import Modal from '../../common/Modal';
 
-export default function BidConfirmModal() {
-  const handlePlaceBid = () => {
-    console.log('Place Bid');
-  };
+const token =
+  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTY2MzE0NzQzIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MjgyMzM5OX0.zwqKkWgQOOfL8eTuQ-vyZDj3aQ3USB7NkCy7nZBSa7k';
+const auctionId = 1;
+
+interface Iprops {
+  bidPrice: number;
+  onConfirmClose: () => void;
+}
+
+export default function BidConfirmModal({ bidPrice, onConfirmClose }: Iprops) {
+  const client = useAtomValue(StompClientAtom);
+
+  const handlePlaceBid = useCallback(async () => {
+    client?.current?.publish({
+      destination: `/auction/${auctionId}`,
+      body: JSON.stringify(bidPrice),
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }, []);
 
   return (
-    <Modal buttonText="응찰" onSubmit={handlePlaceBid}>
+    <Modal buttonText="응찰" onSubmit={handlePlaceBid} onClose={onConfirmClose}>
       <BidPrice>
         <div>응찰가</div>
-        <div>120,000원</div>
+        <div>{bidPrice}</div>
       </BidPrice>
       <CautionMessage>
         <div>응찰 버튼을 누르시면 취소가 불가능합니다.</div>

@@ -1,11 +1,15 @@
 import React from 'react';
 import SockJS from 'sockjs-client';
-import { Client } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
+
+interface ISubscription {
+  destination: string;
+  callback: (message: IMessage) => void;
+}
 
 const useStomp = (
   client: React.MutableRefObject<Client | undefined>,
-  destination: string,
-  callback: ({ body }: { body: string }) => void
+  subscriptionList: ISubscription[]
 ) => {
   const connect = () => {
     client.current = new Client({
@@ -23,7 +27,9 @@ const useStomp = (
       heartbeatOutgoing: 1600000,
       onConnect: () => {
         console.log('0 stomp onConnect: ');
-        client.current?.subscribe(destination, callback);
+        subscriptionList?.forEach((subs) => {
+          client.current?.subscribe(subs.destination, subs.callback);
+        });
       },
       onStompError: (frame) => {
         console.log('1 stomp error: ' + frame.headers['message']);
