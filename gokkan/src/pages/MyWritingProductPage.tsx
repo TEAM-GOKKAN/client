@@ -5,13 +5,17 @@ import ProductListElement from '../components/common/ProductListElement';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import LoadingIndicator from '../components/common/LoadingIndicator';
+import ProductList from '../components/common/ProductList';
 
 const MyWritingProductPageWrapper = styled.div`
-  margin-top: 60px;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
 `;
 
 const LoadingWrapper = styled.div`
@@ -69,9 +73,8 @@ const MyWritingProductPage = () => {
 
   return (
     <MyWritingProductPageWrapper>
-      {productList.map((element) => (
-        <ProductListElement productInfo={element} key={element.id} />
-      ))}
+      <div className="title">작성 중인 경매 목록</div>
+      <ProductList productList={productList} />
       {hasNextPage === true && (
         <LoadingWrapper ref={loadingRef}>
           <LoadingIndicator />

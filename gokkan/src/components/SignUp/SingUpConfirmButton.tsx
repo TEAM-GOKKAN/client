@@ -63,7 +63,17 @@ const SingUpConfirmButton = () => {
       type: 'application/json',
     });
     transferData.append('requestUpdateDto', requestUpdateDto);
-    transferData.append('profileImage', profileImageFile);
+
+    // 파일이 비워져 있을 때, 빈 배열을 보내기 위한 데이터
+    const nullData = new Blob([], {
+      type: 'application/json',
+    });
+    if (profileImageFile === '') {
+      transferData.append('profileImage', nullData);
+    } else {
+      transferData.append('profileImage', profileImageFile);
+    }
+
     customAxios
       .patch('api/v1/users', transferData, {
         headers: {
