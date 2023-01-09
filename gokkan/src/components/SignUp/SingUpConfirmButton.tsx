@@ -7,6 +7,7 @@ import {
   userInfoAtom,
   userNickNameCheckAtom,
   userPhoneCheckAtom,
+  userInfoFixAtom,
 } from '../../store/signUpAtom';
 import { getCustomAxios } from '../../utils/customAxios';
 import { useNavigate } from 'react-router-dom';
@@ -27,11 +28,13 @@ const ConfirmButtonWrapper = styled.button`
 
 const SingUpConfirmButton = () => {
   const [submitPossible, setSubmitPossible] = useState('');
+  const [buttonText, setButtonText] = useState('회원가입');
   const [, setClear] = useAtom(clearAtom);
   const [profileImageFile] = useAtom(userProfileImageFileAtom);
   const [userInfo] = useAtom(userInfoAtom);
   const [nickNameCheck] = useAtom(userNickNameCheckAtom);
   const [phoneCheck] = useAtom(userPhoneCheckAtom);
+  const [userInfoFix, setUserInfoFix] = useAtom(userInfoFixAtom);
   const customAxios = getCustomAxios();
   const navigate = useNavigate();
 
@@ -54,6 +57,14 @@ const SingUpConfirmButton = () => {
     userInfo?.name,
     userInfo?.addressDetail,
   ]);
+
+  useEffect(() => {
+    if (userInfoFix === 'fix') {
+      setButtonText('회원정보 수정');
+    } else {
+      setButtonText('회원가입');
+    }
+  }, [userInfoFix]);
 
   const handleUserInfoSubmit = () => {
     if (submitPossible !== 'true') return;
@@ -97,7 +108,7 @@ const SingUpConfirmButton = () => {
       onClick={handleUserInfoSubmit}
       data-submit={submitPossible}
     >
-      회원가입
+      {buttonText}
     </ConfirmButtonWrapper>
   );
 };
