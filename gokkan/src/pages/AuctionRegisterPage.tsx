@@ -10,7 +10,8 @@ import ProductTempSaveButton from '../components/register/ProductTempSaveButton'
 import { useAtom } from 'jotai';
 import { productIdAtom } from '../store/registerAtom';
 import useProductTempInfo from '../components/register/useProductTempInfo';
-import { RotatingLines } from 'react-loader-spinner';
+import LoadingIndicator from '../components/common/LoadingIndicator';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterWrapper = styled.div`
   header {
@@ -50,6 +51,7 @@ const AuctionRegister = () => {
   const [itemId, setItemId] = useAtom(productIdAtom);
   const [pageName, setPageName] = useState('');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const loadingFinish = () => {
     setLoading(false);
@@ -78,16 +80,14 @@ const AuctionRegister = () => {
     setItemId(String(productId));
   }, []);
 
+  const handleCancleButtonClick = () => {
+    navigate('/');
+  };
+
   if (loading) {
     return (
       <LoadingIndicatorWrapper>
-        <RotatingLines
-          strokeColor="black"
-          strokeWidth="3"
-          animationDuration="0.75"
-          width="50"
-          visible={true}
-        />
+        <LoadingIndicator />
       </LoadingIndicatorWrapper>
     );
   }
@@ -95,11 +95,11 @@ const AuctionRegister = () => {
   return (
     <RegisterWrapper>
       <header>
-        <button>
+        <button onClick={handleCancleButtonClick}>
           <AiOutlineClose />
         </button>
         <div className="title">{pageName}</div>
-        <ProductTempSaveButton />
+        <ProductTempSaveButton setLoading={setLoading} />
       </header>
       {pageNumber === '1' && <PageOne />}
       {pageNumber === '2' && <PageTwo />}

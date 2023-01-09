@@ -17,6 +17,7 @@ const TestPage = lazy(() => import('./pages/Testpage'));
 const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInSuspense'));
+const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 
 function App() {
   const location = useLocation();
@@ -32,9 +33,10 @@ function App() {
           <Route path="auction/1" element={<LotDetailPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signInCheck" element={<SignInSusPense />} />
+          <Route path="myWritingProduct" element={<MyWritingProductPage />} />
         </Route>
         <Route
-          path="register/:pageNumber/:productId"
+          path="/register/:pageNumber/:productId"
           element={<AuctionRegisterPage />}
         />
       </Routes>

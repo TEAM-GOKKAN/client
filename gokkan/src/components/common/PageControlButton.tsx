@@ -40,8 +40,8 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
   const navigate = useNavigate();
   let { pageNumber, productId } = useParams();
   const [productInfo] = useAtom(productGetInfoAtom);
-  const [uploadImgList] = useAtom(uploadImageFileAtom);
-  const [examineImgList] = useAtom(examineImageFileAtom);
+  const [uploadImgFile] = useAtom(uploadImageFileAtom);
+  const [examineImgFile] = useAtom(examineImageFileAtom);
   const customAxios = getCustomAxios();
 
   useEffect(() => {
@@ -68,12 +68,27 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
         type: 'application/json',
       });
       transferData.append('request', requestData);
-      uploadImgList.forEach((uploadImg) => {
-        transferData.append('imageItemFiles', uploadImg);
+
+      // 파일이 비워져 있을 때, 빈 배열을 보내기 위한 데이터
+      const nullData = new Blob([], {
+        type: 'application/json',
       });
-      examineImgList.forEach((examineImg) => {
-        transferData.append('imageCheckFiles', examineImg);
-      });
+
+      if (uploadImgFile.length !== 0) {
+        uploadImgFile.forEach((uploadImg) => {
+          transferData.append('imageItemFiles', uploadImg);
+        });
+      } else {
+        transferData.append('imageItemFiles', nullData);
+      }
+
+      if (examineImgFile.length !== 0) {
+        examineImgFile.forEach((examineImg) => {
+          transferData.append('imageCheckFiles', examineImg);
+        });
+      } else {
+        transferData.append('imageCheckFiles', nullData);
+      }
 
       customAxios
         .post('api/v1/items', transferData, {
@@ -82,7 +97,8 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
           },
         })
         .then((res) => {
-          console.log(res);
+          console.log('제출이 성공적으로 완료되었습니다.');
+          navigate('/');
         })
         .catch((err) => {
           console.log(err);

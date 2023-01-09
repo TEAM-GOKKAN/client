@@ -37,7 +37,7 @@ const productStartPriceAtom = atom('');
 const productGetInfoAtom = atom((get) => {
   const itemId = Number(get(productIdAtom));
   const name = get(productNameAtom);
-  const startPrice = Number(get(productStartPriceAtom));
+  const startPrice = Number(get(productStartPriceAtom).replace(/[^0-9]/g, ''));
   const category = get(secondDepthCategoryAtom);
   const imageItemUrls = get(uploadDbImageUrlAtom);
   const imageCheckUrls = get(examineDbImageUrlAtom);
@@ -52,6 +52,7 @@ const productGetInfoAtom = atom((get) => {
   const designer = get(productDesignerAtom);
   const brand = get(productBrandAtom);
   const productionYear = Number(get(productAgeAtom));
+
   return {
     itemId,
     name,
@@ -114,19 +115,12 @@ const productSetInfoAtom = atom(
       productNameAtom,
       productDescriptionAtom,
     ];
-    const numberTypeProductInfo = [
-      depth,
-      height,
-      width,
-      productionYear,
-      startPrice,
-    ];
+    const numberTypeProductInfo = [depth, height, width, productionYear];
     const numberTypeProductInfoAtomList = [
       productDepthAtom,
       productHeightAtom,
       productWidthAtom,
       productAgeAtom,
-      productStartPriceAtom,
     ];
 
     // string type check and set
@@ -143,6 +137,12 @@ const productSetInfoAtom = atom(
       }
     });
 
+    // start number check and set
+    if (startPrice !== 0) {
+      const stringStartNumber = startPrice.toLocaleString();
+      set(productStartPriceAtom, stringStartNumber);
+    }
+
     // style check and set
     if (styles.length !== 0) {
       set(productStyleAtom, styles);
@@ -151,7 +151,7 @@ const productSetInfoAtom = atom(
     // category check and set
     if (category.name) {
       set(firstDepthCategoryAtom, category.name);
-      set(secondDepthCategoryAtom, category.children.name);
+      set(secondDepthCategoryAtom, category.children[0].name);
     }
 
     // imageUrl check and set

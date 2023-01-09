@@ -12,7 +12,8 @@ const DetailInfoWrapper = styled.div`
     margin-bottom: 10px;
   }
   textarea {
-    border: none;
+    border: 1px solid var(--color-brown200);
+    background: none;
     padding: 10px;
     height: 140px;
   }

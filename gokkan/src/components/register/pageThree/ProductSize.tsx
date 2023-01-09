@@ -22,9 +22,10 @@ const ProductSizeWrapper = styled.div`
     height: 42px;
     input {
       width: 91px;
-      border: none;
       padding: 10px;
       height: 42px;
+      background: none;
+      border: 1px solid var(--color-brown200);
     }
   }
 `;

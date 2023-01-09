@@ -89,7 +89,9 @@ const ImageSwiperContainer = ({
   // 처음 db에 원래 존재하는 url 넣어줌
   useEffect(() => {
     dbUrlList.forEach((dbUrl) => {
-      setImageUrlList((pre) => [dbUrl.url, ...pre]);
+      if (!imageUrlList.includes(dbUrl.url)) {
+        setImageUrlList((pre) => [...pre, dbUrl.url]);
+      }
     });
   }, [dbUrlList.length]);
 
