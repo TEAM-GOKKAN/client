@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getCustomAxios } from '../utils/customAxios';
-import ProductListElement from '../components/common/ProductListElement';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import LoadingIndicator from '../components/common/LoadingIndicator';
@@ -29,6 +28,7 @@ const LoadingWrapper = styled.div`
 const MyWritingProductPage = () => {
   const customAxios = getCustomAxios();
   const [productList, setProductList] = useState<ProductInfoType[]>([]);
+  const [productListCount, setProductListCount] = useState(0);
   const [loadingRef, inView] = useInView();
 
   const getProductList = ({ pageParam = 0 }) => {
@@ -58,10 +58,11 @@ const MyWritingProductPage = () => {
   useEffect(() => {
     if (!isFetching && status === 'success') {
       const pageListNumber = data.pages.length;
-      setProductList((pre) => [
-        ...pre,
-        ...data.pages[pageListNumber - 1].data.content,
-      ]);
+      setProductListCount(data.pages[0].data.totalElements);
+      setProductList((pre) => {
+        const targetList = data.pages[pageListNumber - 1].data.content;
+        return [...pre, ...targetList];
+      });
     }
   }, [isFetching, status, hasNextPage]);
 
@@ -74,7 +75,10 @@ const MyWritingProductPage = () => {
   return (
     <MyWritingProductPageWrapper>
       <div className="title">작성 중인 경매 목록</div>
-      <ProductList productList={productList} />
+      <ProductList
+        productList={productList}
+        productListNumber={productListCount}
+      />
       {hasNextPage === true && (
         <LoadingWrapper ref={loadingRef}>
           <LoadingIndicator />
@@ -91,6 +95,7 @@ type ProductInfoType = {
   writer: string;
   created: string;
   updated: string;
+  startPrice: number;
 };
 
 export default MyWritingProductPage;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { insertCommas } from '../../utils/handleCommas';
 
 const ListElementContainer = styled.div`
   display: flex;
@@ -25,6 +26,12 @@ const ListElementContainer = styled.div`
     display: flex;
     flex-direction: column;
     color: var(--color-brown300);
+    [data-price='true'] {
+      color: var(--color-brown500);
+      font-size: 16px;
+      font-weight: 600;
+      font-family: poppins;
+    }
     .price-content {
       margin-top: 4px;
       display: flex;
@@ -37,11 +44,18 @@ const ListElementContainer = styled.div`
 `;
 
 const ProductListElement = ({ productInfo }: ProductListElementPropType) => {
+  const [price, setPrice] = useState('-');
   const navigate = useNavigate();
 
   const handleElementClick = () => {
     navigate(`/register/1/${productInfo.id}`);
   };
+
+  useEffect(() => {
+    if (productInfo.startPrice && productInfo.startPrice !== 0) {
+      setPrice(insertCommas(productInfo.startPrice));
+    }
+  }, [productInfo.startPrice]);
 
   return (
     <ListElementContainer onClick={handleElementClick}>
@@ -59,8 +73,9 @@ const ProductListElement = ({ productInfo }: ProductListElementPropType) => {
       </div>
       <div className="price">
         <p className="price-title">시작가</p>
-        <div className="price-content">
-          -<p className="unit">원</p>
+        <div className="price-content" data-price={price !== '-'}>
+          {price}
+          <p className="unit">원</p>
         </div>
       </div>
     </ListElementContainer>
@@ -75,6 +90,7 @@ type ProductListElementPropType = {
     writer: string;
     created: string;
     updated: string;
+    startPrice: number;
   };
 };
 
