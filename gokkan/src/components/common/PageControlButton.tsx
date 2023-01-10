@@ -7,7 +7,7 @@ import {
   examineImageFileAtom,
 } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 
 const PageControlButtonWrapper = styled.div`
   position: fixed;
@@ -42,7 +42,6 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
   const [productInfo] = useAtom(productGetInfoAtom);
   const [uploadImgFile] = useAtom(uploadImageFileAtom);
   const [examineImgFile] = useAtom(examineImageFileAtom);
-  const customAxios = getCustomAxios();
 
   useEffect(() => {
     if (pageNumber === '4') {

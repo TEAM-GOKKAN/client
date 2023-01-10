@@ -9,7 +9,7 @@ import {
   userPhoneCheckAtom,
   userInfoFixAtom,
 } from '../../store/signUpAtom';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 import { useNavigate } from 'react-router-dom';
 
 const ConfirmButtonWrapper = styled.button`
@@ -35,7 +35,6 @@ const SingUpConfirmButton = () => {
   const [nickNameCheck] = useAtom(userNickNameCheckAtom);
   const [phoneCheck] = useAtom(userPhoneCheckAtom);
   const [userInfoFix, setUserInfoFix] = useAtom(userInfoFixAtom);
-  const customAxios = getCustomAxios();
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 import { productSetInfoAtom } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
 
 const useProductTempInfo = (itemId: string, loadingFinish: () => void) => {
-  const customAxios = getCustomAxios();
   const [, productSetInfo] = useAtom(productSetInfoAtom);
 
   useEffect(() => {
