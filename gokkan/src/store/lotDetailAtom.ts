@@ -1,7 +1,7 @@
 import { atomsWithQuery } from 'jotai-tanstack-query';
-import axios from 'axios';
 import { atom } from 'jotai';
 import { Client } from '@stomp/stompjs';
+import customAxios from '../utils/customAxios';
 
 interface LotDetail {
   id: number;
@@ -69,14 +69,13 @@ const auctionIdAtom = atom(1);
 const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['lotDetail', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<LotDetail> => {
-    const res = await axios({
+    const res = await customAxios({
       method: 'get',
-      url: `${baseUrl}/items/details/auction`,
+      url: `api/v1/items/details/auction`,
       params: {
         itemId: lotId,
       },
     });
-
     return res?.data;
   },
 }));
@@ -84,9 +83,9 @@ const [lotDetailAtom] = atomsWithQuery((get) => ({
 const [auctionInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidInfo', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<AuctionInfo> => {
-    const res = await axios({
+    const res = await customAxios({
       method: 'get',
-      url: `${baseUrl}/auction`,
+      url: `api/v1/auction`,
       params: {
         auctionId: auctionId,
       },
@@ -99,9 +98,9 @@ const [auctionInfoAtom] = atomsWithQuery((get) => ({
 const [bidHistoryAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidHistory', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<BidInfo[] | null[]> => {
-    const res = await axios({
+    const res = await customAxios({
       method: 'get',
-      url: `${baseUrl}/auction/history`,
+      url: `api/v1/auction/history`,
       params: {
         auctionId: auctionId,
       },
@@ -114,9 +113,9 @@ const [bidHistoryAtom] = atomsWithQuery((get) => ({
 const [expertValuationAtom] = atomsWithQuery((get) => ({
   queryKey: ['expertValuation', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<ExpertValuation> => {
-    const res = await axios({
+    const res = await customAxios({
       method: 'get',
-      url: `${baseUrl}/expert/comment`,
+      url: `api/v1/expert/comment`,
       params: {
         itemId: lotId,
       },
@@ -129,9 +128,9 @@ const [expertValuationAtom] = atomsWithQuery((get) => ({
 const [sellerInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['sellerInfo', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<SellerInfo> => {
-    const res = await axios({
+    const res = await customAxios({
       method: 'get',
-      url: `${baseUrl}/users/seller`,
+      url: `api/v1/users/seller`,
       params: {
         itemId: lotId,
       },

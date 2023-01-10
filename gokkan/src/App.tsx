@@ -16,7 +16,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const TestPage = lazy(() => import('./pages/Testpage'));
 const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
-const SignInSusPense = lazy(() => import('./components/SignIn/SignInSuspense'));
+const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 
 function App() {
@@ -33,6 +33,11 @@ function App() {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signInCheck" element={<SignInSusPense />} />
           <Route path="myWritingProduct" element={<MyWritingProductPage />} />
+          <Route path="expertWorkList" element={<ExpertWorkListPage />} />
+          <Route
+            path="expertWorkDetail/:itemId"
+            element={<ExpertWorkDetailPage />}
+          />
         </Route>
         <Route
           path="/register/:pageNumber/:productId"

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 import { useAtom } from 'jotai';
 import {
   setInitialUserInfo,
@@ -8,7 +8,6 @@ import {
 } from '../../store/signUpAtom';
 
 const useGetUserInfo = () => {
-  const customAxios = getCustomAxios();
   const [, setUserInfo] = useAtom(setInitialUserInfo);
   const [, setNickNameCheck] = useAtom(userNickNameCheckAtom);
   const [, setPhoneCheck] = useAtom(userPhoneCheckAtom);

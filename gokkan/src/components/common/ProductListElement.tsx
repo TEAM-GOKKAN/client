@@ -17,7 +17,7 @@ const ListElementContainer = styled.div`
     background-color: var(--color-brown200);
   }
   .title {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     .untitled {
       color: var(--color-brown300);
     }
