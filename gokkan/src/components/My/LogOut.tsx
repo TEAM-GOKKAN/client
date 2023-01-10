@@ -1,14 +1,9 @@
 import React, { ReactNode } from 'react';
 import SpreadList from '../common/SpreadList';
-import { getCustomAxios } from '../../utils/customAxios';
-import { accessTokenAtom, refreshTokenAtom } from '../../store/tokenAtom';
-import { useAtom } from 'jotai';
+import customAxios from '../../utils/customAxios';
 import { useNavigate } from 'react-router-dom';
 
 const LogOut = () => {
-  const customAxios = getCustomAxios();
-  const [, setAcessToken] = useAtom(accessTokenAtom);
-  const [, setRefreshToken] = useAtom(refreshTokenAtom);
   const navigate = useNavigate();
 
   const logOutClick = () => {
@@ -16,8 +11,8 @@ const LogOut = () => {
     customAxios
       .post(url)
       .then(({ data }) => {
-        setAcessToken('');
-        setRefreshToken('');
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('refreshToken', '');
         navigate('/');
       })
       .catch((err) => {

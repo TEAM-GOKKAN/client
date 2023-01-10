@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import { useAtom } from 'jotai';
-import { accessTokenAtom } from '../../store/tokenAtom';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 import { useNavigate } from 'react-router-dom';
 
 const KakaoButtonWrapper = styled.section`
@@ -21,9 +19,8 @@ const KakaoButtonWrapper = styled.section`
 `;
 
 export default function KakaoButton() {
-  const [accessToken] = useAtom(accessTokenAtom);
+  const accessToken = localStorage.getItem('accessToken');
   const navigate = useNavigate();
-  const customAxios = getCustomAxios();
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const url =
     'http://3.38.59.40:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:5173/signInCheck';

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
 `;
 
 export default function MainPage() {

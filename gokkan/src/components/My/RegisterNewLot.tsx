@@ -1,11 +1,10 @@
 import React from 'react';
-import { getCustomAxios } from '../../utils/customAxios';
+import customAxios from '../../utils/customAxios';
 import { useNavigate } from 'react-router-dom';
 import { productIdAtom } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
 
 const RegisterNewLot = () => {
-  const customAxios = getCustomAxios();
   const navigate = useNavigate();
   const [productId, setProductId] = useAtom(productIdAtom);
 
