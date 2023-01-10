@@ -20,14 +20,16 @@ interface LotDetail {
   brand: string;
   productionYear: number;
   writer: null | string;
-  category: {
-    name: string;
-    children: string[] | null[];
-  };
+  category: Category;
   imageItemUrls: ImageUrl[];
   styles: string[];
   created: string;
   updated: string;
+}
+
+interface Category {
+  name: string;
+  children: Category[];
 }
 
 interface ImageUrl {

@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdChevronRight } from 'react-icons/md';
 
+interface Category {
+  name: string;
+  children: Category[];
+}
+
 interface Iprops {
-  category: {
-    name: string;
-    children: string[] | null[];
-  };
+  category: Category;
 }
 
 export default function CategoryInfo({ category }: Iprops) {
@@ -14,7 +16,7 @@ export default function CategoryInfo({ category }: Iprops) {
     <Conatiner>
       <span>{category.name}</span>
       <MdChevronRight />
-      <span>{category.children?.at(-1)}</span>
+      <span>{category.children?.at(-1)?.name}</span>
     </Conatiner>
   );
 }
