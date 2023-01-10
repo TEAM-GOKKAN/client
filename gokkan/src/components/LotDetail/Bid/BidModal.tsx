@@ -1,14 +1,13 @@
-import { atom, useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Client } from '@stomp/stompjs';
+import { lotDetailAtom } from '../../../store/lotDetailAtom';
 import {
   auctionInfoAtom,
   bidCloseTimeAtom,
   bidHistoryAtom,
   currBidHistoryAtom,
   currBidPriceAtom,
-  lotDetailAtom,
-} from '../../../store/lotDetailAtom';
+} from '../../../store/bidAtom';
 import { insertCommas } from '../../../utils/handleCommas';
 import ModalFull from '../../common/ModalFull';
 import BidSection from './BidSection';
@@ -30,6 +29,8 @@ export default function BidModal() {
   const [bidPrice, setBidPrice] = useState(0);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [remainingTime, setRemainingTime] = useState('');
+  const [isAutoBid, setIsAutoBid] = useState(false);
+  const [isAuctionClosed, setIsAuctionClosed] = useState(false);
 
   // 남은 시간 업데이트 함수
   const updateRemainingTime = () => {
@@ -40,6 +41,7 @@ export default function BidModal() {
   const handleOpenConfirmModal = useCallback(() => {
     setConfirmModalOpen(true);
   }, []);
+
   const handleCloseConfirmModal = useCallback(() => {
     setConfirmModalOpen(false);
   }, []);
@@ -64,27 +66,37 @@ export default function BidModal() {
     updateRemainingTime();
     const timeoutId = setInterval(updateRemainingTime, 1000);
 
+    // 경매 마감 시 타이머 해제 및 응찰 섹션 숨기기
+    if (remainingTime === '마감') {
+      setIsAuctionClosed(true);
+      clearInterval(timeoutId);
+    }
+
     // 타이머 해제
     return () => clearInterval(timeoutId);
-  }, [bidCloseTime]);
+  }, [bidCloseTime, remainingTime]);
 
   return (
     <ModalFull title={remainingTime}>
       <LotPreview
         lotName={name}
         thumbnail={thumbnail}
-        currentPrice={insertCommas(currBidPrice)}
+        currentPrice={insertCommas(Number(currBidPrice))}
         closeTime={bidCloseTime}
       />
-      <BidSection
-        currentPrice={currBidPrice}
-        onSetBidPrice={handleSetBidPrice}
-        onConfirmOpen={handleOpenConfirmModal}
-      />
+      {!isAuctionClosed && (
+        <BidSection
+          currentPrice={currBidPrice}
+          onSetBidPrice={handleSetBidPrice}
+          onConfirmOpen={handleOpenConfirmModal}
+          onSetAutoBid={setIsAutoBid}
+        />
+      )}
       <BidHistory bidHistory={currBidHistory} />
       {confirmModalOpen && (
         <BidConfirmModal
           bidPrice={bidPrice}
+          isAutoBid={isAutoBid}
           onConfirmClose={handleCloseConfirmModal}
         />
       )}

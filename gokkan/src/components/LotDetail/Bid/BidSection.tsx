@@ -1,6 +1,13 @@
 import { Client } from '@stomp/stompjs';
 import { useUpdateAtom } from 'jotai/utils';
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useInput from '../../../lib/hooks/useInput';
@@ -10,12 +17,14 @@ interface Iprops {
   currentPrice: number | string;
   onConfirmOpen: () => void;
   onSetBidPrice: (price: number) => void;
+  onSetAutoBid: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function BidSection({
   currentPrice,
   onConfirmOpen,
   onSetBidPrice,
+  onSetAutoBid,
 }: Iprops) {
   const [minBidPrice, setMinBidPrice] = useState<number>(
     Number(currentPrice) + 10000
@@ -30,10 +39,20 @@ export default function BidSection({
   };
 
   // 모달 띄우기
-  const handleClickBidButton = () => {
+  const openConfirmModal = () => {
     const bidPriceWithCommas = Number(removeCommas(value));
     onSetBidPrice(bidPriceWithCommas);
     onConfirmOpen();
+  };
+
+  const handleClickBidButton = () => {
+    onSetAutoBid(false);
+    openConfirmModal();
+  };
+
+  const handleClickAutoBidButton = () => {
+    onSetAutoBid(true);
+    openConfirmModal();
   };
 
   return (
@@ -61,20 +80,12 @@ export default function BidSection({
         {inputErrMsg && <div>{inputErrMsg}</div>}
       </PriceInputContainer>
       <BidButtonsContainer>
-        {/* <Link
-          to="bid"
-          state={{
-            background: location,
-            bidPrice: value,
-          }}
-        > */}
         <BidOnceButton type="button" onClick={handleClickBidButton}>
           1회 응찰
         </BidOnceButton>
-        {/* </Link> */}
-        {/* <Link to="modal" state={{ background: location }}>
-            <BidAutoButton type="button">자동 응찰</BidAutoButton>
-          </Link> */}
+        <BidAutoButton type="button" onClick={handleClickAutoBidButton}>
+          자동 응찰
+        </BidAutoButton>
       </BidButtonsContainer>
     </Container>
   );
@@ -130,12 +141,7 @@ const BidButtonsContainer = styled.div`
     font-size: var(--font-regular);
     line-height: var(--font-regular);
     color: var(--color-brown100);
-    /* background: var(--color-brown500); */
     font-weight: 500;
-
-    /* &:last-child {
-      background: var(--color-purple);
-    } */
   }
 `;
 

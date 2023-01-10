@@ -20,30 +20,21 @@ interface LotDetail {
   brand: string;
   productionYear: number;
   writer: null | string;
-  category: {
-    name: string;
-    children: string[] | null[];
-  };
+  category: Category;
   imageItemUrls: ImageUrl[];
   styles: string[];
   created: string;
   updated: string;
 }
 
+interface Category {
+  name: string;
+  children: Category[];
+}
+
 interface ImageUrl {
   id: number;
   url: string;
-}
-
-interface AuctionInfo {
-  auctionEndDateTime: string;
-  currentPrice: number;
-}
-
-interface BidInfo {
-  memberId: string;
-  price: number;
-  bidTime: string;
 }
 
 interface ExpertValuation {
@@ -61,114 +52,45 @@ interface SellerInfo {
   createdAt: string;
 }
 
-const baseUrl = 'http://3.38.59.40:8080/api/v1';
-
-const lotIdAtom = atom(8);
-const auctionIdAtom = atom(1);
+const lotIdAtom = atom(7);
 
 const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['lotDetail', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<LotDetail> => {
-    const res = await customAxios({
-      method: 'get',
-      url: `api/v1/items/details/auction`,
+    const { data } = await customAxios.get('/api/v1/items/details/auction', {
       params: {
         itemId: lotId,
       },
     });
-    return res?.data;
-  },
-}));
 
-const [auctionInfoAtom] = atomsWithQuery((get) => ({
-  queryKey: ['bidInfo', get(auctionIdAtom)],
-  queryFn: async ({ queryKey: [, auctionId] }): Promise<AuctionInfo> => {
-    const res = await customAxios({
-      method: 'get',
-      url: `api/v1/auction`,
-      params: {
-        auctionId: auctionId,
-      },
-    });
-
-    return res?.data;
-  },
-}));
-
-const [bidHistoryAtom] = atomsWithQuery((get) => ({
-  queryKey: ['bidHistory', get(auctionIdAtom)],
-  queryFn: async ({ queryKey: [, auctionId] }): Promise<BidInfo[] | null[]> => {
-    const res = await customAxios({
-      method: 'get',
-      url: `api/v1/auction/history`,
-      params: {
-        auctionId: auctionId,
-      },
-    });
-
-    return res?.data;
+    return data;
   },
 }));
 
 const [expertValuationAtom] = atomsWithQuery((get) => ({
   queryKey: ['expertValuation', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<ExpertValuation> => {
-    const res = await customAxios({
-      method: 'get',
-      url: `api/v1/expert/comment`,
+    const { data } = await customAxios.get('/api/v1/expert/comment', {
       params: {
         itemId: lotId,
       },
     });
 
-    return res?.data;
+    return data;
   },
 }));
 
 const [sellerInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['sellerInfo', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<SellerInfo> => {
-    const res = await customAxios({
-      method: 'get',
-      url: `api/v1/users/seller`,
+    const { data } = await customAxios.get('/api/v1/users/seller', {
       params: {
         itemId: lotId,
       },
     });
 
-    return res?.data;
+    return data;
   },
 }));
 
-const StompClientAtom = atom<React.MutableRefObject<Client | undefined> | null>(
-  null
-);
-
-// const bidCloseTimeAtom = atom((get) => {
-//   const { auctionEndDateTime } = get(auctionInfoAtom);
-//   return auctionEndDateTime;
-// });
-
-const currBidPriceAtom = atom<number | string>(0);
-
-const currBidHistoryAtom = atom<BidInfo[] | null[]>([]);
-
-const bidCloseTimeAtom = atom('');
-
-const bidErrMsgAtom = atom('');
-
-const addedBidTimeAtom = atom('');
-
-export {
-  lotDetailAtom,
-  auctionInfoAtom,
-  bidHistoryAtom,
-  expertValuationAtom,
-  sellerInfoAtom,
-  StompClientAtom,
-  currBidPriceAtom,
-  bidCloseTimeAtom,
-  bidErrMsgAtom,
-  addedBidTimeAtom,
-  currBidHistoryAtom,
-};
+export { lotIdAtom, lotDetailAtom, expertValuationAtom, sellerInfoAtom };
