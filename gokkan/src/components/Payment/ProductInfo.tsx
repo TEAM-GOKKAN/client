@@ -1,8 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { insertCommas } from '../../utils/handleCommas';
 import Section from './Section';
 
-export default function ProductInfo() {
+interface IProps {
+  data: {
+    id: number;
+    itemId: number;
+    itemName: string;
+    thumbnail: string;
+    price: number;
+  };
+}
+
+export default function ProductInfo({ data }: IProps) {
+  const { itemName, thumbnail, price } = data;
+
   return (
     <Section
       title="주문상품"
@@ -10,13 +23,13 @@ export default function ProductInfo() {
     >
       <Content>
         <ThumbnailContent>
-          <img src="" alt="thumbnail" />
+          <img src={thumbnail || ''} alt="thumbnail" />
         </ThumbnailContent>
         <NameAndPrice>
-          <ProductName>Seven vintage vases with two plates</ProductName>
+          <ProductName>{itemName}</ProductName>
           <ProductPrice>
             <div>낙찰가</div>
-            <div>290,000원</div>
+            <div>{insertCommas(price) + '원'}</div>
           </ProductPrice>
         </NameAndPrice>
       </Content>
@@ -36,9 +49,12 @@ const Content = styled.div`
 
 const ThumbnailContent = styled.div`
   background-color: var(--color-brown100);
-  height: 100px;
+  width: 100%;
+  max-height: 112px;
 
   & img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;

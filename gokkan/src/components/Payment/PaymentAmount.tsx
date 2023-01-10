@@ -1,23 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { insertCommas } from '../../utils/handleCommas';
 import Section from './Section';
 
-export default function PaymentAmount() {
+interface IProps {
+  data: {
+    hammerPrice: number;
+    fee: number;
+    paymentAmount: number;
+  };
+}
+
+export default function PaymentAmount({ data }: IProps) {
+  const { hammerPrice, fee, paymentAmount } = data;
+
   return (
     <Section title="결제금액" preview="319,000원">
       <PriceList>
         <Price>
           <span>낙찰가</span>
-          <span>219,000원</span>
+          <span>{insertCommas(hammerPrice) + '원'}</span>
         </Price>
         <Price>
           <span>수수료</span>
-          <span>21,900원</span>
+          <span>{insertCommas(fee) + '원'}</span>
         </Price>
       </PriceList>
       <TotalPrice>
         <span>총 결제금액</span>
-        <span>319,000원</span>
+        <span>{insertCommas(paymentAmount) + '원'}</span>
       </TotalPrice>
     </Section>
   );

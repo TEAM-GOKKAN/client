@@ -52,7 +52,7 @@ interface SellerInfo {
   createdAt: string;
 }
 
-const lotIdAtom = atom(7);
+const lotIdAtom = atom(8);
 
 const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['lotDetail', get(lotIdAtom)],
