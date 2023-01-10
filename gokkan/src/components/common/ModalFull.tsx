@@ -50,9 +50,9 @@ const Nav = styled.nav`
   position: relative;
 `;
 
-const NavTitle = styled.div`
+const NavTitle = styled.h2`
   font-size: var(--font-medium);
-  font-weight: 500;
+  font-weight: var(--weight-bold);
   letter-spacing: normal;
   position: absolute;
   top: 50%;

@@ -18,6 +18,7 @@ const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
+const PaymentPage = lazy(() => import('./pages/PaymentPage'));
 
 function App() {
   const location = useLocation();
@@ -38,6 +39,7 @@ function App() {
             path="expertWorkDetail/:itemId"
             element={<ExpertWorkDetailPage />}
           />
+          <Route path="payment" element={<PaymentPage />} />
         </Route>
         <Route
           path="/register/:pageNumber/:productId"
