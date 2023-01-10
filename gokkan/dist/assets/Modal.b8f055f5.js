@@ -1,11 +1,11 @@
-import{a as e,j as o,c as i,s as t}from"./index.7e56801c.js";function b({children:r,buttonText:n,onSubmit:l}){const a=e();return o(c,{children:i(d,{children:[o(s,{children:r}),i(h,{children:[o("button",{type:"button",onClick:()=>{a(-1)},children:"\uB2EB\uAE30"}),n&&o("button",{type:"button",onClick:l,children:n})]})]})})}const c=t.div`
+import{a as c,j as o,c as r,s as t}from"./index.6e976c01.js";function g({children:l,buttonText:i,onSubmit:a,onClose:n}){const e=c();return o(d,{children:r(s,{children:[o(h,{children:l}),r(p,{children:[o("button",{type:"button",onClick:()=>{n?n():e(-1)},children:"\uB2EB\uAE30"}),i&&o("button",{type:"button",onClick:a,children:i})]})]})})}const d=t.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: #9d9792ad;
-`,d=t.div`
+`,s=t.div`
   width: calc(100% - 24px);
   background: var(--color-white);
   position: fixed;
@@ -15,7 +15,7 @@ import{a as e,j as o,c as i,s as t}from"./index.7e56801c.js";function b({childre
   display: flex;
   flex-direction: column;
   z-index: 9999;
-`,s=t.dialog`
+`,h=t.dialog`
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ import{a as e,j as o,c as i,s as t}from"./index.7e56801c.js";function b({childre
   width: 100%;
   background: var(--color-white);
   position: relative;
-`,h=t.div`
+`,p=t.div`
   width: 100%;
   display: flex;
 
@@ -39,4 +39,4 @@ import{a as e,j as o,c as i,s as t}from"./index.7e56801c.js";function b({childre
       color: var(--color-brown300);
     }
   }
-`;export{b as M};
+`;export{g as M};
