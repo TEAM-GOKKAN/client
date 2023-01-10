@@ -8,7 +8,6 @@ import UserPhone from '../components/SignUp/UserPhone';
 import SingUpConfirmButton from '../components/SignUp/SingUpConfirmButton';
 import useGetUserInfo from '../components/SignUp/useGetUserInfo';
 import styled from 'styled-components';
-import queryString from 'query-string';
 
 const SignUpWrapper = styled.div`
   width: 100%;
@@ -16,7 +15,6 @@ const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-top: 60px;
 `;
 
 const SignUpPage = () => {

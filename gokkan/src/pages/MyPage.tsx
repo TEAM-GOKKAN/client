@@ -4,6 +4,7 @@ import MyLotList from '../components/My/MyLotList';
 import MyLotRegister from '../components/My/MyLotRegister';
 import MySetting from '../components/My/MySetting';
 import LogOut from '../components/My/LogOut';
+import ExpertWorkList from '../components/My/ExpertWorkList';
 
 const MyPage = () => {
   return (
@@ -12,6 +13,7 @@ const MyPage = () => {
       <MyLotRegister />
       <MySetting />
       <LogOut />
+      <ExpertWorkList />
     </ModalFull>
   );
 };

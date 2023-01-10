@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import MyProductButton from './MyProductButton';
 import { HiOutlineUser } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { accessTokenAtom } from '../../store/tokenAtom';
 import { useAtom } from 'jotai';
 
 const IconButton = styled.button`
@@ -18,7 +16,7 @@ const IconButton = styled.button`
 const SignInButton = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [accessToken] = useAtom(accessTokenAtom);
+  const accessToken = localStorage.getItem('accessToken');
 
   const handleSignInButttonClick = () => {
     if (accessToken !== '') {
