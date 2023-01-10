@@ -3,8 +3,6 @@ import { RotatingLines } from 'react-loader-spinner';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import queryString from 'query-string';
-import { accessTokenAtom, refreshTokenAtom } from '../../store/tokenAtom';
-import { useAtom } from 'jotai';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,16 +14,14 @@ const SignInCheckWrapper = styled.div`
   align-items: center;
 `;
 
-const SignInSuspense = () => {
+const SignInCheck = () => {
   const { token, refreshToken } = queryString.parse(window.location.search);
-  const [, setAccessTokenAtom] = useAtom(accessTokenAtom);
-  const [, setRefreshTokenAtom] = useAtom(refreshTokenAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token !== '' && refreshToken !== '') {
-      setAccessTokenAtom(String(token));
-      setRefreshTokenAtom(String(refreshToken));
+      localStorage.setItem('accessToken', String(token));
+      localStorage.setItem('refreshToken', String(refreshToken));
       axios
         .get('http://3.38.59.40:8080/api/v1/users', {
           headers: { Authorization: `Bearer ${token}` },
@@ -56,4 +52,4 @@ const SignInSuspense = () => {
   );
 };
 
-export default SignInSuspense;
+export default SignInCheck;

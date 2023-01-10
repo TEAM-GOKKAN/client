@@ -1,7 +1,7 @@
 import { atomsWithQuery } from 'jotai-tanstack-query';
 import { atom } from 'jotai';
 import { Client } from '@stomp/stompjs';
-import { getCustomAxios } from '../utils/customAxios';
+import customAxios from '../utils/customAxios';
 
 interface LotDetail {
   id: number;
@@ -57,7 +57,6 @@ const lotIdAtom = atom(7);
 const [lotDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['lotDetail', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<LotDetail> => {
-    const customAxios = getCustomAxios();
     const { data } = await customAxios.get('/api/v1/items/details/auction', {
       params: {
         itemId: lotId,
@@ -71,7 +70,6 @@ const [lotDetailAtom] = atomsWithQuery((get) => ({
 const [expertValuationAtom] = atomsWithQuery((get) => ({
   queryKey: ['expertValuation', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<ExpertValuation> => {
-    const customAxios = getCustomAxios();
     const { data } = await customAxios.get('/api/v1/expert/comment', {
       params: {
         itemId: lotId,
@@ -85,7 +83,6 @@ const [expertValuationAtom] = atomsWithQuery((get) => ({
 const [sellerInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['sellerInfo', get(lotIdAtom)],
   queryFn: async ({ queryKey: [, lotId] }): Promise<SellerInfo> => {
-    const customAxios = getCustomAxios();
     const { data } = await customAxios.get('/api/v1/users/seller', {
       params: {
         itemId: lotId,

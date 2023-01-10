@@ -6,7 +6,6 @@ import {
   bidErrMsgAtom,
   StompClientAtom,
 } from '../../../store/bidAtom';
-import { accessTokenAtom } from '../../../store/tokenAtom';
 import { insertCommas } from '../../../utils/handleCommas';
 import Modal from '../../common/Modal';
 
@@ -26,7 +25,7 @@ export default function BidConfirmModal({
   const destination = isAutoBid
     ? `/auction/auto/${auctionId}`
     : `/auction/${auctionId}`;
-  const accessToken = useAtomValue(accessTokenAtom);
+  const accessToken = localStorage.getItem('accessToken');
 
   const bidErrMsg = useAtom(bidErrMsgAtom);
 

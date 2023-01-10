@@ -1,7 +1,7 @@
 import { atomsWithQuery } from 'jotai-tanstack-query';
 import { atom } from 'jotai';
 import { Client } from '@stomp/stompjs';
-import { getCustomAxios } from '../utils/customAxios';
+import customAxios from '../utils/customAxios';
 
 interface AuctionInfo {
   auctionEndDateTime: string;
@@ -19,7 +19,6 @@ const auctionIdAtom = atom(2);
 const [auctionInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidInfo', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<AuctionInfo> => {
-    const customAxios = getCustomAxios();
     const { data } = await customAxios.get('/api/v1/auction', {
       params: {
         auctionId,
@@ -33,7 +32,6 @@ const [auctionInfoAtom] = atomsWithQuery((get) => ({
 const [bidHistoryAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidHistory', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<BidInfo[] | null[]> => {
-    const customAxios = getCustomAxios();
     const { data } = await customAxios.get('/api/v1/auction/history', {
       params: {
         auctionId,

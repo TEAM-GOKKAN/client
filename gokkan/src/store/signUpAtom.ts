@@ -61,6 +61,7 @@ const userInfoAtom = atom((get) => {
     cardNumber,
   };
 });
+const userInfoFixAtom = atom('');
 
 type InitialUserInfo = {
   name: string;
@@ -85,4 +86,5 @@ export {
   clearAtom,
   setInitialUserInfo,
   userInfoAtom,
+  userInfoFixAtom,
 };
