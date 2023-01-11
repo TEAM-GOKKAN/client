@@ -8,7 +8,7 @@ import PageThree from '../components/register/pageThree';
 import PageFour from '../components/register/pageFour';
 import ProductTempSaveButton from '../components/register/ProductTempSaveButton';
 import { useAtom } from 'jotai';
-import { productIdAtom } from '../store/registerAtom';
+import { productIdAtom, registerPageLoadingAtom } from '../store/registerAtom';
 import useProductTempInfo from '../components/register/useProductTempInfo';
 import LoadingIndicator from '../components/common/LoadingIndicator';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,7 @@ const AuctionRegister = () => {
   const { pageNumber, productId } = useParams();
   const [itemId, setItemId] = useAtom(productIdAtom);
   const [pageName, setPageName] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useAtom(registerPageLoadingAtom);
   const navigate = useNavigate();
 
   const loadingFinish = () => {

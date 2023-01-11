@@ -8,6 +8,7 @@ const ExpertWorkListPage = () => {
       url={url}
       queryKey="expertWorkList"
       title="감정 대기 목록"
+      targetElementUrl="/expertWorkDetail"
     />
   );
 };

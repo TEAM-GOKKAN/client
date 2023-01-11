@@ -25,7 +25,12 @@ const LoadingWrapper = styled.div`
   align-items: center;
 `;
 
-const ProductListPage = ({ url, queryKey, title }: ProductListPagePropType) => {
+const ProductListPage = ({
+  url,
+  queryKey,
+  title,
+  targetElementUrl,
+}: ProductListPagePropType) => {
   const [productList, setProductList] = useState<ProductInfoType[]>([]);
   const [productListCount, setProductListCount] = useState(0);
   const [loadingRef, inView] = useInView();
@@ -42,6 +47,7 @@ const ProductListPage = ({ url, queryKey, title }: ProductListPagePropType) => {
     isFetching,
     isFetchingNextPage,
     status,
+    refetch,
   } = useInfiniteQuery({
     queryKey: [queryKey],
     queryFn: getProductList,
@@ -69,12 +75,21 @@ const ProductListPage = ({ url, queryKey, title }: ProductListPagePropType) => {
     }
   }, [inView]);
 
+  // 페이지가 로드될 때마다 refetch해 줌
+  useEffect(() => {
+    // 초기화
+    setProductList([]);
+    refetch();
+    console.log('page load 됨');
+  }, []);
+
   return (
     <ProductListPageWrapper>
       <div className="title">{title}</div>
       <ProductList
         productList={productList}
         productListNumber={productListCount}
+        targetUrl={targetElementUrl}
       />
       {hasNextPage === true && (
         <LoadingWrapper ref={loadingRef}>
@@ -99,6 +114,7 @@ type ProductListPagePropType = {
   url: string;
   queryKey: string;
   title: string;
+  targetElementUrl: string;
 };
 
 export default ProductListPage;

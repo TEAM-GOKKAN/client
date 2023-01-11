@@ -9,6 +9,7 @@ const MyWritingProductPage = () => {
       url={url}
       queryKey="myWritingProduct"
       title="작성 중인 경매 목록"
+      targetElementUrl="/register/1"
     />
   );
 };
