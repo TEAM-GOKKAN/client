@@ -8,26 +8,25 @@ import SellerInfo from '../components/LotDetail/SellerInfo';
 import BidBox from '../components/LotDetail/BidBox';
 import Favorite from '../components/LotDetail/Favorite';
 import {
-  bidHistoryAtom,
-  auctionInfoAtom,
   lotDetailAtom,
   expertValuationAtom,
   sellerInfoAtom,
+} from '../store/lotDetailAtom';
+import {
+  bidHistoryAtom,
+  auctionInfoAtom,
   StompClientAtom,
   currBidPriceAtom,
   bidErrMsgAtom,
   addedBidTimeAtom,
   currBidHistoryAtom,
-} from '../store/lotDetailAtom';
+  auctionIdAtom,
+} from '../store/bidAtom';
 import { useAtom, useAtomValue } from 'jotai';
 import { Client, IMessage } from '@stomp/stompjs';
 import useStomp from '../lib/hooks/useStomp';
 import CategoryInfo from '../components/LotDetail/CategoryInfo';
 import { useUpdateAtom } from 'jotai/utils';
-
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTY2MzE0NzQzIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MjgyMzM5OX0.zwqKkWgQOOfL8eTuQ-vyZDj3aQ3USB7NkCy7nZBSa7k';
-const auctionId = 1;
 
 export default function LotDetailPage() {
   const lotDetail = useAtomValue(lotDetailAtom);
@@ -35,6 +34,7 @@ export default function LotDetailPage() {
   const bidHistory = useAtomValue(bidHistoryAtom);
   const expertValuation = useAtomValue(expertValuationAtom);
   const sellerInfo = useAtomValue(sellerInfoAtom);
+  const auctionId = useAtomValue(auctionIdAtom);
 
   // 웹소켓 Client
   const client = useRef<Client>();
@@ -99,6 +99,11 @@ export default function LotDetailPage() {
   useEffect(() => {
     setCurrBidHistory(bidHistory);
   }, [bidHistory]);
+
+  useEffect(() => {
+    console.log('bid err msg');
+    console.log(bidErrMsg);
+  }, [bidErrMsg]);
 
   return (
     <div>
