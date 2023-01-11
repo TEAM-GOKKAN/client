@@ -19,6 +19,8 @@ const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 const ExaminePage = lazy(() => import('./pages/ExaminePage'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const FilterPage = lazy(() => import('./pages/FilterPage'));
 
 function App() {
   const location = useLocation();
@@ -30,7 +32,10 @@ function App() {
       <Routes location={background || location}>
         <Route path="/" element={<LayoutPage />}>
           <Route path="/" element={<MainPage />} />
-          <Route path="auction/1" element={<LotDetailPage />} />
+          <Route
+            path="auction/:itemId/:auctionId"
+            element={<LotDetailPage />}
+          />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signInCheck" element={<SignInSusPense />} />
           <Route path="myWritingProduct" element={<MyWritingProductPage />} />
@@ -50,6 +55,8 @@ function App() {
           <Route path="/auction/1/bid" element={<BidModal />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/filter" element={<FilterPage />} />
           <Route path="/examine/:itemId" element={<ExaminePage />} />
         </Routes>
       )}

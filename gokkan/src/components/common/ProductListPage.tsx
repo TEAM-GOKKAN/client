@@ -60,11 +60,14 @@ const ProductListPage = ({
 
   useEffect(() => {
     if (!isFetching && status === 'success') {
-      const pageListNumber = data.pages.length;
       setProductListCount(data.pages[0].data.totalElements);
       setProductList((pre) => {
-        const targetList = data.pages[pageListNumber - 1].data.content;
-        return [...pre, ...targetList];
+        let targetList: ProductInfoType[] = [];
+        data.pages.forEach((page) => {
+          targetList = [...targetList, ...page.data.content];
+        });
+
+        return targetList;
       });
     }
   }, [isFetching, status, hasNextPage]);
@@ -80,7 +83,6 @@ const ProductListPage = ({
     // 초기화
     setProductList([]);
     refetch();
-    console.log('page load 됨');
   }, []);
 
   return (

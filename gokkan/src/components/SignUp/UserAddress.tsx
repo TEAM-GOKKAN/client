@@ -78,6 +78,7 @@ const UserAddress = () => {
   };
 
   const onCompletePost = (data: any) => {
+    console.log(data);
     setAddress(String(data.address));
     setShowAddress(false);
   };
