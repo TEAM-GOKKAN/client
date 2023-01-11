@@ -18,6 +18,7 @@ const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
+const ExaminePage = lazy(() => import('./pages/ExaminePage'));
 
 function App() {
   const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
           <Route path="/auction/1/bid" element={<BidModal />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
+          <Route path="/examine/:itemId" element={<ExaminePage />} />
         </Routes>
       )}
     </Suspense>

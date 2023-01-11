@@ -20,9 +20,9 @@ const SignInButton = () => {
 
   const handleSignInButttonClick = () => {
     if (accessToken !== '') {
-      navigate('myPage', { state: { background: location } });
+      navigate('/myPage', { state: { background: location } });
     } else {
-      navigate('signin', { state: { background: location } });
+      navigate('/signin', { state: { background: location } });
     }
   };
 

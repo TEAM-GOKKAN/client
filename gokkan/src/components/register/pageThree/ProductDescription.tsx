@@ -16,6 +16,7 @@ const DetailInfoWrapper = styled.div`
     background: none;
     padding: 10px;
     height: 140px;
+    resize: none;
   }
   .limit {
     position: absolute;

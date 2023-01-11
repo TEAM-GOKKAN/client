@@ -160,6 +160,7 @@ const bidErrMsgAtom = atom('');
 const addedBidTimeAtom = atom('');
 
 export {
+  lotIdAtom,
   lotDetailAtom,
   auctionInfoAtom,
   bidHistoryAtom,
