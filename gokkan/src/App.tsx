@@ -41,6 +41,8 @@ function App() {
             element={<ExpertWorkDetailPage />}
           />
           <Route path="payment" element={<PaymentPage />} />
+          {/* 결제 결과 */}
+          <Route path="payment/result" element={<PaymentResultPage />} />
         </Route>
         <Route
           path="/register/:pageNumber/:productId"
