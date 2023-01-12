@@ -17,6 +17,8 @@ const LogOut = () => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('refreshToken', '');
       });
   };
 
