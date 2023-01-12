@@ -52,7 +52,7 @@ const Nav = styled.nav`
 
 const NavTitle = styled.div`
   font-size: var(--font-medium);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: normal;
   position: absolute;
   top: 50%;
