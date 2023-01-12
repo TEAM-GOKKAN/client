@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import customAxios from '../utils/customAxios';
-import FilterIcon from '../components/Filter/FilterIcon';
+import MainList from '../components/Main/MainList';
+import {
+  endTimeAuctionItemListAtom,
+  newEnrollAuctionItemListAtom,
+} from '../store/auctionQueryAtom';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -9,21 +11,13 @@ const MainWrapper = styled.div`
 `;
 
 export default function MainPage() {
-  useEffect(() => {
-    customAxios
-      .get('api/v1/auction/filter-list')
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <MainWrapper>
-      Main page 입니다.
-      <FilterIcon />
+      <MainList title="마감임박 경매" queryAtom={endTimeAuctionItemListAtom} />
+      <MainList
+        title="신규 등록 경매"
+        queryAtom={newEnrollAuctionItemListAtom}
+      />
     </MainWrapper>
   );
 }
