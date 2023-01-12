@@ -10,7 +10,7 @@ const SliderElement = styled.div`
   img {
     width: 100%;
     height: 255px;
-    object-fit: fill;
+    object-fit: cover;
   }
   .delete {
     background-color: var(--color-orange);

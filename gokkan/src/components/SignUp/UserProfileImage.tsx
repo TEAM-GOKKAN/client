@@ -9,6 +9,7 @@ const ProfileImgWrapper = styled.div`
     margin-top: 10px;
     width: 100%;
     height: calc(100vw - 24px);
+    object-fit: cover;
   }
   button {
     margin-top: 2vh;

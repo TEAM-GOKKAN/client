@@ -11,6 +11,7 @@ import {
   lotDetailAtom,
   expertValuationAtom,
   sellerInfoAtom,
+  lotIdAtom,
 } from '../store/lotDetailAtom';
 import {
   bidHistoryAtom,
@@ -35,7 +36,8 @@ export default function LotDetailPage() {
   const bidHistory = useAtomValue(bidHistoryAtom);
   const expertValuation = useAtomValue(expertValuationAtom);
   const sellerInfo = useAtomValue(sellerInfoAtom);
-  const auctionId = useAtomValue(auctionIdAtom);
+  const [auctionId, setAuctionId] = useAtom(auctionIdAtom);
+  const [lotId, setLotId] = useAtom(lotIdAtom);
   const params = useParams();
 
   // 웹소켓 Client
@@ -88,6 +90,8 @@ export default function LotDetailPage() {
   // itemId, auctionId 불러옴
   useEffect(() => {
     const { itemId, auctionId } = params;
+    setLotId(Number(itemId));
+    setAuctionId(Number(auctionId));
   }, []);
 
   // 웹소켓 연결 및 해제

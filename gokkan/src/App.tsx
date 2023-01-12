@@ -52,7 +52,10 @@ function App() {
       </Routes>
       {background && (
         <Routes>
-          <Route path="/auction/1/bid" element={<BidModal />} />
+          <Route
+            path="/auction/:itemId/:auctionId/bid"
+            element={<BidModal />}
+          />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/category" element={<CategoryPage />} />

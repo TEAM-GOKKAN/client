@@ -18,8 +18,10 @@ const MainListElement = ({ lotInfo }: MainListElementPropType) => {
       <div className="price">
         <p className="price-title">현재가</p>
         <div className="price-content">
-          {insertCommas(lotInfo.currentPrice)}
-          <p className="unit">원</p>
+          <span className="price-value">
+            {insertCommas(lotInfo.currentPrice)}
+          </span>
+          <span className="unit">원</span>
         </div>
       </div>
       <div className="end-time">
@@ -46,7 +48,7 @@ interface MainListElementPropType {
 
 const Container = styled.div`
   min-width: 60vw;
-  height: 50vh;
+  height: 45vh;
   margin-right: 20px;
   display: flex;
   flex-direction: column;
@@ -54,30 +56,42 @@ const Container = styled.div`
     height: 70%;
     width: 100%;
     margin-bottom: 12px;
+    object-fit: cover;
   }
   .lot-name {
     margin-bottom: 20px;
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17.5px;
   }
   .price {
     display: flex;
     flex-direction: column;
-    color: var(--color-brown500);
-    font-size: 16px;
-    font-weight: 600;
-    font-family: poppins;
+    .price-title {
+      font-weight: 500;
+      font-size: 12px;
+    }
     .price-content {
-      margin-top: 4px;
       display: flex;
       flex-direction: row;
       .unit {
-        margin-left: 4px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .price-value {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Poppins';
+        letter-spacing: normal;
       }
     }
   }
   .end-time {
-    margin-top: 15px;
+    margin-top: 12px;
     color: var(--color-brown300);
+    font-weight: 400;
+    font-size: 12px;
   }
 `;
