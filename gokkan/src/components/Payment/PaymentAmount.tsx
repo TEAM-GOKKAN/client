@@ -15,7 +15,7 @@ export default function PaymentAmount({ data }: IProps) {
   const { hammerPrice, fee, paymentAmount } = data;
 
   return (
-    <Section title="결제금액" preview="319,000원">
+    <Section title="결제금액" preview={insertCommas(paymentAmount) + '원'}>
       <PriceList>
         <Price>
           <span>낙찰가</span>

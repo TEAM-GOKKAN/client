@@ -17,10 +17,7 @@ export default function ProductInfo({ data }: IProps) {
   const { itemName, thumbnail, price } = data;
 
   return (
-    <Section
-      title="주문상품"
-      preview="product name Seven vintage vases with two plates"
-    >
+    <Section title="주문상품" preview={itemName}>
       <Content>
         <ThumbnailContent>
           <img src={thumbnail || ''} alt="thumbnail" />

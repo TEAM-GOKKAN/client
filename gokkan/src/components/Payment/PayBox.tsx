@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function PayBox() {
+interface IProps {
+  onClickPayment: () => void;
+}
+
+export default function PayBox({ onClickPayment }: IProps) {
   return (
     <Container>
-      <PayButton type="button" className="active">
+      <PayButton type="button" className="active" onClick={onClickPayment}>
         결제하기
       </PayButton>
     </Container>

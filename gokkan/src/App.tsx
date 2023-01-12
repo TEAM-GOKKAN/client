@@ -19,6 +19,7 @@ const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
+const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'));
 
 function App() {
   const location = useLocation();

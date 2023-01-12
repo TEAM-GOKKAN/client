@@ -63,4 +63,64 @@ const [paymentAmountAtom] = atomsWithQuery((get) => ({
   },
 }));
 
-export { addressAtom, productInfoAtom, paymentAmountAtom };
+// const iamportDataAtom = atom({
+//   pg: 'kakaopay',
+//   pay_method: 'card',
+//   merchant_uid: `mid_${new Date().getTime()}`,
+//   amount: 0,
+//   name: '',
+//   buyer_name: '',
+//   buyer_tel: '',
+//   buyer_email: 'example@example',
+//   buyer_addr: '',
+//   buyer_postcode: '06018',
+//   m_redirect_url: 'http://localhost:5173/payment/result',
+// });
+
+const pgAtom = atom('');
+const payMethodAtom = atom('card');
+
+const newAddressAtom = atom('');
+const newAddressDetailAtom = atom('');
+const newNameAtom = atom('');
+const newPhoneNumberAtom = atom('');
+
+const iamportDataAtom = atom((get) => {
+  const { name, phoneNumber, address, addressDetail } = get(addressAtom);
+  const { paymentAmount } = get(paymentAmountAtom);
+  const { itemName } = get(productInfoAtom);
+
+  return {
+    pg: get(pgAtom),
+    pay_method: get(payMethodAtom),
+    merchant_uid: `${new Date().getTime()}`,
+    amount: paymentAmount,
+    name: itemName,
+    buyer_name: get(newNameAtom) || name,
+    buyer_tel: get(newPhoneNumberAtom) || phoneNumber,
+    buyer_addr: get(newAddressDetailAtom)
+      ? `${get(newAddressAtom)} ${get(newAddressDetailAtom)}`
+      : `${address} ${addressDetail}`,
+    m_redirect_url: 'http://gokkan.loca.lt/payment/result',
+  };
+});
+
+const newAddressInfoAtom = atom((get) => ({
+  name: get(newNameAtom),
+  phoneNumber: get(newPhoneNumberAtom),
+  address: get(newAddressAtom),
+}));
+
+export {
+  addressAtom,
+  productInfoAtom,
+  paymentAmountAtom,
+  iamportDataAtom,
+  pgAtom,
+  payMethodAtom,
+  newAddressAtom,
+  newAddressDetailAtom,
+  newNameAtom,
+  newPhoneNumberAtom,
+  newAddressInfoAtom,
+};

@@ -1,5 +1,7 @@
-import React from 'react';
+import { useAtomValue } from 'jotai';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ChangeAddress from './ChangeAddress';
 import Section from './Section';
 
 interface IProps {
@@ -7,26 +9,47 @@ interface IProps {
     name: string;
     phoneNumber: string;
     address: string;
-    addressDetail: string;
+    addressDetail?: string;
   };
+  isPaid?: boolean;
 }
 
-export default function ShippingAddress({ data }: IProps) {
+export default function ShippingAddress({ data, isPaid }: IProps) {
   const { name, phoneNumber, address, addressDetail } = data;
+
+  const [isChangeMode, setIsChangeMode] = useState(false);
+
+  const handleClickChangeButton = () => {
+    setIsChangeMode(true);
+  };
+
+  const handleClickCompleteButton = () => {
+    setIsChangeMode(false);
+  };
 
   return (
     <Section
       title="배송지"
-      preview="서울특별시 성동구 서울로1길 197 서울동, 서울아파트 101호"
-      isFirstSection
+      preview={addressDetail ? `${address} ${addressDetail}` : address}
     >
-      <div>
-        <span>{name}</span>
-        <span> / </span>
-        <PhoneNumber>{phoneNumber}</PhoneNumber>
-      </div>
-      <Address>{`${address} ${addressDetail}`}</Address>
-      <ChangeButton type="button">변경</ChangeButton>
+      {/* {!isChangeMode && ( */}
+      <>
+        <div>
+          <span>{name}</span>
+          <span> / </span>
+          <PhoneNumber>{phoneNumber}</PhoneNumber>
+        </div>
+        <Address>
+          {addressDetail ? `${address} ${addressDetail}` : address}
+        </Address>
+        {/* {!isPaid && (
+            <ChangeButton type="button" onClick={handleClickChangeButton}>
+              변경
+            </ChangeButton>
+          )} */}
+      </>
+      {/* )} */}
+      {/* {isChangeMode && <ChangeAddress onComplete={handleClickCompleteButton} />} */}
     </Section>
   );
 }

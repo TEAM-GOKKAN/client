@@ -5,16 +5,10 @@ import { FiChevronDown } from 'react-icons/fi';
 interface IProps {
   title?: string;
   preview?: string;
-  isFirstSection?: boolean;
   children: React.ReactNode;
 }
 
-export default function Section({
-  title,
-  preview,
-  children,
-  isFirstSection,
-}: IProps) {
+export default function Section({ title, preview, children }: IProps) {
   const [isToggleOpen, setIsToggleOpen] = useState(true);
   const containerRef = useRef(null);
 
@@ -23,10 +17,7 @@ export default function Section({
   };
 
   return (
-    <SectionContainer
-      ref={containerRef}
-      className={isFirstSection ? 'first' : ''}
-    >
+    <SectionContainer ref={containerRef}>
       {title && (
         <TitleContainer>
           <Title>{title}</Title>
@@ -43,13 +34,13 @@ export default function Section({
 
 const SectionContainer = styled.section`
   width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   font-size: var(--font-small);
 
-  &:not(.first)::before {
+  &::before {
     content: '';
     display: inline-block;
-    margin-bottom: 21px;
+    margin-bottom: 24px;
     border-bottom: 1px solid var(--color-brown100);
     width: calc(100% + 32px);
     position: relative;
