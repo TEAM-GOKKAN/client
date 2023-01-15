@@ -21,7 +21,8 @@ const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
 const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'));
 const ExaminePage = lazy(() => import('./pages/ExaminePage'));
-const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const CategoryModalPage = lazy(() => import('./pages/CategoryModalPage'));
+const CategorySearchPage = lazy(() => import('./pages/CategorySearchPage'));
 const FilterPage = lazy(() => import('./pages/FilterPage'));
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
           <Route path="myWritingProduct" element={<MyWritingProductPage />} />
           <Route path="expertWorkList" element={<ExpertWorkListPage />} />
           <Route
+            path="categorySearch/:category"
+            element={<CategorySearchPage />}
+          />
+          <Route
             path="expertWorkDetail/:itemId"
             element={<ExpertWorkDetailPage />}
           />
@@ -62,7 +67,7 @@ function App() {
           />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/myPage" element={<MyPage />} />
-          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/categoryModal" element={<CategoryModalPage />} />
           <Route path="/filter" element={<FilterPage />} />
           <Route path="/examine/:itemId" element={<ExaminePage />} />
         </Routes>

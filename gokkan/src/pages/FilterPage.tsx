@@ -4,8 +4,10 @@ import SortFilter from '../components/Filter/SortFilter';
 import StyleFilter from '../components/Filter/StyleFilter';
 import PriceFilter from '../components/Filter/PriceFilter';
 import FilterControlButton from '../components/Filter/FilterControlButton';
+import useFilterInitialSetting from '../components/Filter/useFilterInitialSetting';
 
 const FilterPage = () => {
+  useFilterInitialSetting();
   return (
     <ModalFull title="필터">
       <SortFilter />

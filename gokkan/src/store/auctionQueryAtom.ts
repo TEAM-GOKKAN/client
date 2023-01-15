@@ -8,6 +8,35 @@ const minPriceAtom = atom('');
 const maxPriceAtom = atom('');
 const sortAtom = atom('마감임박순');
 
+// 초기 filter 조회용 atom
+const filterInfoAtom = atom((get) => {
+  const category = get(categoryAtom);
+  const styles = get(stylesAtom);
+  const minPrice = get(minPriceAtom);
+  const maxPrice = get(maxPriceAtom);
+  const sort = get(sortAtom);
+  return {
+    category,
+    styles,
+    minPrice,
+    maxPrice,
+    sort,
+  };
+});
+// filter reset용 atom
+const resetStoredFilterInfoAtom = atom(null, (get, set, data) => {
+  set(stylesAtom, []);
+  set(sortAtom, '마감임박순');
+  set(minPriceAtom, '');
+  set(maxPriceAtom, '');
+});
+// filter 설정용 atom
+const setStoredFilterInfoAtom = atom(null, (get, set, data: FilterInfoType) => {
+  set(sortAtom, data.sort);
+  set(stylesAtom, data.styles);
+  set(minPriceAtom, data.minPrice);
+  set(maxPriceAtom, data.maxPrice);
+});
 // 마감임박 페이지용 쿼리
 const [, endTimeAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ['auction', '마감임박순'],
@@ -26,7 +55,6 @@ const [, endTimeAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
     }
   },
 }));
-
 // 신규등록 페이지용 쿼리
 const [, newEnrollAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ['auction', '신규등록순'],
@@ -46,6 +74,7 @@ const [, newEnrollAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   },
 }));
 
+// 카테고리 및 필터 조회용 쿼리
 const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: [
     'auction',
@@ -68,11 +97,11 @@ const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
     }
     // minPrice있을 때 추가해줌
     if (minPrice !== '') {
-      url += `&minPrice=${minPrice}`;
+      url += `&minPrice=${String(minPrice).replace(/,/g, '')}`;
     }
     // maxPrice있을 때 추가해줌
     if (maxPrice !== '') {
-      url += `&maxPrice=${maxPrice}`;
+      url += `&maxPrice=${String(maxPrice).replace(/,/g, '')}`;
     }
     // styles있을 때 styles 추가해줌
     if ((styles as Array<string>).length !== 0) {
@@ -105,4 +134,14 @@ export {
   sortAtom,
   endTimeAuctionItemListAtom,
   newEnrollAuctionItemListAtom,
+  filterInfoAtom,
+  resetStoredFilterInfoAtom,
+  setStoredFilterInfoAtom,
 };
+
+interface FilterInfoType {
+  sort: string;
+  styles: string[];
+  minPrice: string;
+  maxPrice: string;
+}

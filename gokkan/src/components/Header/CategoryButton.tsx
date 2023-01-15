@@ -17,7 +17,7 @@ const CategoryButton = () => {
   const navigate = useNavigate();
 
   const handleSignInButttonClick = () => {
-    navigate('/category', { state: { background: location } });
+    navigate('/categoryModal', { state: { background: location } });
   };
 
   return (
