@@ -11,6 +11,7 @@ import {
   lotDetailAtom,
   expertValuationAtom,
   sellerInfoAtom,
+  lotIdAtom,
 } from '../store/lotDetailAtom';
 import {
   bidHistoryAtom,
@@ -27,6 +28,7 @@ import { Client, IMessage } from '@stomp/stompjs';
 import useStomp from '../lib/hooks/useStomp';
 import CategoryInfo from '../components/LotDetail/CategoryInfo';
 import { useUpdateAtom } from 'jotai/utils';
+import { useParams } from 'react-router-dom';
 
 export default function LotDetailPage() {
   const lotDetail = useAtomValue(lotDetailAtom);
@@ -34,7 +36,9 @@ export default function LotDetailPage() {
   const bidHistory = useAtomValue(bidHistoryAtom);
   const expertValuation = useAtomValue(expertValuationAtom);
   const sellerInfo = useAtomValue(sellerInfoAtom);
-  const auctionId = useAtomValue(auctionIdAtom);
+  const [auctionId, setAuctionId] = useAtom(auctionIdAtom);
+  const [lotId, setLotId] = useAtom(lotIdAtom);
+  const params = useParams();
 
   // 웹소켓 Client
   const client = useRef<Client>();
@@ -82,6 +86,13 @@ export default function LotDetailPage() {
 
   // 웹소켓 연결 Hook
   const [connect, disconnect] = useStomp(client, subscriptionList);
+
+  // itemId, auctionId 불러옴
+  useEffect(() => {
+    const { itemId, auctionId } = params;
+    setLotId(Number(itemId));
+    setAuctionId(Number(auctionId));
+  }, []);
 
   // 웹소켓 연결 및 해제
   useEffect(() => {

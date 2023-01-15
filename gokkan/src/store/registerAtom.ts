@@ -1,6 +1,9 @@
 import { atom } from 'jotai';
 import { atomsWithQuery } from 'jotai-tanstack-query';
 
+// loading indicator
+const registerPageLoadingAtom = atom(true);
+
 // productId
 const productIdAtom = atom('');
 
@@ -164,7 +167,34 @@ const productSetInfoAtom = atom(
   }
 );
 
+// for register reset
+const resetProductInfoAtom = atom(null, (get, set, data) => {
+  set(productIdAtom, '');
+  set(uploadDbImageUrlAtom, []);
+  set(uploadImageUrlAtom, []);
+  set(uploadImageFileAtom, []);
+  set(examineDbImageUrlAtom, []);
+  set(examineImageUrlAtom, []);
+  set(examineImageFileAtom, []);
+  set(firstDepthCategoryAtom, '');
+  set(secondDepthCategoryAtom, '');
+  set(productNameAtom, '');
+  set(productBrandAtom, '');
+  set(productDesignerAtom, '');
+  set(productStyleAtom, []);
+  set(productMaterialAtom, '');
+  set(productAgeAtom, '');
+  set(productWidthAtom, '');
+  set(productDepthAtom, '');
+  set(productHeightAtom, '');
+  set(productConditionAtom, '');
+  set(productDetailConditionAtom, '');
+  set(productDescriptionAtom, '');
+  set(productStartPriceAtom, '');
+});
+
 export {
+  registerPageLoadingAtom,
   uploadDbImageUrlAtom,
   examineDbImageUrlAtom,
   productIdAtom,
@@ -189,6 +219,7 @@ export {
   productDescriptionAtom,
   productGetInfoAtom,
   productSetInfoAtom,
+  resetProductInfoAtom,
 };
 
 type ImageUrl = {

@@ -2,16 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/logo/logo.png';
 import SignInButton from './SignInButton';
-import { HiOutlineMenu } from 'react-icons/hi';
+import CategoryButton from './CategoryButton';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
     <Container>
       <Fixed>
-        <IconButton>
-          <HiOutlineMenu size="22" color="var(--color-brown300)" />
-        </IconButton>
+        <CategoryButton />
         <LogoContainer>
           <Link to="/">
             <img src={logo} alt="gokkan" />

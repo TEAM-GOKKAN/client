@@ -20,6 +20,7 @@ const ProductListGridWrapper = styled.div`
 const ProductList = ({
   productList,
   productListNumber,
+  targetUrl,
 }: ProductListPropType) => {
   const listElementCount = insertCommas(Number(productListNumber));
 
@@ -31,6 +32,7 @@ const ProductList = ({
           return (
             <ProductListElement
               productInfo={productInfo}
+              targetUrl={targetUrl}
               key={productInfo.id}
             />
           );
@@ -52,6 +54,7 @@ type ProductInfoType = {
 
 type ProductListPropType = {
   productList: ProductInfoType[];
+  targetUrl: string;
   productListNumber?: number;
 };
 

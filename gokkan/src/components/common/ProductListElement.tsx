@@ -43,12 +43,15 @@ const ListElementContainer = styled.div`
   }
 `;
 
-const ProductListElement = ({ productInfo }: ProductListElementPropType) => {
+const ProductListElement = ({
+  productInfo,
+  targetUrl,
+}: ProductListElementPropType) => {
   const [price, setPrice] = useState('-');
   const navigate = useNavigate();
 
   const handleElementClick = () => {
-    navigate(`/register/1/${productInfo.id}`);
+    navigate(`${targetUrl}/${productInfo.id}`);
   };
 
   useEffect(() => {
@@ -92,6 +95,7 @@ type ProductListElementPropType = {
     updated: string;
     startPrice: number;
   };
+  targetUrl: string;
 };
 
 export default ProductListElement;

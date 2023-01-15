@@ -10,7 +10,11 @@ const LogOut = () => {
     const url = 'api/v1/users/logout';
     customAxios
       .post(url)
-      .then(({ data }) => {
+      .then(({ data }) => {})
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
         localStorage.setItem('accessToken', '');
         localStorage.setItem('refreshToken', '');
         navigate('/');

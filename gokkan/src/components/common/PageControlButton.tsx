@@ -5,6 +5,8 @@ import {
   productGetInfoAtom,
   uploadImageFileAtom,
   examineImageFileAtom,
+  registerPageLoadingAtom,
+  resetProductInfoAtom,
 } from '../../store/registerAtom';
 import { useAtom } from 'jotai';
 import customAxios from '../../utils/customAxios';
@@ -42,6 +44,8 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
   const [productInfo] = useAtom(productGetInfoAtom);
   const [uploadImgFile] = useAtom(uploadImageFileAtom);
   const [examineImgFile] = useAtom(examineImageFileAtom);
+  const [, resetProductInfo] = useAtom(resetProductInfoAtom);
+  const [isLoading, setIsLoading] = useAtom(registerPageLoadingAtom);
 
   useEffect(() => {
     if (pageNumber === '4') {
@@ -62,6 +66,7 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
     } else {
       console.log('submit button clicked');
 
+      setIsLoading(true);
       const transferData = new FormData();
       const requestData = new Blob([JSON.stringify(productInfo)], {
         type: 'application/json',
@@ -96,11 +101,14 @@ const PageControlButton = ({ active }: PageControlButtonProp) => {
           },
         })
         .then((res) => {
-          console.log('제출이 성공적으로 완료되었습니다.');
           navigate('/');
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          resetProductInfo();
+          setIsLoading(false);
         });
     }
   };
