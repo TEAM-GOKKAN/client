@@ -6,8 +6,7 @@ import { sortFilterAtom } from '../../store/filterAtom';
 
 const SortFilter = () => {
   const [sortTarget, setSortTarget] = useAtom(sortFilterAtom);
-
-  const sortList = ['마감 임박순', '신규 등록순'];
+  const sortList = ['마감임박순', '신규등록순'];
 
   const handleSortItemClick = (item: string) => {
     setSortTarget(item);

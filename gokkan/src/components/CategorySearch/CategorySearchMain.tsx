@@ -5,6 +5,7 @@ import FilterIcon from '../Filter/FilterIcon';
 import {
   auctionItemListAtom,
   categoryAtom,
+  filterInfoAtom,
 } from '../../store/auctionQueryAtom';
 import { useAtom } from 'jotai';
 import { insertCommas } from '../../utils/handleCommas';
@@ -20,6 +21,7 @@ const CategorySearchMain = () => {
   // 보여줄 경매 리스트
   const [lotList, setLotList] = useState<LotInfoType[]>([]);
   const [storedCategory, setStoredCategory] = useAtom(categoryAtom);
+  const [filterInfo] = useAtom(filterInfoAtom);
   // 해당 카테고리로 조회 요청을 보냄
   const [queryResult] = useAtom(auctionItemListAtom);
   const {
@@ -41,12 +43,16 @@ const CategorySearchMain = () => {
     }
   }, [category]);
 
-  // 저장된 카테고리가 변했을 때, refetch 요청을 보냄
+  // 조건이 변할 때마다 refetch를 해줌
   useEffect(() => {
-    if (storedCategory) {
-      refetch();
-    }
-  }, [storedCategory]);
+    refetch();
+  }, [
+    filterInfo.category,
+    filterInfo.maxPrice,
+    filterInfo.minPrice,
+    filterInfo.sort,
+    filterInfo.styles.length,
+  ]);
 
   // 조회 결과 데이터가 변할 때마다 변화된 데이터를 넣어줌
   useEffect(() => {

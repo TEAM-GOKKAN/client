@@ -19,6 +19,19 @@ const initialFilterSettingAtom = atom(null, (get, set, data) => {
   set(maxPriceFilterAtom, filterInfo.maxPrice);
 });
 
+const getFilterDataAtom = atom((get) => {
+  const sort = get(sortFilterAtom);
+  const styles = get(styleFilterAtom);
+  const minPrice = get(minPriceFilterAtom);
+  const maxPrice = get(maxPriceFilterAtom);
+  return {
+    sort,
+    styles,
+    minPrice,
+    maxPrice,
+  };
+});
+
 export {
   sortFilterAtom,
   styleFilterAtom,
@@ -26,4 +39,5 @@ export {
   maxPriceFilterAtom,
   resetFilterAtom,
   initialFilterSettingAtom,
+  getFilterDataAtom,
 };

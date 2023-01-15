@@ -9,6 +9,7 @@ const useFilterInitialSetting = () => {
   useEffect(() => {
     initialFilterSetting();
   }, []);
+  
 };
 
 export default useFilterInitialSetting;

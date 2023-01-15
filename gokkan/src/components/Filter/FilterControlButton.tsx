@@ -1,36 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAtom } from 'jotai';
+import { resetFilterAtom, getFilterDataAtom } from '../../store/filterAtom';
 import {
-  resetFilterAtom,
-  sortFilterAtom,
-  styleFilterAtom,
-  minPriceFilterAtom,
-  maxPriceFilterAtom,
-} from '../../store/filterAtom';
+  resetStoredFilterInfoAtom,
+  setStoredFilterInfoAtom,
+} from '../../store/auctionQueryAtom';
+import { useNavigate } from 'react-router-dom';
 
 const FilterControlButton = () => {
   const [, resetFilter] = useAtom(resetFilterAtom);
-  const [sortFilter] = useAtom(sortFilterAtom);
-  const [styleList] = useAtom(styleFilterAtom);
-  const [minPrice] = useAtom(minPriceFilterAtom);
-  const [maxPrice] = useAtom(maxPriceFilterAtom);
+  const [, resetStoredFilter] = useAtom(resetStoredFilterInfoAtom);
+  const [, setStoredFilter] = useAtom(setStoredFilterInfoAtom);
+  const [filterData] = useAtom(getFilterDataAtom);
+  const { sort, styles, minPrice, maxPrice } = filterData;
   const [active, setActive] = useState(false);
+  const navigate = useNavigate();
 
   const handleResetButtonClick = () => {
     resetFilter();
+    resetStoredFilter();
   };
 
   const handleCompleteButtonClick = () => {
     if (active) {
-      console.log('제출버튼 클릭');
+      // 제출을 클릭했을 때, StoredFilter data 갱신해주고, 이전 페이지로 돌아감
+      setStoredFilter(filterData);
+      navigate(-1);
     }
   };
 
   useEffect(() => {
     if (
-      sortFilter !== '' ||
-      styleList.length !== 0 ||
+      sort !== '' ||
+      styles.length !== 0 ||
       minPrice !== '' ||
       maxPrice !== ''
     ) {
@@ -38,7 +41,7 @@ const FilterControlButton = () => {
     } else {
       setActive(false);
     }
-  }, [sortFilter, styleList.length, minPrice, maxPrice]);
+  }, [sort, styles.length, minPrice, maxPrice]);
 
   return (
     <Container>
