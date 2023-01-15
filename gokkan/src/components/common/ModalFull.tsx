@@ -37,6 +37,7 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: auto;
   z-index: 9991;
 `;
@@ -50,9 +51,9 @@ const Nav = styled.nav`
   position: relative;
 `;
 
-const NavTitle = styled.div`
+const NavTitle = styled.h2`
   font-size: var(--font-medium);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   letter-spacing: normal;
   position: absolute;
   top: 50%;

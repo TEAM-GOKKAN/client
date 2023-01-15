@@ -18,6 +18,8 @@ const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
+const PaymentPage = lazy(() => import('./pages/PaymentPage'));
+const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'));
 const ExaminePage = lazy(() => import('./pages/ExaminePage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const FilterPage = lazy(() => import('./pages/FilterPage'));
@@ -44,6 +46,8 @@ function App() {
             path="expertWorkDetail/:itemId"
             element={<ExpertWorkDetailPage />}
           />
+          <Route path="payment" element={<PaymentPage />} />
+          <Route path="payment/result" element={<PaymentResultPage />} />
         </Route>
         <Route
           path="/register/:pageNumber/:productId"

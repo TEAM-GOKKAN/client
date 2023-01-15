@@ -18,6 +18,11 @@ const LogOut = () => {
         localStorage.setItem('accessToken', '');
         localStorage.setItem('refreshToken', '');
         navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        localStorage.setItem('accessToken', '');
+        localStorage.setItem('refreshToken', '');
       });
   };
 
