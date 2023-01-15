@@ -23,12 +23,16 @@ export default FilterIcon;
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
-  width: 100px;
+  width: 50px;
   height: 42px;
-  background-color: red;
+  color: var(--color-brown400);
   .title {
     margin-left: 3px;
+    font-size: 14px;
+    font-weight: 400px;
+    line-height: 14px;
+    letter-spacing: -4%;
   }
 `;

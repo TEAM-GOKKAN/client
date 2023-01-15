@@ -1,7 +1,13 @@
-import React from 'react';
+import CategoryNav from '../components/CategorySearch/CategoryNav';
+import CategorySearchMain from '../components/CategorySearch/CategorySearchMain';
 
 const CategorySearchPage = () => {
-  return <div>카테고리 검색 결과 확인 페이지</div>;
+  return (
+    <div>
+      <CategoryNav />
+      <CategorySearchMain />
+    </div>
+  );
 };
 
 export default CategorySearchPage;

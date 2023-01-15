@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import SpreadList from '../common/SpreadList';
 import CategoryItem from './CategoryItem';
+import { furniture } from '../../utils/category';
 
 const FurnitureList = () => {
-  const furniture = ['가구', '의자', '테이블', '수납가구'];
   const listItems: ReactNode[] = furniture.map((content) => {
     return <CategoryItem content={content} />;
   });

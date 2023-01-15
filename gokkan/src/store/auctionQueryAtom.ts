@@ -8,6 +8,19 @@ const minPriceAtom = atom('');
 const maxPriceAtom = atom('');
 const sortAtom = atom('마감임박순');
 
+const filterInfoAtom = atom((get) => {
+  const styles = get(stylesAtom);
+  const minPrice = get(minPriceAtom);
+  const maxPrice = get(maxPriceAtom);
+  const sort = get(sortAtom);
+  return {
+    styles,
+    minPrice,
+    maxPrice,
+    sort,
+  };
+});
+
 // 마감임박 페이지용 쿼리
 const [, endTimeAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ['auction', '마감임박순'],
@@ -46,6 +59,7 @@ const [, newEnrollAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   },
 }));
 
+// 카테고리 및 필터 조회용 쿼리
 const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: [
     'auction',
@@ -105,4 +119,5 @@ export {
   sortAtom,
   endTimeAuctionItemListAtom,
   newEnrollAuctionItemListAtom,
+  filterInfoAtom,
 };

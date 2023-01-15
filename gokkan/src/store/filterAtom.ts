@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { filterInfoAtom } from './auctionQueryAtom';
 
 const sortFilterAtom = atom('');
 const styleFilterAtom = atom<string[]>([]);
@@ -10,6 +11,13 @@ const resetFilterAtom = atom(null, (get, set, data) => {
   set(minPriceFilterAtom, '');
   set(maxPriceFilterAtom, '');
 });
+const initialFilterSettingAtom = atom(null, (get, set, data) => {
+  const filterInfo = get(filterInfoAtom);
+  set(sortFilterAtom, filterInfo.sort);
+  set(styleFilterAtom, filterInfo.styles);
+  set(minPriceFilterAtom, filterInfo.minPrice);
+  set(maxPriceFilterAtom, filterInfo.maxPrice);
+});
 
 export {
   sortFilterAtom,
@@ -17,4 +25,5 @@ export {
   minPriceFilterAtom,
   maxPriceFilterAtom,
   resetFilterAtom,
+  initialFilterSettingAtom,
 };
