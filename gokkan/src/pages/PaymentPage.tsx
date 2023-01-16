@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ModalFull from '../components/common/ModalFull';
 import PayBox from '../components/Payment/PayBox';
 import PaymentAmount from '../components/Payment/PaymentAmount';
@@ -33,7 +33,6 @@ declare global {
 export default function PaymentPage() {
   const navigate = useNavigate();
   const params = useParams();
-
   const shippingAddress = useAtomValue(addressAtom);
   const productInfo = useAtomValue(productInfoAtom);
   const paymentAmount = useAtomValue(paymentAmountAtom);
@@ -45,6 +44,7 @@ export default function PaymentPage() {
   const setNewName = useUpdateAtom(newNameAtom);
   const setNewPhoneNumber = useUpdateAtom(newPhoneNumberAtom);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
+  const currentLocation = useLocation();
 
   const callback = async (res: any) => {
     const {
@@ -80,6 +80,7 @@ export default function PaymentPage() {
         navigate('result', {
           state: {
             orderNumber: merchant_uid,
+            background: currentLocation,
           },
         });
       }
@@ -88,6 +89,7 @@ export default function PaymentPage() {
       navigate('result', {
         state: {
           error: error_msg,
+          background: currentLocation,
         },
       });
     }

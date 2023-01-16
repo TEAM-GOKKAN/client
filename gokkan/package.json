@@ -24,7 +24,6 @@
     "jotai": "^1.11.0",
     "jotai-tanstack-query": "^0.4.0",
     "jquery": "^3.6.1",
-    "localtunnel": "^2.0.2",
     "prettier": "^2.8.0",
     "query-string": "^7.1.3",
     "react": "^18.2.0",
