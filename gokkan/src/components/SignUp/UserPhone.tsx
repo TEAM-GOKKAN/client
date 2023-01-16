@@ -9,13 +9,23 @@ const PhoneWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 36px;
+  .phone-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
+    margin-bottom: 10px;
+  }
   .button-wrapper {
+    display: flex;
+    align-items: center;
     input {
       width: calc(100% - 86px);
-      background-color: #f4f2f1;
       padding: 10px 12px;
-      margin-top: 10px;
-      border: none;
+      border: 1px solid var(--color-brown100);
+      font-size: 15px;
+      line-height: 21px;
+      letter-spacing: normal;
     }
     button {
       width: 76px;
@@ -113,7 +123,7 @@ const UserPhone = () => {
 
   return (
     <PhoneWrapper>
-      <div>휴대폰</div>
+      <div className="phone-title">휴대전화</div>
       <div className="button-wrapper">
         <input
           type="text"

@@ -31,7 +31,7 @@ const getElapsedTime = (targetTime: string, type?: string) => {
       : Number(currTime) - Number(bidCloseTime);
 
   if (diff < 0) {
-    return type === '남은시간' ? '0초 후 마감' : '0초 전';
+    return type === '남은시간' ? '마감' : '0초 전';
   } else if (diff < 1000 * 60) {
     const diffSec = Math.floor((diff / 1000) % 60);
     return type === '남은시간' ? `${diffSec}초 후 마감` : `${diffSec}초 전`;

@@ -4,9 +4,13 @@ import { useAtom } from 'jotai';
 import styled from 'styled-components';
 
 const ProductStyleWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   .title {
     margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
   }
   ul {
     width: 100%;
@@ -19,12 +23,14 @@ const ProductStyleWrapper = styled.div`
     padding-left: 12px;
     padding-right: 12px;
     padding-bottom: 10px;
-    font: poppins;
+    font-family: 'Poppins';
+    letter-spacing: normal;
     font-weight: 400;
     font-size: 15px;
+    line-height: 22.5px;
     color: var(--color-brown200);
     border: 1px solid var(--color-brown200);
-    margin: 10px;
+    margin: 5px;
     &[data-active='true'] {
       color: var(--color-brown500);
       border: 1px solid var(--color-brown500);

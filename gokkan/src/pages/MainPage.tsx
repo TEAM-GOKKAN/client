@@ -10,11 +10,12 @@ const MainWrapper = styled.div`
   flex-direction: column;
   .banner {
     width: calc(100% + 32px);
-    height: 25vh;
-    background-color: var(--color-brown200);
+    height: 27vh;
+    background-color: var(--color-brown100);
     margin-bottom: 48px;
     margin-left: -16px;
     margin-right: -16px;
+    margin-top: -32px;
   }
 `;
 

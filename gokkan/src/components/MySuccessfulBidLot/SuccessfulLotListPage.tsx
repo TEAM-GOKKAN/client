@@ -3,41 +3,15 @@ import styled from 'styled-components';
 import customAxios from '../../utils/customAxios';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
-import LoadingIndicator from './LoadingIndicator';
-import ProductList from './ProductList';
+import LoadingIndicator from '../common/LoadingIndicator';
+import SuccessfullLotList from './SuccessfulLotList';
 
-const ProductListPageWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  .title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 24px;
-    line-height: 23px;
-    letter-spacing: -4%;
-  }
-`;
-
-const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ProductListPage = ({
-  url,
-  queryKey,
-  title,
-  targetElementUrl,
-}: ProductListPagePropType) => {
-  const [productList, setProductList] = useState<ProductInfoType[]>([]);
-  const [productListCount, setProductListCount] = useState(0);
+const SuccessfulLotListPage = ({ url, queryKey, title }: PropType) => {
+  const [lotDisplayList, setLotDisplayList] = useState<LotInfoType[]>([]);
+  const [lotDisplayCount, setLotDisplayCount] = useState(0);
   const [loadingRef, inView] = useInView();
 
-  const getProductList = ({ pageParam = 0 }) => {
+  const getLotList = ({ pageParam = 0 }) => {
     return customAxios.get(`${url}size=6&page=${pageParam}`);
   };
 
@@ -52,7 +26,7 @@ const ProductListPage = ({
     refetch,
   } = useInfiniteQuery({
     queryKey: [queryKey],
-    queryFn: getProductList,
+    queryFn: getLotList,
     getNextPageParam: (lastPage, pages) => {
       if (!lastPage.data.last) {
         return lastPage.data.number + 1;
@@ -62,9 +36,9 @@ const ProductListPage = ({
 
   useEffect(() => {
     if (!isFetching && status === 'success') {
-      setProductListCount(data.pages[0].data.totalElements);
-      setProductList((pre) => {
-        let targetList: ProductInfoType[] = [];
+      setLotDisplayCount(data.pages[0].data.totalElements);
+      setLotDisplayList((pre) => {
+        let targetList: LotInfoType[] = [];
         data.pages.forEach((page) => {
           targetList = [...targetList, ...page.data.content];
         });
@@ -83,42 +57,58 @@ const ProductListPage = ({
   // 페이지가 로드될 때마다 refetch해 줌
   useEffect(() => {
     // 초기화
-    setProductList([]);
+    setLotDisplayList([]);
     refetch();
   }, []);
 
   return (
-    <ProductListPageWrapper>
+    <Container>
       <div className="title">{title}</div>
-      <ProductList
-        productList={productList}
-        productListNumber={productListCount}
-        targetUrl={targetElementUrl}
+      <SuccessfullLotList
+        lotList={lotDisplayList}
+        lotListCount={lotDisplayCount}
       />
       {hasNextPage === true && (
         <LoadingWrapper ref={loadingRef}>
           <LoadingIndicator />
         </LoadingWrapper>
       )}
-    </ProductListPageWrapper>
+    </Container>
   );
 };
 
-type ProductInfoType = {
-  id: string;
+export default SuccessfulLotListPage;
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+`;
+const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+type LotInfoType = {
+  id: number;
+  itemId: number;
   name: string;
   thumbnail: string;
+  currentPrice: number;
   writer: string;
-  created: string;
-  updated: string;
-  startPrice: number;
+  auctionState: string;
+  auctionEndDateTime: string;
 };
 
-type ProductListPagePropType = {
+type PropType = {
   url: string;
   queryKey: string;
   title: string;
-  targetElementUrl: string;
 };
-
-export default ProductListPage;

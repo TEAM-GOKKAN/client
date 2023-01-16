@@ -4,7 +4,7 @@ import { productBrandAtom } from '../../../store/registerAtom';
 import CustomProductUnknownInput from '../../common/CustomProductUnknownInput';
 
 const ProductBrandWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 42px;
 `;
 
 const ProductBrand = () => {

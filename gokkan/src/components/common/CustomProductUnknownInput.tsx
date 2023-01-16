@@ -7,12 +7,21 @@ const CustomUnknownInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   .title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
     margin-bottom: 10px;
   }
   input {
     width: 100%;
     padding: 10px 12px;
-    margin-top: 10px;
+    background-color: none;
+    border: 1px solid var(--color-brown100);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22.5px;
+    font-family: 'Noto Sans KR';
   }
 `;
 

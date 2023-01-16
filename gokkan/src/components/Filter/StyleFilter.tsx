@@ -64,6 +64,8 @@ const Container = styled.div`
     font-weight: 700;
     font-size: 16px;
     margin-bottom: 16px;
+    line-height: 23px;
+    letter-spacing: -4%;
   }
   li {
     width: 100%;

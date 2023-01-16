@@ -5,22 +5,36 @@ import styled from 'styled-components';
 
 const StartPriceWrapper = styled.div`
   .title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
     margin-bottom: 10px;
   }
   .price-holder {
     display: flex;
     align-items: center;
+    position: relative;
     input {
       text-align: right;
+      height: 42px;
       width: 100%;
-      border: none;
+      padding: 10px 12px;
+      padding-right: 30px;
+      background-color: none;
+      border: 1px solid var(--color-brown100);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 22.5px;
+      font-family: 'Poppins';
     }
     .scale {
       height: 42px;
       display: flex;
       align-items: center;
-      background-color: var(--color-brown100);
       color: var(--color-brown300);
+      position: absolute;
+      right: 10px;
     }
   }
   .warning {

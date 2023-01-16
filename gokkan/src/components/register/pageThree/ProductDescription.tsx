@@ -7,21 +7,34 @@ const DetailInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 90px;
   label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
     margin-bottom: 10px;
   }
   textarea {
-    border: 1px solid var(--color-brown200);
+    border: 1px solid var(--color-brown100);
     background: none;
     padding: 10px;
     height: 140px;
     resize: none;
   }
   .limit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    right: 3px;
+    bottom: -20px;
+    font-family: 'Poppins';
+    letter-spacing: normal;
+    .limit-unit {
+      color: var(--color-brown200);
+      margin-left: 3px;
+    }
   }
 `;
 
@@ -48,7 +61,9 @@ const ProductDescription = () => {
         onChange={handleDescriptionChange}
         value={description}
       />
-      <div className="limit">{description.length} / 1000</div>
+      <div className="limit">
+        {description.length} <p className="limit-unit">/ 1000</p>{' '}
+      </div>
     </DetailInfoWrapper>
   );
 };

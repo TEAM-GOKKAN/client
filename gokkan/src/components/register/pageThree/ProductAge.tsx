@@ -4,7 +4,7 @@ import CustomProductInput from '../../common/CustomProductInput';
 import { productAgeAtom } from '../../../store/registerAtom';
 
 const ProductAgeWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 `;
 
 const ProductAge = () => {

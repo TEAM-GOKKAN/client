@@ -4,7 +4,7 @@ import { productNameAtom } from '../../../store/registerAtom';
 import styled from 'styled-components';
 
 const ProductNameWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 42px;
 `;
 
 const ProductName = () => {

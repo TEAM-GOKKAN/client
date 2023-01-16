@@ -9,8 +9,12 @@ import {
 } from '../../../store/registerAtom';
 
 const ProductSizeWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   .title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
     margin-bottom: 10px;
   }
   .actual-size {
@@ -25,7 +29,11 @@ const ProductSizeWrapper = styled.div`
       padding: 10px;
       height: 42px;
       background: none;
-      border: 1px solid var(--color-brown200);
+      border: 1px solid var(--color-brown100);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 21.7px;
+      font-family: 'Poppins';
     }
   }
 `;

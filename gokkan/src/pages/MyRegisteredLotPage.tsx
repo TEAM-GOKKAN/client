@@ -1,15 +1,14 @@
 import React from 'react';
-import ProductListPage from '../components/common/ProductListPage';
+import LotListPage from '../components/common/LotListPage';
 
 const MyRegisteredProductPage = () => {
-  const url = 'api/v1/items/my-items?states=COMPLETE&';
+  const url = 'api/v1/auction/list/my?auctionStatus=경매중&';
 
   return (
-    <ProductListPage
+    <LotListPage
       url={url}
-      queryKey="myRegisteredProduct"
-      title="등록한 경매 목록"
-      targetElementUrl="/register/1"
+      queryKey="myRegisteredLot"
+      title="내가 올린 경매 목록"
     />
   );
 };

@@ -103,8 +103,7 @@ const GlobalStyle = createGlobalStyle`
   input {
     height: 42px;
     color: var(--color-brown500);
-    background: var(--color-brown100);
-    border: 0;
+    border: 1px solid var(--color-brown200);
     width: 100%;
     font-size: var(--font-small);
 
