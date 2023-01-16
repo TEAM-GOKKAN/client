@@ -1,21 +1,21 @@
 import { Client } from '@stomp/stompjs';
+import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import React, {
   ChangeEvent,
   Dispatch,
   MouseEvent,
   SetStateAction,
-  useCallback,
-  useRef,
+  useEffect,
   useState,
 } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useInput from '../../../lib/hooks/useInput';
+import { bidErrMsgAtom } from '../../../store/bidAtom';
 import { insertCommas, removeCommas } from '../../../utils/handleCommas';
 
 interface Iprops {
-  currentPrice: number | string;
+  currentPrice: number | string | undefined;
   onConfirmOpen: () => void;
   onSetBidPrice: (price: number) => void;
   onSetAutoBid: Dispatch<SetStateAction<boolean>>;
@@ -27,33 +27,52 @@ export default function BidSection({
   onSetBidPrice,
   onSetAutoBid,
 }: Iprops) {
-  const [minBidPrice, setMinBidPrice] = useState<number>(
-    Number(currentPrice) + 10000
+  const [recommendedBidPrices, setRecommendedBidPrices] = useState<number[]>(
+    []
   );
-  const [inputErrMsg, setInputErrMsg] = useState('');
+
+  const [bidErrMsg, setBidErrMsg] = useAtom(bidErrMsgAtom);
 
   const [value, , setValue] = useInput<string>('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setBidErrMsg('');
+
     const inputPriceWithCommas = insertCommas(removeCommas(e.target.value));
     setValue(inputPriceWithCommas);
   };
 
   // 모달 띄우기
-  const openConfirmModal = () => {
-    const bidPriceWithoutCommas = Number(removeCommas(value));
+  const openConfirmModal = (price: string) => {
+    setBidErrMsg('');
+
+    // 토큰이 없을 경우 에러 메세지
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setBidErrMsg(`로그인 후 응찰해주세요.`);
+      return;
+    }
+
+    // 응찰가가 현재가보다 낮을 경우 에러 메세지
+    if (Number(removeCommas(price)) < recommendedBidPrices[0]) {
+      const minBidPriceWithCommas = insertCommas(recommendedBidPrices[0]);
+      setBidErrMsg(`${minBidPriceWithCommas}원 이상부터 응찰 가능합니다.`);
+      return;
+    }
+
+    const bidPriceWithoutCommas = Number(removeCommas(price));
     onSetBidPrice(bidPriceWithoutCommas);
     onConfirmOpen();
   };
 
   const handleClickBidButton = () => {
     onSetAutoBid(false);
-    openConfirmModal();
+    openConfirmModal(value);
   };
 
   const handleClickAutoBidButton = () => {
     onSetAutoBid(true);
-    openConfirmModal();
+    openConfirmModal(value);
   };
 
   // 추천 응찰가 클릭
@@ -63,29 +82,38 @@ export default function BidSection({
     if (e.target instanceof HTMLButtonElement && e.target.textContent) {
       onSetAutoBid(false);
 
-      console.log(e.target.textContent);
-
       const bidPrice = e.target.textContent.slice(0, -1);
-      console.log(bidPrice);
-
-      const bidPriceWithCommas = Number(removeCommas(bidPrice));
-      onSetBidPrice(bidPriceWithCommas);
-      onConfirmOpen();
+      openConfirmModal(bidPrice);
     }
   };
+
+  useEffect(() => {
+    setBidErrMsg('');
+  }, []);
+
+  useEffect(() => {
+    if (!currentPrice) return;
+
+    const minBidPrice = Number(currentPrice) + 10000;
+    setRecommendedBidPrices([
+      minBidPrice,
+      minBidPrice + 10000,
+      minBidPrice + 20000,
+    ]);
+  }, [currentPrice]);
 
   return (
     <Container>
       <PriceButtonsContainer>
-        <button type="button" onClick={handleClickRecommendedBidButton}>
-          {insertCommas(minBidPrice) + '원'}
-        </button>
-        <button type="button" onClick={handleClickRecommendedBidButton}>
-          {insertCommas(minBidPrice + 10000) + '원'}
-        </button>
-        <button type="button" onClick={handleClickRecommendedBidButton}>
-          {insertCommas(minBidPrice + 20000) + '원'}
-        </button>
+        {recommendedBidPrices.map((price) => (
+          <button
+            type="button"
+            key={price}
+            onClick={handleClickRecommendedBidButton}
+          >
+            {insertCommas(price) + '원'}
+          </button>
+        ))}
       </PriceButtonsContainer>
       <PriceInputContainer>
         <input
@@ -93,7 +121,7 @@ export default function BidSection({
           value={value}
           onChange={handleInputChange}
         />
-        {inputErrMsg && <div>{inputErrMsg}</div>}
+        {bidErrMsg && <div>{bidErrMsg}</div>}
       </PriceInputContainer>
       <BidButtonsContainer>
         <BidOnceButton type="button" onClick={handleClickBidButton}>
