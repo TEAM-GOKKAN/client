@@ -12,7 +12,7 @@ const SuccessfulLotListElement = ({ lotInfo }: PropType) => {
 
   const handlePaymentClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    console.log('결제버튼 클릭');
+    navigate(`/payment/${lotInfo.itemId}/${lotInfo.id}`);
   };
 
   return (
@@ -96,6 +96,7 @@ const Container = styled.div`
     font-weight: 400;
     line-height: 12px;
     letter-spacing: -4%;
+    margin-top: 10px;
   }
 `;
 

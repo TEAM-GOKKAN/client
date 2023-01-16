@@ -49,6 +49,7 @@ interface MainListElementPropType {
 const Container = styled.div`
   min-width: 60vw;
   height: 45vh;
+  min-height: 350px;
   margin-right: 14px;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ModalFull from '../components/common/ModalFull';
 import PayBox from '../components/Payment/PayBox';
 import PaymentAmount from '../components/Payment/PaymentAmount';
@@ -22,6 +22,7 @@ import {
   productInfoAtom,
 } from '../store/paymentAtom';
 import customAxios from '../utils/customAxios';
+import { lotIdAtom } from '../store/lotDetailAtom';
 
 declare global {
   interface Window {
@@ -31,12 +32,14 @@ declare global {
 
 export default function PaymentPage() {
   const navigate = useNavigate();
+  const params = useParams();
 
   const shippingAddress = useAtomValue(addressAtom);
   const productInfo = useAtomValue(productInfoAtom);
   const paymentAmount = useAtomValue(paymentAmountAtom);
   const iamportData = useAtomValue(iamportDataAtom);
-  const auctionId = useAtomValue(auctionIdAtom);
+  const [auctionId, setAuctionId] = useAtom(auctionIdAtom);
+  const [itemId, setItemId] = useAtom(lotIdAtom);
   const [pg, setPg] = useAtom(pgAtom);
   const setNewAddress = useUpdateAtom(newAddressAtom);
   const setNewName = useUpdateAtom(newNameAtom);
@@ -108,6 +111,13 @@ export default function PaymentPage() {
   const selectPaymentMethod = (method: string) => {
     setPg(method);
   };
+
+  useEffect(() => {
+    if (params.auctionId && params.itemId) {
+      setAuctionId(Number(params.auctionId));
+      setItemId(Number(params.itemId));
+    }
+  }, []);
 
   useEffect(() => {
     console.log(iamportData);

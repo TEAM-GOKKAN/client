@@ -101,7 +101,9 @@ const iamportDataAtom = atom((get) => {
     buyer_addr: get(newAddressDetailAtom)
       ? `${get(newAddressAtom)} ${get(newAddressDetailAtom)}`
       : `${address} ${addressDetail}`,
-    m_redirect_url: 'http://gokkan.loca.lt/payment/result',
+    m_redirect_url: `http://gokkan.loca.lt/payment/${get(lotIdAtom)}/${get(
+      auctionIdAtom
+    )}/result`,
   };
 });
 

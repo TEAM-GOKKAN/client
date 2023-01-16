@@ -10,7 +10,7 @@ const MyFinishedBidLot = () => {
   };
 
   return (
-    <Container onClick={handleFinishedBidLotClick}>결재 완료된 경매</Container>
+    <Container onClick={handleFinishedBidLotClick}>결제완료된 경매</Container>
   );
 };
 

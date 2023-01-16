@@ -8,7 +8,7 @@ const MyFinishedBidLotPage = () => {
     <LotListPage
       url={url}
       queryKey="myFinishedBidLot"
-      title="결재 완료된 경매 목록"
+      title="결제완료된 경매 목록"
     />
   );
 };
