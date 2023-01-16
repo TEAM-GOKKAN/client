@@ -124,7 +124,7 @@ export default function LotDetailPage() {
         lotNumber={lotDetail.itemNumber}
         lotImageUrls={lotDetail.imageItemUrls}
       />
-      <Favorite />
+      {/* <Favorite /> */}
       <ExpertValuation data={expertValuation} />
       <InfoDetail
         brand={lotDetail.brand}
