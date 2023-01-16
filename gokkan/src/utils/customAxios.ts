@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 
 const url = 'http://3.38.59.40:8080/';
-const localAccessToken = localStorage.getItem('accessToken');
-const localRefreshToken = localStorage.getItem('refreshToken');
+let localAccessToken = localStorage.getItem('accessToken');
+let localRefreshToken = localStorage.getItem('refreshToken');
 const customAxios: AxiosInstance = axios.create({
   baseURL: `${url}`,
 });
@@ -44,9 +44,10 @@ customAxios.interceptors.response.use(
               },
             }
           );
+          // accessToken 갱신
           const accessToken = rs.data;
           localStorage.setItem('accessToken', accessToken);
-
+          localAccessToken = accessToken;
           originalConfig.headers.Authorization = 'Bearer ' + accessToken;
           return customAxios(originalConfig);
         } catch (_error) {
