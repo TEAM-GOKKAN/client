@@ -22,11 +22,12 @@ const useStomp = (
           }
         ),
       brokerURL: 'ws://3.38.59.40:8080/gokkan',
-      reconnectDelay: 2000000,
-      heartbeatIncoming: 1600000,
-      heartbeatOutgoing: 1600000,
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
       onConnect: () => {
         console.log('0 stomp onConnect: ');
+
         subscriptionList?.forEach((subs) => {
           client.current?.subscribe(subs.destination, subs.callback);
         });

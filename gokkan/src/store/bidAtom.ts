@@ -14,9 +14,9 @@ interface BidInfo {
   bidTime: string;
 }
 
-const auctionIdAtom = atom(1);
+const auctionIdAtom = atom(0);
 
-const [auctionInfoAtom] = atomsWithQuery((get) => ({
+const [, auctionInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidInfo', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<AuctionInfo> => {
     const { data } = await customAxios.get('/api/v1/auction', {
@@ -29,7 +29,7 @@ const [auctionInfoAtom] = atomsWithQuery((get) => ({
   },
 }));
 
-const [bidHistoryAtom] = atomsWithQuery((get) => ({
+const [, bidHistoryAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidHistory', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<BidInfo[] | null[]> => {
     const { data } = await customAxios.get('/api/v1/auction/history', {
@@ -46,29 +46,17 @@ const StompClientAtom = atom<React.MutableRefObject<Client | undefined> | null>(
   null
 );
 
-// const bidCloseTimeAtom = atom((get) => {
-//   const { auctionEndDateTime } = get(auctionInfoAtom);
-//   return auctionEndDateTime;
-// });
-
-const currBidPriceAtom = atom<number | string>(0);
-
-const currBidHistoryAtom = atom<BidInfo[] | null[]>([]);
-
-const bidCloseTimeAtom = atom('');
-
 const bidErrMsgAtom = atom('');
 
 const addedBidTimeAtom = atom('');
+const isTimeAddedAtom = atom(false);
 
 export {
   auctionIdAtom,
   auctionInfoAtom,
   bidHistoryAtom,
   StompClientAtom,
-  currBidPriceAtom,
-  bidCloseTimeAtom,
   bidErrMsgAtom,
   addedBidTimeAtom,
-  currBidHistoryAtom,
+  isTimeAddedAtom,
 };
