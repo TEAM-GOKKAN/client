@@ -31,7 +31,7 @@ export default function InfoMain(props: Iprops) {
 }
 
 const Container = styled.div`
-  margin-bottom: 18px;
+  margin-bottom: 42px;
 `;
 
 const ProductName = styled.h1`

@@ -34,7 +34,7 @@ export default function SellerInfo({ data }: Iprops) {
 }
 
 const Container = styled.div`
-  margin-bottom: 42px;
+  margin-bottom: 142px;
 
   &::after {
     content: '';
