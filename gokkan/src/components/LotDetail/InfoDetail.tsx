@@ -26,11 +26,11 @@ export default function InfoDetail(props: Iprops) {
     <Container>
       <Row>
         <InfoTitle>Brand</InfoTitle>
-        <InfoContent>{brand}</InfoContent>
+        <InfoContent>{brand || 'unknown'}</InfoContent>
       </Row>
       <Row>
         <InfoTitle>Designer</InfoTitle>
-        <InfoContent>{designer}</InfoContent>
+        <InfoContent>{brand || 'unknown'}</InfoContent>
       </Row>
       <Row>
         <InfoTitle>Material</InfoTitle>
