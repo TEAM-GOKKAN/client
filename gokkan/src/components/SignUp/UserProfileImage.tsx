@@ -5,6 +5,12 @@ const ProfileImgWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   margin-bottom: 100px;
+  .profile-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
+  }
   img {
     margin-top: 10px;
     width: 100%;
@@ -39,7 +45,7 @@ const UserProfileImage = ({ info }: InfoProps) => {
     info;
   return (
     <ProfileImgWrapper>
-      <div>프로필 사진</div>
+      <div className="profile-title">프로필 사진</div>
       <img
         alt="유저 프로필 이미지"
         src={imgUrl}

@@ -20,6 +20,7 @@ const RegisterWrapper = styled.div`
     display: flex;
     flex-direction: row;
     margin-bottom: 32px;
+    align-items: center;
     button {
       width: 60px;
       height: 60px;
@@ -31,9 +32,14 @@ const RegisterWrapper = styled.div`
       justify-content: center;
       font-size: 16px;
       font-weight: 500;
+      line-height: 23px;
+      letter-spacing: -4%;
     }
     .save {
       color: var(--color-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

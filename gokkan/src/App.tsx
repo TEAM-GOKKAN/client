@@ -10,11 +10,9 @@ const BidModal = lazy(() => import('./components/LotDetail/Bid/BidModal'));
 const AuctionRegisterPage = lazy(() => import('./pages/AuctionRegisterPage'));
 const ExpertWorkDetailPage = lazy(() => import('./pages/ExpertWorkDetailPage'));
 const ExpertWorkListPage = lazy(() => import('./pages/ExpertWorkListPage'));
-const SettingPage = lazy(() => import('./pages/SettingPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const TestPage = lazy(() => import('./pages/Testpage'));
-const UserVerifyPage = lazy(() => import('./pages/UserVerifyPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
@@ -24,6 +22,13 @@ const ExaminePage = lazy(() => import('./pages/ExaminePage'));
 const CategoryModalPage = lazy(() => import('./pages/CategoryModalPage'));
 const CategorySearchPage = lazy(() => import('./pages/CategorySearchPage'));
 const FilterPage = lazy(() => import('./pages/FilterPage'));
+const MyRegisteredLotPage = lazy(() => import('./pages/MyRegisteredLotPage'));
+const MyReturnedLotPage = lazy(() => import('./pages/MyReturnedLotPage'));
+const MyBidLotPage = lazy(() => import('./pages/MyBidLotPage'));
+const MySuccesfulBidLotPage = lazy(
+  () => import('./pages/MySuccessfulBidLotPage')
+);
+const MyFinishedBidLotPage = lazy(() => import('./pages/MyFinishedBidLotPage'));
 
 function App() {
   const location = useLocation();
@@ -42,6 +47,14 @@ function App() {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signInCheck" element={<SignInSusPense />} />
           <Route path="myWritingProduct" element={<MyWritingProductPage />} />
+          <Route path="myRegisteredLot" element={<MyRegisteredLotPage />} />
+          <Route path="myReturnedLot" element={<MyReturnedLotPage />} />
+          <Route path="myBidLot" element={<MyBidLotPage />} />
+          <Route
+            path="mySuccessfulBidLot"
+            element={<MySuccesfulBidLotPage />}
+          />
+          <Route path="myFinishedBidLot" element={<MyFinishedBidLotPage />} />
           <Route path="expertWorkList" element={<ExpertWorkListPage />} />
           <Route
             path="categorySearch/:category"
@@ -51,7 +64,7 @@ function App() {
             path="expertWorkDetail/:itemId"
             element={<ExpertWorkDetailPage />}
           />
-          <Route path="payment" element={<PaymentPage />} />
+          <Route path="payment/:auctionId" element={<PaymentPage />} />
           <Route path="payment/result" element={<PaymentResultPage />} />
         </Route>
         <Route

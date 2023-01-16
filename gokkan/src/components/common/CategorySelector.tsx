@@ -27,13 +27,13 @@ const CategorySelector = ({
           border: `1px solid var(--color-brown100)`,
           height: '42px',
           boxShadow: 'none',
+          fontWeight: '400',
         }),
         container: (baseStyles, state) => ({
           ...baseStyles,
           height: '42px',
           padding: '0',
           marginBottom: '10px',
-          border: `1px solid var(--color-brown100)`,
         }),
         valueContainer: (baseStyles, state) => ({
           ...baseStyles,

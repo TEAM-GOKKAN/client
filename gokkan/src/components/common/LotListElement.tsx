@@ -1,27 +1,24 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { insertCommas } from '../../utils/handleCommas';
 import { getElapsedTime } from '../../utils/getDiffTime';
-import { useNavigate } from 'react-router-dom';
 
-const MainListElement = ({ lotInfo }: MainListElementPropType) => {
+const LotListElement = ({ lotInfo }: PropType) => {
   const navigate = useNavigate();
 
-  const handleAuctionItemClick = () => {
+  const handleElementClick = () => {
     navigate(`/auction/${lotInfo.itemId}/${lotInfo.id}`);
   };
 
   return (
-    <Container onClick={handleAuctionItemClick}>
+    <Container onClick={handleElementClick}>
       <img src={lotInfo.thumbnail} />
-      <div className="lot-name">{lotInfo.name}</div>
+      <div className="lot-title">{lotInfo.name}</div>
       <div className="price">
         <p className="price-title">현재가</p>
         <div className="price-content">
-          <span className="price-value">
-            {insertCommas(lotInfo.currentPrice)}
-          </span>
-          <span className="unit">원</span>
+          {insertCommas(lotInfo.currentPrice)}
+          <p className="unit">원</p>
         </div>
       </div>
       <div className="end-time">
@@ -31,35 +28,21 @@ const MainListElement = ({ lotInfo }: MainListElementPropType) => {
   );
 };
 
-export default MainListElement;
-
-interface MainListElementPropType {
-  lotInfo: {
-    id: number;
-    itemId: number;
-    name: string;
-    thumbnail: string;
-    currentPrice: number;
-    writer: string;
-    auctionState: string;
-    auctionEndDateTime: string;
-  };
-}
+export default LotListElement;
 
 const Container = styled.div`
-  min-width: 60vw;
-  height: 45vh;
-  margin-right: 14px;
   display: flex;
   flex-direction: column;
+  width: calc((100vw - 60px) / 2);
+  margin-bottom: 48px;
   img {
-    height: 70%;
-    width: 100%;
-    margin-bottom: 10px;
     object-fit: cover;
+    height: 227px;
+    width: 100%;
+    margin-bottom: 8px;
   }
-  .lot-name {
-    margin-bottom: 11px;
+  .lot-title {
+    margin-bottom: 16px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17.5px;
@@ -72,29 +55,40 @@ const Container = styled.div`
       font-size: 12px;
       line-height: 17px;
       letter-spacing: -4%;
+      color: var(--color-brown300);
     }
     .price-content {
       display: flex;
       flex-direction: row;
+      color: var(--color-brown500);
+      font-weight: 600;
+      line-height: 24px;
+      font-size: 16px;
       .unit {
+        margin-left: 4px;
         font-weight: 400;
         font-size: 14px;
-        line-height: 20px;
         letter-spacing: -4%;
-      }
-      .price-value {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        font-family: 'Poppins';
-        letter-spacing: normal;
       }
     }
   }
   .end-time {
-    margin-top: 3px;
+    margin-top: 12px;
     color: var(--color-brown300);
     font-weight: 400;
     font-size: 12px;
   }
 `;
+
+type PropType = {
+  lotInfo: {
+    id: number;
+    itemId: number;
+    name: string;
+    thumbnail: string;
+    currentPrice: number;
+    writer: string;
+    auctionState: string;
+    auctionEndDateTime: string;
+  };
+};

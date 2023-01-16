@@ -106,7 +106,8 @@ const GlobalStyle = createGlobalStyle`
   input {
     height: 42px;
     color: var(--color-brown500);
-    background: var(--color-brown100);
+    border: none;
+    background-color: var(--color-brown100);
 
     &::placeholder {
       color: var(--color-brown300);

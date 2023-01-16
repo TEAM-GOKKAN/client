@@ -9,6 +9,8 @@ const SpreadListContainer = styled.div`
   .title {
     font-size: 16px;
     font-weight: 700;
+    line-height: 23px;
+    letter-spacing: -4%;
     width: 100%;
     display: flex;
     justify-content: space-between;

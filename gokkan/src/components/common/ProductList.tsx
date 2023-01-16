@@ -8,6 +8,8 @@ const ProductListWrapper = styled.div`
     margin-bottom: 19px;
     font-size: 14px;
     font-weight: 500;
+    line-height: 14px;
+    letter-spacing: -4%;
   }
 `;
 

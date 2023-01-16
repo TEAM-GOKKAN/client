@@ -1,6 +1,7 @@
 import { atomsWithInfiniteQuery } from 'jotai-tanstack-query';
 import { atom } from 'jotai';
 import customAxios from '../utils/customAxios';
+import axios from 'axios';
 
 const categoryAtom = atom('');
 const stylesAtom = atom<string[]>([]);
@@ -41,11 +42,11 @@ const setStoredFilterInfoAtom = atom(null, (get, set, data: FilterInfoType) => {
 const [, endTimeAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ['auction', '마감임박순'],
   queryFn: async ({ queryKey: [name, sort], pageParam = 0 }) => {
-    let url = `api/v1/auction/filter-list?size=6&page=${pageParam}`;
+    let url = `http://3.38.59.40:8080/api/v1/auction/filter-list?size=6&page=${pageParam}`;
     // url에 sort 추가해줌
     url += `&sort=${sort}`;
     // 최종적으로 해당 url로 요청을 보냄
-    const page = await customAxios.get(url);
+    const page = await axios.get(url);
     return page;
   },
   // infinite queries can support paginated fetching
@@ -59,11 +60,11 @@ const [, endTimeAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
 const [, newEnrollAuctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
   queryKey: ['auction', '신규등록순'],
   queryFn: async ({ queryKey: [name, sort], pageParam = 0 }) => {
-    let url = `api/v1/auction/filter-list?size=6&page=${pageParam}`;
+    let url = `http://3.38.59.40:8080/api/v1/auction/filter-list?size=6&page=${pageParam}`;
     // url에 sort 추가해줌
     url += `&sort=${sort}`;
     // 최종적으로 해당 url로 요청을 보냄
-    const page = await customAxios.get(url);
+    const page = await axios.get(url);
     return page;
   },
   // infinite queries can support paginated fetching
@@ -88,7 +89,7 @@ const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
     queryKey: [name, category, styles, minPrice, maxPrice, sort],
     pageParam = 0,
   }) => {
-    let url = `api/v1/auction/filter-list?size=6&page=${pageParam}`;
+    let url = `http://3.38.59.40:8080/api/v1/auction/filter-list?size=6&page=${pageParam}`;
     // url에 sort 추가해줌
     url += `&sort=${sort}`;
     // category 있을 때 카테고리 추가해줌
@@ -114,7 +115,7 @@ const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
       url += `&styles=${existStyle}`;
     }
     // 최종적으로 해당 url로 요청을 보냄
-    const page = await customAxios.get(url);
+    const page = await axios.get(url);
     return page;
   },
   // infinite queries can support paginated fetching

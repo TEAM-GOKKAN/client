@@ -10,9 +10,13 @@ import CategorySelector from '../../../components/common/CategorySelector';
 const ProductCategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
+  margin-bottom: 42px;
   .title {
     margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
   }
 `;
 

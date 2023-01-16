@@ -8,6 +8,9 @@ const ListElementContainer = styled.div`
   flex-direction: column;
   width: calc((100vw - 60px) / 2);
   margin-bottom: 48px;
+  img {
+    object-fit: cover;
+  }
   img,
   .none-image {
     height: 227px;
@@ -16,8 +19,11 @@ const ListElementContainer = styled.div`
     border: 0.5px solid var(--color-brown200);
     background-color: var(--color-brown200);
   }
-  .title {
+  .element-title {
     margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17.5px;
     .untitled {
       color: var(--color-brown300);
     }
@@ -30,7 +36,13 @@ const ListElementContainer = styled.div`
       color: var(--color-brown500);
       font-size: 16px;
       font-weight: 600;
-      font-family: poppins;
+      font-family: 'Poppins';
+    }
+    .price-title {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 17px;
+      letter-spacing: -4%;
     }
     .price-content {
       margin-top: 4px;
@@ -67,7 +79,7 @@ const ProductListElement = ({
       ) : (
         <div className="none-image" />
       )}
-      <div className="title">
+      <div className="element-title">
         {productInfo.name === '' ? (
           <p className="untitled">Untitled</p>
         ) : (

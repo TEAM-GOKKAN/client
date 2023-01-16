@@ -4,7 +4,7 @@ import CustomProductInput from '../../common/CustomProductInput';
 import { productMaterialAtom } from '../../../store/registerAtom';
 
 const ProductMaterialWrapper = styled.div`
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 `;
 
 const ProductMaterial = () => {

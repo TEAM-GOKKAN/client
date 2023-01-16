@@ -18,6 +18,10 @@ const RegisterPageOneWrapper = styled.div`
   position: relative;
   .section-title {
     margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
   }
   .product-picture {
     margin-bottom: 42px;

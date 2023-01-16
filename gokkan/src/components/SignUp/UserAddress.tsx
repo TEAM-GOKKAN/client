@@ -8,6 +8,12 @@ const AddressWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 36px;
+  .address-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
+  }
   .address-find {
     width: 100%;
     margin: 10px 0px;
@@ -16,16 +22,12 @@ const AddressWrapper = styled.div`
     .address {
       width: calc(100% - 84px);
       height: 42px;
-      background-color: var(--color-brown100);
+      border: 1px solid var(--color-brown100);
       padding: 10px 12px;
-      font-family: 'Noto Sans KR';
-      font-style: normal;
       font-weight: 400;
       font-size: 15px;
       line-height: 22px;
-      /* identical to box height */
-
-      letter-spacing: -0.04em;
+      letter-spacing: -4%;
     }
     button {
       width: 80px;
@@ -36,8 +38,13 @@ const AddressWrapper = styled.div`
     }
   }
   input {
-    border: none;
+    width: 100%;
     padding: 10px 12px;
+    border: 1px solid var(--color-brown100);
+    font-size: 15px;
+    line-height: 21px;
+    letter-spacing: -4%;
+    font-weight: 400;
   }
 `;
 
@@ -89,7 +96,7 @@ const UserAddress = () => {
 
   return (
     <AddressWrapper>
-      <div>주소</div>
+      <div className="address-title">주소</div>
       <div className="address-find">
         <div className="address">{address}</div>
         <button onClick={handleAddressButtonClick}>주소 검색</button>

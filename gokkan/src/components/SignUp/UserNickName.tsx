@@ -11,12 +11,20 @@ const NickNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 36px;
+  .nickname-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -4%;
+  }
   input {
     width: 100%;
-    background-color: #f4f2f1;
     padding: 10px 12px;
     margin-top: 10px;
-    border: none;
+    border: 1px solid var(--color-brown100);
+    font-size: 15px;
+    line-height: 21px;
+    letter-spacing: -4%;
   }
   .available {
     font-size: 12px;
@@ -62,7 +70,7 @@ const UserNickName = () => {
 
   return (
     <NickNameWrapper>
-      <div>닉네임</div>
+      <div className="nickname-title">닉네임</div>
       <input
         type="text"
         placeholder="닉네임을 지어주세요"

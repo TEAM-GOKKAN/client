@@ -18,9 +18,13 @@ const SwiperWrapper = styled.div`
   position: relative;
   .image-count-holder {
     width: 26px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    font-family: 'Poppins';
     justify-content: space-between;
     position: absolute;
-    bottom: -18px;
+    bottom: -20px;
     right: 0;
     display: flex;
     color: var(--color-brown200);
