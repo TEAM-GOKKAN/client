@@ -3,6 +3,7 @@ import { useUpdateAtom } from 'jotai/utils';
 import React, {
   ChangeEvent,
   Dispatch,
+  MouseEvent,
   SetStateAction,
   useCallback,
   useRef,
@@ -40,8 +41,8 @@ export default function BidSection({
 
   // 모달 띄우기
   const openConfirmModal = () => {
-    const bidPriceWithCommas = Number(removeCommas(value));
-    onSetBidPrice(bidPriceWithCommas);
+    const bidPriceWithoutCommas = Number(removeCommas(value));
+    onSetBidPrice(bidPriceWithoutCommas);
     onConfirmOpen();
   };
 
@@ -55,20 +56,35 @@ export default function BidSection({
     openConfirmModal();
   };
 
+  // 추천 응찰가 클릭
+  const handleClickRecommendedBidButton = (
+    e: MouseEvent<HTMLButtonElement>
+  ) => {
+    if (e.target instanceof HTMLButtonElement && e.target.textContent) {
+      onSetAutoBid(false);
+
+      console.log(e.target.textContent);
+
+      const bidPrice = e.target.textContent.slice(0, -1);
+      console.log(bidPrice);
+
+      const bidPriceWithCommas = Number(removeCommas(bidPrice));
+      onSetBidPrice(bidPriceWithCommas);
+      onConfirmOpen();
+    }
+  };
+
   return (
     <Container>
       <PriceButtonsContainer>
-        <button type="submit">
-          <span>{insertCommas(minBidPrice)}</span>
-          <span>원</span>
+        <button type="button" onClick={handleClickRecommendedBidButton}>
+          {insertCommas(minBidPrice) + '원'}
         </button>
-        <button type="submit">
-          <span>{insertCommas(minBidPrice + 10000)}</span>
-          <span>원</span>
+        <button type="button" onClick={handleClickRecommendedBidButton}>
+          {insertCommas(minBidPrice + 10000) + '원'}
         </button>
-        <button type="submit">
-          <span>{insertCommas(minBidPrice + 20000)}</span>
-          <span>원</span>
+        <button type="button" onClick={handleClickRecommendedBidButton}>
+          {insertCommas(minBidPrice + 20000) + '원'}
         </button>
       </PriceButtonsContainer>
       <PriceInputContainer>
