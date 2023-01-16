@@ -79,7 +79,12 @@ const [paymentAmountAtom] = atomsWithQuery((get) => ({
 
 const pgAtom = atom('');
 const payMethodAtom = atom('card');
-
+const mRedirectUrlAtom = atom(
+  (get) =>
+    `http://gokkan.loca.lt/payment/${get(lotIdAtom)}/${get(
+      auctionIdAtom
+    )}/result`
+);
 const newAddressAtom = atom('');
 const newAddressDetailAtom = atom('');
 const newNameAtom = atom('');
@@ -101,7 +106,8 @@ const iamportDataAtom = atom((get) => {
     buyer_addr: get(newAddressDetailAtom)
       ? `${get(newAddressAtom)} ${get(newAddressDetailAtom)}`
       : `${address} ${addressDetail}`,
-    m_redirect_url: 'http://gokkan.loca.lt/payment/result',
+    // m_redirect_url: `http://gokkan.loca.lt/payment/result`,
+    m_redirect_url: get(mRedirectUrlAtom),
   };
 });
 

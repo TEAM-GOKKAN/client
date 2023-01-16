@@ -53,7 +53,7 @@ const Container = styled.li`
   display: flex;
   flex-direction: column;
   img {
-    height: 70%;
+    min-height: 70%;
     width: 100%;
     margin-bottom: 12px;
     object-fit: cover;
