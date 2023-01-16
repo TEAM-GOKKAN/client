@@ -21,13 +21,14 @@ export default function BidConfirmModal({
   onConfirmClose,
 }: Iprops) {
   const client = useAtomValue(StompClientAtom);
+
   const auctionId = useAtomValue(auctionIdAtom);
   const destination = isAutoBid
     ? `/auction/auto/${auctionId}`
     : `/auction/${auctionId}`;
   const accessToken = localStorage.getItem('accessToken');
 
-  const bidErrMsg = useAtom(bidErrMsgAtom);
+  const bidErrMsg = useAtomValue(bidErrMsgAtom);
 
   const handlePlaceBid = useCallback(async () => {
     client?.current?.publish({

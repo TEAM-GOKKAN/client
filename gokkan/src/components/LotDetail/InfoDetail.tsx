@@ -26,11 +26,11 @@ export default function InfoDetail(props: Iprops) {
     <Container>
       <Row>
         <InfoTitle>Brand</InfoTitle>
-        <InfoContent>{brand}</InfoContent>
+        <InfoContent>{brand || 'unknown'}</InfoContent>
       </Row>
       <Row>
         <InfoTitle>Designer</InfoTitle>
-        <InfoContent>{designer}</InfoContent>
+        <InfoContent>{brand || 'unknown'}</InfoContent>
       </Row>
       <Row>
         <InfoTitle>Material</InfoTitle>
@@ -70,18 +70,26 @@ const Container = styled.ul`
 
 const Row = styled.li`
   display: flex;
-  align-items: center;
-  margin-bottom: 22px;
-  position: relative;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  /* position: relative; */
+  width: 100%;
+  /* background: blue; */
 `;
 
 const InfoTitle = styled.span`
   color: var(--color-brown300);
   font-size: var(--font-micro);
   letter-spacing: normal;
+  width: calc(50% - 8px);
+  line-height: calc(var(--font-regular) * 1.4);
 `;
 
 const InfoContent = styled.span`
-  position: absolute;
-  left: calc(50% + 8px);
+  /* position: absolute; */
+  /* left: calc(50% + 8px); */
+  width: calc(50% - 8px);
+  white-space: pre-line;
+  line-height: calc(var(--font-regular) * 1.4);
 `;

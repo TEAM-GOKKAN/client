@@ -5,7 +5,7 @@ import { convertDateFormat } from '../../../utils/convertDateFormat';
 interface Iprops {
   lotName: string;
   thumbnail: string | undefined;
-  currentPrice: number | string;
+  currentPrice: number | string | undefined;
   closeTime: string;
 }
 

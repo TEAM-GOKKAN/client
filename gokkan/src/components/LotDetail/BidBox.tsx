@@ -7,6 +7,7 @@ import { insertCommas } from '../../utils/handleCommas';
 interface Iprops {
   closeTime: string;
   currentPrice: number | string;
+  isTimeAdded: boolean;
 }
 
 export default function BidBox({ closeTime, currentPrice }: Iprops) {

@@ -1,12 +1,10 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import React, { useCallback, useEffect, useState } from 'react';
 import { lotDetailAtom } from '../../../store/lotDetailAtom';
 import {
   auctionInfoAtom,
-  bidCloseTimeAtom,
   bidHistoryAtom,
-  currBidHistoryAtom,
-  currBidPriceAtom,
+  isTimeAddedAtom,
 } from '../../../store/bidAtom';
 import { insertCommas } from '../../../utils/handleCommas';
 import ModalFull from '../../common/ModalFull';
@@ -18,13 +16,10 @@ import BidHistory from '../BidHistory';
 
 export default function BidModal() {
   const { name, thumbnail } = useAtomValue(lotDetailAtom);
-
-  const { currentPrice, auctionEndDateTime } = useAtomValue(auctionInfoAtom);
-  const bidHistory = useAtomValue(bidHistoryAtom);
-
-  const [currBidPrice, setCurrBidPrice] = useAtom(currBidPriceAtom);
-  const [bidCloseTime, setBidCloseTime] = useAtom(bidCloseTimeAtom);
-  const [currBidHistory, setCurrBidHistory] = useAtom(currBidHistoryAtom);
+  const { data: auctionInfo, refetch: updateAuctionInfo } =
+    useAtomValue(auctionInfoAtom);
+  const { data: bidHistory, refetch: updateBidHistory } =
+    useAtomValue(bidHistoryAtom);
 
   const [bidPrice, setBidPrice] = useState(0);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
@@ -33,8 +28,8 @@ export default function BidModal() {
   const [isAuctionClosed, setIsAuctionClosed] = useState(false);
 
   // 남은 시간 업데이트 함수
-  const updateRemainingTime = () => {
-    const diffTime = getRemainingTime(bidCloseTime);
+  const updateRemainingTime = (time: string) => {
+    const diffTime = getRemainingTime(time);
     setRemainingTime(diffTime);
   };
 
@@ -50,21 +45,21 @@ export default function BidModal() {
     setBidPrice(price);
   };
 
+  // 마운트 시 리페칭
   useEffect(() => {
-    setCurrBidPrice(currentPrice);
-  }, [currentPrice]);
+    updateAuctionInfo();
+    updateBidHistory();
+  }, []);
 
+  // 경매 남은 시간 타이머
   useEffect(() => {
-    setBidCloseTime(auctionEndDateTime);
-  }, [auctionEndDateTime]);
+    if (!auctionInfo) return;
 
-  useEffect(() => {
-    setCurrBidHistory(bidHistory);
-  }, [bidHistory]);
-
-  useEffect(() => {
-    updateRemainingTime();
-    const timeoutId = setInterval(updateRemainingTime, 1000);
+    updateRemainingTime(auctionInfo.auctionEndDateTime);
+    const timeoutId = setInterval(
+      () => updateRemainingTime(auctionInfo.auctionEndDateTime),
+      1000
+    );
 
     // 경매 마감 시 타이머 해제 및 응찰 섹션 숨기기
     if (remainingTime === '마감') {
@@ -74,25 +69,25 @@ export default function BidModal() {
 
     // 타이머 해제
     return () => clearInterval(timeoutId);
-  }, [bidCloseTime, remainingTime]);
+  }, [auctionInfo?.auctionEndDateTime, remainingTime]);
 
   return (
     <ModalFull title={remainingTime}>
       <LotPreview
         lotName={name}
         thumbnail={thumbnail}
-        currentPrice={insertCommas(Number(currBidPrice))}
-        closeTime={bidCloseTime}
+        currentPrice={auctionInfo?.currentPrice}
+        closeTime={auctionInfo?.auctionEndDateTime || ''}
       />
       {!isAuctionClosed && (
         <BidSection
-          currentPrice={currBidPrice}
+          currentPrice={auctionInfo?.currentPrice}
           onSetBidPrice={handleSetBidPrice}
           onConfirmOpen={handleOpenConfirmModal}
           onSetAutoBid={setIsAutoBid}
         />
       )}
-      <BidHistory bidHistory={currBidHistory} />
+      <BidHistory bidHistory={bidHistory || []} />
       {confirmModalOpen && (
         <BidConfirmModal
           bidPrice={bidPrice}
