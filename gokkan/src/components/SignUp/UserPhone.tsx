@@ -75,7 +75,8 @@ const UserPhone = () => {
     IMP.certification(
       {
         merchant_uid: 'ORD20180131-0000011', // 주문 번호
-        m_redirect_url: 'http://localhost:5173/signup', //redirect
+        m_redirect_url:
+          'http://gokkan.s3-website.ap-northeast-2.amazonaws.com/signup', //redirect
       },
       () => {}
     );
@@ -109,7 +110,10 @@ const UserPhone = () => {
         })
         .then(({ data }) => {
           const targetPhoneNumber = phoneNumber.replace(/-/g, '');
-          if (data === targetPhoneNumber) {
+          const checkData = data.replace(/-/g, '');
+          console.log(checkData);
+          console.log(targetPhoneNumber);
+          if (checkData === targetPhoneNumber) {
             setPhoneCheck('true');
           } else {
             setPhoneCheck('false');

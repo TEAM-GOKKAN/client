@@ -8,7 +8,7 @@ const HomeDecoList = () => {
     return <CategoryItem content={content} />;
   });
 
-  return <SpreadList title="홈 데코" listItems={listItems} />;
+  return <SpreadList title="홈데코" listItems={listItems} />;
 };
 
 export default HomeDecoList;

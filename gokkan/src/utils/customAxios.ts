@@ -50,6 +50,8 @@ customAxios.interceptors.response.use(
           localStorage.setItem('refreshToken', refreshToken);
           localAccessToken = accessToken;
           localRefreshToken = refreshToken;
+          console.log(accessToken);
+          console.log(refreshToken);
           originalConfig.headers.Authorization = 'Bearer ' + accessToken;
           return customAxios(originalConfig);
         } catch (_error) {

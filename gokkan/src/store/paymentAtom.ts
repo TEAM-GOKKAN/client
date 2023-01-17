@@ -81,9 +81,9 @@ const pgAtom = atom('');
 const payMethodAtom = atom('card');
 const mRedirectUrlAtom = atom(
   (get) =>
-    `http://gokkan.loca.lt/payment/${get(lotIdAtom)}/${get(
-      auctionIdAtom
-    )}/result`
+    `http://gokkan.s3-website.ap-northeast-2.amazonaws.com/payment/${get(
+      lotIdAtom
+    )}/${get(auctionIdAtom)}/result`
 );
 const newAddressAtom = atom('');
 const newAddressDetailAtom = atom('');

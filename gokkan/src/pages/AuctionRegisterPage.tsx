@@ -21,9 +21,11 @@ const RegisterWrapper = styled.div`
     flex-direction: row;
     margin-bottom: 32px;
     align-items: center;
+    justify-content: space-between;
+    padding: 16px;
     button {
-      width: 60px;
-      height: 60px;
+      width: 18px;
+      height: 18px;
     }
     .title {
       width: calc(100% - 120px);
@@ -33,13 +35,13 @@ const RegisterWrapper = styled.div`
       font-size: 16px;
       font-weight: 500;
       line-height: 23px;
-      letter-spacing: -4%;
     }
     .save {
       color: var(--color-purple);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: var(--font-small);
     }
   }
 `;
@@ -102,7 +104,7 @@ const AuctionRegister = () => {
     <RegisterWrapper>
       <header>
         <button onClick={handleCancleButtonClick}>
-          <AiOutlineClose />
+          <AiOutlineClose size="18px" />
         </button>
         <div className="title">{pageName}</div>
         <ProductTempSaveButton setLoading={setLoading} />
