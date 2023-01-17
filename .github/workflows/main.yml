@@ -3,17 +3,17 @@ name: master
 on:
   push:
     branches:
-      [master]
+      [main]
   pull_request:
     branches:
-      [master]
+      [main]
       
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: checkout source code
-      uses: actions/checkout@master
+      uses: actions/checkout@main
       
     - name: Cache node modules
       uses: actions/cache@v1
