@@ -3,17 +3,17 @@ name: master
 on:
   push:
     branches:
-      [main]
+      [master]
   pull_request:
     branches:
-      [main]
+      [master]
       
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: checkout source code
-      uses: actions/checkout@main
+      uses: actions/checkout@master
       
     - name: Cache node modules
       uses: actions/cache@v1
@@ -38,4 +38,4 @@ jobs:
         aws s3 cp \
           --recursive \
           --region ap-northeast-2 \
-          build s3://gokkan
+          s3://gokkan
