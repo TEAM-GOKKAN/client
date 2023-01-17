@@ -11,7 +11,7 @@ const MainWrapper = styled.div`
   .banner {
     width: calc(100% + 32px);
     height: 27vh;
-    background-color: var(--color-purple);
+    background-color: var(--color-brown100);
     margin-bottom: 48px;
     margin-left: -16px;
     margin-right: -16px;
