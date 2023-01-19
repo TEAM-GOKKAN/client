@@ -36,6 +36,7 @@ customAxios.interceptors.response.use(
         try {
           const newAxios = axios.create();
           delete newAxios.defaults.headers.common['Authorization'];
+
           const rs = await newAxios.get(
             'http://3.38.59.40:8080/api/v1/auth/refresh',
             {
@@ -46,17 +47,19 @@ customAxios.interceptors.response.use(
           );
           // accessToken 갱신
           const { accessToken, refreshToken } = rs.data;
-          if (accessToken && refreshToken) {
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
-            localAccessToken = accessToken;
-            localRefreshToken = refreshToken;
-            console.log(accessToken);
-            console.log(refreshToken);
-            originalConfig.headers.Authorization = 'Bearer ' + accessToken;
-          }
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          localAccessToken = accessToken;
+          localRefreshToken = refreshToken;
+          console.log(accessToken);
+          console.log(refreshToken);
+          originalConfig.headers.Authorization = 'Bearer ' + accessToken;
+
           return customAxios(originalConfig);
         } catch (_error) {
+          // refreshToken이 만료되었을 때, 로그아웃이 되도록 함
+          localStorage.setItem('accessToken', '');
+          localStorage.setItem('refreshToken', '');
           return Promise.reject(_error);
         }
       }
