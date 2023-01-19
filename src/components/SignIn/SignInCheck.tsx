@@ -22,6 +22,8 @@ const SignInCheck = () => {
     if (token !== '' && refreshToken !== '') {
       localStorage.setItem('accessToken', String(token));
       localStorage.setItem('refreshToken', String(refreshToken));
+      console.log(token);
+      console.log(refreshToken);
       axios
         .get('http://3.38.59.40:8080/api/v1/users', {
           headers: { Authorization: `Bearer ${token}` },
