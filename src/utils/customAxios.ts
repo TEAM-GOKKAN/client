@@ -58,8 +58,10 @@ customAxios.interceptors.response.use(
           return customAxios(originalConfig);
         } catch (_error) {
           // refreshToken이 만료되었을 때, 로그아웃이 되도록 함
+          // 토큰 지우고, 홈페이지로 redirect 시킴
           localStorage.setItem('accessToken', '');
           localStorage.setItem('refreshToken', '');
+          window.location.replace('/');
           return Promise.reject(_error);
         }
       }
