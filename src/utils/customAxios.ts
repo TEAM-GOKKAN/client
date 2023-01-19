@@ -46,13 +46,15 @@ customAxios.interceptors.response.use(
           );
           // accessToken 갱신
           const { accessToken, refreshToken } = rs.data;
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('refreshToken', refreshToken);
-          localAccessToken = accessToken;
-          localRefreshToken = refreshToken;
-          console.log(accessToken);
-          console.log(refreshToken);
-          originalConfig.headers.Authorization = 'Bearer ' + accessToken;
+          if (accessToken && refreshToken) {
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('refreshToken', refreshToken);
+            localAccessToken = accessToken;
+            localRefreshToken = refreshToken;
+            console.log(accessToken);
+            console.log(refreshToken);
+            originalConfig.headers.Authorization = 'Bearer ' + accessToken;
+          }
           return customAxios(originalConfig);
         } catch (_error) {
           return Promise.reject(_error);
