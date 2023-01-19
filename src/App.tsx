@@ -13,7 +13,7 @@ const ExpertWorkListPage = lazy(() => import('./pages/ExpertWorkListPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
-const SignInSusPense = lazy(() => import('./components/SignIn/SignInCheck'));
+const SignInCheck = lazy(() => import('./components/SignIn/SignInCheck'));
 const MyWritingProductPage = lazy(() => import('./pages/MyWritingProductPage'));
 const PaymentPage = lazy(() => import('./pages/PaymentPage'));
 const PaymentResultPage = lazy(() => import('./pages/PaymentResultPage'));
@@ -44,7 +44,7 @@ function App() {
             element={<LotDetailPage />}
           />
           <Route path="signup" element={<SignUpPage />} />
-          <Route path="signInCheck" element={<SignInSusPense />} />
+          <Route path="signInCheck" element={<SignInCheck />} />
           <Route path="myWritingProduct" element={<MyWritingProductPage />} />
           <Route path="myRegisteredLot" element={<MyRegisteredLotPage />} />
           <Route path="myReturnedLot" element={<MyReturnedLotPage />} />
