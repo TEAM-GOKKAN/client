@@ -61,7 +61,7 @@ customAxios.interceptors.response.use(
           // 토큰 지우고, 홈페이지로 redirect 시킴
           localStorage.setItem('accessToken', '');
           localStorage.setItem('refreshToken', '');
-          window.location.replace('/signin');
+          window.location.replace('/');
           return Promise.reject(_error);
         }
       }
