@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-export default function PaymentTerms() {
+interface IProps {
+  onChangeCheckbox: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function PaymentTerms({ onChangeCheckbox }: IProps) {
   return (
     <Container>
       <TermContainer>
-        <CheckBox type="checkbox" id="terms" />
+        <CheckBox type="checkbox" id="terms" onChange={onChangeCheckbox} />
         <Label htmlFor="terms">
           <div>이용약관에 모두 동의합니다.</div>
           <div>
