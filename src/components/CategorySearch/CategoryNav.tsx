@@ -1,31 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { furniture, light, homeDeco } from '../../utils/category';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import CategoryNavItem from './CategoryNavItem';
+import { useAtom } from 'jotai';
+import { categoryAtom } from '../../store/auctionQueryAtom';
 
 const CategoryNav = () => {
   const { category } = useParams();
+  const [, setStoredCategory] = useAtom(categoryAtom);
   const [firstDepthCategory, setFirstDepthCategory] = useState('');
   const [secondDepthCategory, setSecondDepthCategory] = useState<string[]>([]);
+  const ContainerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (furniture.includes(String(category))) {
-      setFirstDepthCategory('가구');
-      setSecondDepthCategory(furniture);
+    if (category && ContainerRef) {
+      // 선택된 카테고리를 atom에 저장
+      setStoredCategory(String(category));
+      // 카테고리별로 표시할 타이틀을 지정함
+      if (furniture.includes(String(category))) {
+        setFirstDepthCategory('가구');
+        setSecondDepthCategory(furniture);
+      }
+      if (light.includes(String(category))) {
+        setFirstDepthCategory('조명');
+        setSecondDepthCategory(light);
+      }
+      if (homeDeco.includes(String(category))) {
+        setFirstDepthCategory('홈데코');
+        setSecondDepthCategory(homeDeco);
+      }
     }
-    if (light.includes(String(category))) {
-      setFirstDepthCategory('조명');
-      setSecondDepthCategory(light);
-    }
-    if (homeDeco.includes(String(category))) {
-      setFirstDepthCategory('홈 데코');
-      setSecondDepthCategory(homeDeco);
-    }
-  }, [category]);
+  }, [category, ContainerRef]);
 
   return (
-    <Container>
+    <Container ref={ContainerRef}>
       <div className="title">{firstDepthCategory}</div>
       <ul>
         {secondDepthCategory.map((secondDepthCategory) => {

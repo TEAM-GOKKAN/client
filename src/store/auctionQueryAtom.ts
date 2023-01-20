@@ -94,7 +94,13 @@ const [, auctionItemListAtom] = atomsWithInfiniteQuery((get) => ({
     url += `&sort=${sort}`;
     // category 있을 때 카테고리 추가해줌
     if (category !== '') {
-      url += `&category=${category}`;
+      // 홈데코 카테고리 예외처리해줌
+      if (category === '홈데코') {
+        const newCategory = '홈 데코';
+        url += `&category=${newCategory}`;
+      } else {
+        url += `&category=${category}`;
+      }
     }
     // minPrice있을 때 추가해줌
     if (minPrice !== '') {

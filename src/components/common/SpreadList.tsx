@@ -1,14 +1,14 @@
 import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlineDown } from 'react-icons/ai';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const SpreadListContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   .title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: var(--font-regular);
+    font-weight: var(--weight-semi-bold);
     line-height: 23px;
     letter-spacing: -4%;
     width: 100%;
@@ -51,7 +51,7 @@ const SpreadList = ({ title, listItems = [], clickFn }: SpreadListPropType) => {
         {title}
         {listItems.length !== 0 && (
           <div className="iconHolder" data-listopen={listOpen}>
-            <AiOutlineDown />
+            <IoIosArrowDown />
           </div>
         )}
       </div>

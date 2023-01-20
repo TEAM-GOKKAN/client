@@ -91,7 +91,7 @@ const Container = styled.div`
     font-size: 16px;
     line-height: 23px;
     letter-spacing: -4%;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
   }
   .scroll-container {
     width: 100%;

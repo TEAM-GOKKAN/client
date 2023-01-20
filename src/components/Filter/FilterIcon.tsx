@@ -25,14 +25,16 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: right;
   align-items: center;
-  width: 50px;
-  height: 42px;
   color: var(--color-brown400);
   .title {
     margin-left: 3px;
     font-size: 14px;
-    font-weight: 400px;
+    font-weight: 400;
     line-height: 14px;
     letter-spacing: -4%;
+  }
+  svg {
+    font-size: 14px;
+    line-height: 14px;
   }
 `;

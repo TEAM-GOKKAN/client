@@ -6,23 +6,24 @@ import { insertCommas } from '../../utils/handleCommas';
 const ListElementContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc((100vw - 60px) / 2);
-  margin-bottom: 48px;
+  width: calc(50vw - 24px);
+  height: 45vh;
   img {
     object-fit: cover;
   }
   img,
   .none-image {
-    height: 227px;
+    min-height: 70%;
+    max-height: 70%;
     width: 100%;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     border: 0.5px solid var(--color-brown200);
     background-color: var(--color-brown200);
   }
   .element-title {
     margin-bottom: 12px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-regular);
     line-height: 17.5px;
     .untitled {
       color: var(--color-brown300);
@@ -43,6 +44,7 @@ const ListElementContainer = styled.div`
       font-size: 12px;
       line-height: 17px;
       letter-spacing: -4%;
+      color: var(--color-brown300);
     }
     .price-content {
       margin-top: 4px;
@@ -50,6 +52,9 @@ const ListElementContainer = styled.div`
       flex-direction: row;
       .unit {
         margin-left: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

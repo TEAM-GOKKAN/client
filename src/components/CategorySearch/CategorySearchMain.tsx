@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import FilterIcon from '../Filter/FilterIcon';
 import {
   auctionItemListAtom,
-  categoryAtom,
   filterInfoAtom,
 } from '../../store/auctionQueryAtom';
 import { useAtom } from 'jotai';
@@ -14,13 +12,12 @@ import { useInView } from 'react-intersection-observer';
 import LoadingIndicator from '../common/LoadingIndicator';
 
 const CategorySearchMain = () => {
-  const { category } = useParams();
   const [loadingRef, inView] = useInView();
   // 총 검색 결과
   const [totalNumber, setTotalNumber] = useState('');
   // 보여줄 경매 리스트
   const [lotList, setLotList] = useState<LotInfoType[]>([]);
-  const [storedCategory, setStoredCategory] = useAtom(categoryAtom);
+  // 조회할 필터 조건
   const [filterInfo] = useAtom(filterInfoAtom);
   // 해당 카테고리로 조회 요청을 보냄
   const [queryResult] = useAtom(auctionItemListAtom);
@@ -36,15 +33,12 @@ const CategorySearchMain = () => {
     refetch,
   } = queryResult;
 
-  // 조회할 카테고리 설정
+  // 조건이 변할 때마다, 이전 검색 결과를 초기화해주고 refetch를 해줌
   useEffect(() => {
-    if (category) {
-      setStoredCategory(category);
-    }
-  }, [category]);
-
-  // 조건이 변할 때마다 refetch를 해줌
-  useEffect(() => {
+    // 이전 검색 결과 초기화
+    setLotList([]);
+    setTotalNumber('');
+    // 다시 검색 결과를 받아옴
     refetch();
   }, [
     filterInfo.category,
@@ -106,6 +100,7 @@ const Container = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 18px;
     .number-holder {
       font-size: 14px;
       font-weight: 500;
@@ -114,14 +109,15 @@ const Container = styled.main`
       flex-direction: row;
       align-items: center;
       .number-total {
-        margin: 0 2px;
+        margin-left: 3px;
+        margin-right: 1px;
       }
     }
   }
   .category-search-list {
     display: grid;
     grid-template-columns: auto auto;
-    column-gap: 15px;
+    column-gap: 16px;
     row-gap: 48px;
   }
 `;
