@@ -1,30 +1,23 @@
 import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import CompletedPayment from '../components/PaymentResult/CompletedPayment';
-import FailedPayment from '../components/PaymentResult/FailedPayment';
+import { useParams } from 'react-router-dom';
+import PaymentResult from '../components/PaymentResult';
 import { auctionIdAtom } from '../store/bidAtom';
 import { lotIdAtom } from '../store/lotDetailAtom';
 
 export default function PaymentResultPage() {
-  const { state } = useLocation();
   const params = useParams();
-  const [, setAuctionId] = useAtom(auctionIdAtom);
-  const [, setItemId] = useAtom(lotIdAtom);
+
+  const [auctionId, setAuctionId] = useAtom(auctionIdAtom);
+  const [lotId, setLotId] = useAtom(lotIdAtom);
 
   useEffect(() => {
-    if (params.itemId && params.auctionId) {
-      setAuctionId(Number(params.auctionId));
-      setItemId(Number(params.itemId));
-    }
+    const { auctionId, itemId } = params;
+    setAuctionId(Number(auctionId));
+    setLotId(Number(itemId));
   }, []);
 
   return (
-    <>
-      {state?.orderNumber && (
-        <CompletedPayment orderNumber={state.orderNumber} />
-      )}
-      {state?.error && <FailedPayment errMsg={state.error} />}
-    </>
+    <>{!!auctionId && !!lotId && <PaymentResult auctionId={auctionId} />}</>
   );
 }

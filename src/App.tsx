@@ -64,14 +64,14 @@ function App() {
             element={<ExpertWorkDetailPage />}
           />
           <Route path="payment/:itemId/:auctionId" element={<PaymentPage />} />
+          <Route
+            path="payment/:itemId/:auctionId/result"
+            element={<PaymentResultPage />}
+          />
         </Route>
         <Route
           path="/register/:pageNumber/:productId"
           element={<AuctionRegisterPage />}
-        />
-        <Route
-          path="/payment/:itemId/:auctionId/result"
-          element={<PaymentResultPage />}
         />
       </Routes>
       {background && (
