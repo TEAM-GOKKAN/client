@@ -23,23 +23,23 @@ export default function PaymentResult({ auctionId }: IProps) {
   const [isValidationChecked, setIsValidationChecked] = useState(false);
 
   const getPaymentData = async () => {
-    const { data } = await customAxios.get('/api/v1/payment', {
-      params: {
-        auctionId,
-        impUid: impUid,
-      },
-    });
+    try {
+      const { data } = await customAxios.get('/api/v1/payment', {
+        params: {
+          auctionId,
+          impUid: impUid,
+        },
+      });
 
-    if (data?.pay_method) {
-      setPg(data?.pay_method);
-    } else {
-      setErrMsg(data?.message);
+      if (data?.pay_method) {
+        setPg(data?.pay_method);
+      }
+    } catch (err) {
+      const { response } = err as unknown as any;
+      setErrMsg(response.data?.message);
     }
 
     setIsValidationChecked(true);
-
-    // 테스트
-    console.log(data);
   };
 
   useEffect(() => {
