@@ -23,6 +23,11 @@ export default function PaymentResult({ auctionId }: IProps) {
   const [isValidationChecked, setIsValidationChecked] = useState(false);
 
   const getPaymentData = async () => {
+    if (!success) {
+      setIsValidationChecked(true);
+      return;
+    }
+
     try {
       const { data } = await customAxios.get('/api/v1/payment', {
         params: {
