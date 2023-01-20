@@ -2,7 +2,7 @@ import customAxios from '../utils/customAxios';
 import { atomsWithQuery } from 'jotai-tanstack-query';
 import { atom } from 'jotai';
 
-const itemIdAtom = atom(8);
+const itemIdAtom = atom(24);
 const [itemDetailAtom] = atomsWithQuery((get) => ({
   queryKey: ['itemDetail', get(itemIdAtom)],
   queryFn: async ({ queryKey: [, itemId] }): Promise<ItemDetail> => {

@@ -14,7 +14,7 @@ interface BidInfo {
   bidTime: string;
 }
 
-const auctionIdAtom = atom(0);
+const auctionIdAtom = atom(3);
 
 const [, auctionInfoAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidInfo', get(auctionIdAtom)],

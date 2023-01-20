@@ -12,8 +12,8 @@ const MyPage = () => {
       <MyLotList />
       <MyLotRegister />
       <MySetting />
-      <LogOut />
       <ExpertWorkList />
+      <LogOut />
     </ModalFull>
   );
 };
