@@ -8,7 +8,9 @@ const LotList = ({ lotList, lotListCount }: PropType) => {
 
   return (
     <Container>
-      <div className="total-count">총 {listElementCount} 개</div>
+      <div className="total-count">
+        총 <div className="count">{listElementCount}</div> 개
+      </div>
       <LotListGridWrapper>
         {lotList.map((lotInfo) => {
           return <LotListElement lotInfo={lotInfo} key={lotInfo.id} />;
@@ -41,11 +43,19 @@ const Container = styled.div`
     margin-bottom: 19px;
     font-size: 14px;
     font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .count {
+      margin-left: 3px;
+      margin-right: 1px;
+    }
   }
 `;
 
 const LotListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  column-gap: 15px;
+  column-gap: 16px;
+  row-gap: 48px;
 `;

@@ -39,18 +39,19 @@ export default SuccessfulLotListElement;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc((100vw - 60px) / 2);
-  margin-bottom: 48px;
+  width: calc(50vw - 24px);
+  height: 45vh;
   img {
-    object-fit: cover;
-    height: 227px;
+    min-height: 70%;
+    max-height: 70%;
     width: 100%;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    object-fit: cover;
   }
   .lot-title {
     margin-bottom: 16px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-regular);
     line-height: 17.5px;
   }
   .price {
@@ -74,7 +75,9 @@ const Container = styled.div`
         margin-left: 4px;
         font-weight: 400;
         font-size: 14px;
-        letter-spacing: -4%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
@@ -82,11 +85,11 @@ const Container = styled.div`
     margin-top: 12px;
     color: var(--color-brown300);
     font-weight: 400;
-    font-size: 12px;
+    font-size: var(--font-small);
   }
   button {
     width: 100%;
-    height: 24px;
+    padding: 4px 0px;
     background-color: var(--color-orange);
     color: var(--color-brown100);
     display: flex;

@@ -47,8 +47,8 @@ interface MainListElementPropType {
 }
 
 const Container = styled.div`
-  min-width: 60vw;
-  height: 45vh;
+  min-width: calc((50vw - 24px) * 1.05);
+  height: calc(45vh * 1.05);
   min-height: 350px;
   margin-right: 14px;
   display: flex;
@@ -62,7 +62,7 @@ const Container = styled.div`
   .lot-name {
     margin-bottom: 11px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: var(--font-regular);
     line-height: 17.5px;
   }
   .price {
@@ -73,6 +73,7 @@ const Container = styled.div`
       font-size: 12px;
       line-height: 17px;
       letter-spacing: -4%;
+      color: var(--color-brown300);
     }
     .price-content {
       display: flex;
@@ -81,7 +82,9 @@ const Container = styled.div`
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
-        letter-spacing: -4%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .price-value {
         font-weight: 600;
@@ -96,6 +99,6 @@ const Container = styled.div`
     margin-top: 3px;
     color: var(--color-brown300);
     font-weight: 400;
-    font-size: 12px;
+    font-size: var(--font-small);
   }
 `;

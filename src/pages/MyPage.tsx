@@ -11,8 +11,8 @@ const MyPage = () => {
     <ModalFull title="마이페이지">
       <MyLotList />
       <MyLotRegister />
-      <MySetting />
       <ExpertWorkList />
+      <MySetting />
       <LogOut />
     </ModalFull>
   );

@@ -48,12 +48,13 @@ interface CategorySearchListItemPropType {
 }
 
 const Container = styled.li`
-  width: calc(50vw - 25px);
+  width: calc(50vw - 24px);
   height: 45vh;
   display: flex;
   flex-direction: column;
   img {
     min-height: 70%;
+    max-height: 70%;
     width: 100%;
     margin-bottom: 12px;
     object-fit: cover;

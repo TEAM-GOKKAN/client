@@ -9,18 +9,17 @@ const SignInWrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    .title {
+    .login-title {
       display: flex;
       flex-direction: row;
       align-items: center;
+      font-size: var(--font-micro);
+      line-height: 12px;
       margin-bottom: 12px;
-      .small {
-        font-family: 'Noto Sans KR';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 12px;
+      .highlight {
         margin: 0 5px;
+        font-size: var(--font-regular);
+        font-weight: var(--weight-semi-bold);
       }
     }
     .content {
@@ -39,8 +38,9 @@ const SignInPage = () => {
     <Modal>
       <SignInWrapper>
         <div className="content-holder">
-          <div className="title">
-            로그인 <div className="small">또는</div> 회원가입
+          <div className="login-title">
+            <p className="highlight">로그인</p> 또는
+            <p className="highlight">회원가입</p>
           </div>
           <div className="content">
             큐레이팅된 빈티지 가구들로 곳간을 채워보세요
