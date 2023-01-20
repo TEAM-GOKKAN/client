@@ -63,32 +63,9 @@ const [paymentAmountAtom] = atomsWithQuery((get) => ({
   },
 }));
 
-// const iamportDataAtom = atom({
-//   pg: 'kakaopay',
-//   pay_method: 'card',
-//   merchant_uid: `mid_${new Date().getTime()}`,
-//   amount: 0,
-//   name: '',
-//   buyer_name: '',
-//   buyer_tel: '',
-//   buyer_email: 'example@example',
-//   buyer_addr: '',
-//   buyer_postcode: '06018',
-//   m_redirect_url: 'http://localhost:5173/payment/result',
-// });
-
 const pgAtom = atom('');
 const payMethodAtom = atom('card');
-const mRedirectUrlAtom = atom(
-  (get) =>
-    `http://gokkan.loca.lt/payment/${get(lotIdAtom)}/${get(
-      auctionIdAtom
-    )}/result`
-);
-const newAddressAtom = atom('');
-const newAddressDetailAtom = atom('');
-const newNameAtom = atom('');
-const newPhoneNumberAtom = atom('');
+const mRedirectUrlAtom = atom('');
 
 const iamportDataAtom = atom((get) => {
   const { name, phoneNumber, address, addressDetail } = get(addressAtom);
@@ -101,21 +78,15 @@ const iamportDataAtom = atom((get) => {
     merchant_uid: `${new Date().getTime()}`,
     amount: paymentAmount,
     name: itemName,
-    buyer_name: get(newNameAtom) || name,
-    buyer_tel: get(newPhoneNumberAtom) || phoneNumber,
-    buyer_addr: get(newAddressDetailAtom)
-      ? `${get(newAddressAtom)} ${get(newAddressDetailAtom)}`
-      : `${address} ${addressDetail}`,
-    // m_redirect_url: `http://gokkan.loca.lt/payment/result`,
+    buyer_name: name,
+    buyer_tel: phoneNumber,
+    buyer_addr: `${address} ${addressDetail}`,
     m_redirect_url: get(mRedirectUrlAtom),
   };
 });
 
-const newAddressInfoAtom = atom((get) => ({
-  name: get(newNameAtom),
-  phoneNumber: get(newPhoneNumberAtom),
-  address: get(newAddressAtom),
-}));
+const payErrMsgAtom = atom('');
+const paymentResultErrMsgAtom = atom('');
 
 export {
   addressAtom,
@@ -124,9 +95,7 @@ export {
   iamportDataAtom,
   pgAtom,
   payMethodAtom,
-  newAddressAtom,
-  newAddressDetailAtom,
-  newNameAtom,
-  newPhoneNumberAtom,
-  newAddressInfoAtom,
+  mRedirectUrlAtom,
+  payErrMsgAtom,
+  paymentResultErrMsgAtom,
 };
