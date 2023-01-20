@@ -46,7 +46,8 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #9d9792ad;
+  background: rgba(75, 67, 61, 0.7);
+  z-index: 9999;
 `;
 
 const Container = styled.div`
@@ -62,13 +63,14 @@ const Container = styled.div`
 `;
 
 const Dialog = styled.dialog`
-  padding: 24px;
+  padding: 36px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background: var(--color-white);
   position: relative;
+  color: var(--color-brown500);
+  background: var(--color-white);
 `;
 
 const ModalButtons = styled.div`

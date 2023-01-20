@@ -29,6 +29,8 @@ const [, auctionInfoAtom] = atomsWithQuery((get) => ({
   },
 }));
 
+const auctionInfoDataAtom = atom((get) => get(auctionInfoAtom)?.data);
+
 const [, bidHistoryAtom] = atomsWithQuery((get) => ({
   queryKey: ['bidHistory', get(auctionIdAtom)],
   queryFn: async ({ queryKey: [, auctionId] }): Promise<BidInfo[] | null[]> => {
@@ -59,4 +61,5 @@ export {
   bidErrMsgAtom,
   addedBidTimeAtom,
   isTimeAddedAtom,
+  auctionInfoDataAtom,
 };

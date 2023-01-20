@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ShippingAddress from '../Payment/ShippingAddress';
 import { useAtomValue } from 'jotai';
 import {
-  newAddressInfoAtom,
+  addressAtom,
   paymentAmountAtom,
   pgAtom,
   productInfoAtom,
@@ -21,7 +21,7 @@ interface IProps {
 }
 
 export default function CompletedPayment({ orderNumber }: IProps) {
-  const newAddress = useAtomValue(newAddressInfoAtom);
+  const shippingAddress = useAtomValue(addressAtom);
   const productInfo = useAtomValue(productInfoAtom);
   const paymentAmount = useAtomValue(paymentAmountAtom);
   const pg = useAtomValue(pgAtom);
@@ -39,7 +39,7 @@ export default function CompletedPayment({ orderNumber }: IProps) {
         <ResultMessage>결제가 완료되었습니다.</ResultMessage>
       </PaymentResult>
       <OrderNumber orderNumber={orderNumber} />
-      <ShippingAddress data={newAddress} isPaid />
+      <ShippingAddress data={shippingAddress} isPaid />
       <ProductInfo data={productInfo} />
       <PaymentAmount data={paymentAmount} />
       <PaidMethod pg={pg} />
