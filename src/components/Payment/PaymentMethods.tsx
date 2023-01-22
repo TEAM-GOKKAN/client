@@ -1,4 +1,4 @@
-import React, { MouseEvent, useRef } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 import { PGS } from '../../lib/constants/payment';
 import Section from './Section';
@@ -9,12 +9,19 @@ interface IProps {
 }
 
 export default function PaymentMethods({ pg, onSetPg }: IProps) {
-  const buttonsRef = useRef([]);
+  const [btnActive, setBtnActive] = useState('');
 
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (e.target instanceof HTMLButtonElement) {
-      onSetPg(e.target.value);
+    if (!(e.target instanceof HTMLButtonElement)) return;
+
+    if (e.target.value === btnActive) {
+      setBtnActive('');
+      onSetPg('');
+      return;
     }
+
+    setBtnActive(e.target.value);
+    onSetPg(e.target.value);
   };
 
   return (
@@ -25,7 +32,7 @@ export default function PaymentMethods({ pg, onSetPg }: IProps) {
           key={method.value}
           value={method.value}
           onClick={handleButtonClick}
-          ref={buttonsRef.current[0]}
+          className={method.value === btnActive ? 'active' : ''}
         >
           {method.label}
         </PaymentButton>
@@ -37,7 +44,7 @@ export default function PaymentMethods({ pg, onSetPg }: IProps) {
 const PaymentButton = styled.button`
   height: 42px;
   padding: 0 12px;
-  border: 1px solid var(--color-brown300);
+  border: 1px solid var(--color-brown200);
   color: var(--color-brown300);
   margin-right: 10px;
 

@@ -23,7 +23,7 @@ export default function PaymentTerms({ onChangeCheckbox }: IProps) {
 
 const Container = styled.div`
   width: 100%;
-  margin-bottom: 98px;
+  padding-bottom: 98px;
   font-size: var(--font-small);
 
   &::before {

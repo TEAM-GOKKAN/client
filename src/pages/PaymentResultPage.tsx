@@ -17,6 +17,13 @@ export default function PaymentResultPage() {
     setLotId(Number(itemId));
   }, []);
 
+  // 경매 id 초기화
+  useEffect(() => {
+    return () => {
+      setAuctionId(0);
+    };
+  }, []);
+
   return (
     <>{!!auctionId && !!lotId && <PaymentResult auctionId={auctionId} />}</>
   );

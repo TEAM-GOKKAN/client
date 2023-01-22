@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import LoadingSpinner from './components/common/LoadingSpinner';
 import GlobalStyle from './lib/styles/global';
 
 const LayoutPage = lazy(() => import('./pages/LayoutPage'));
@@ -34,7 +35,7 @@ function App() {
   const background = location.state?.background;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <GlobalStyle />
       <Routes location={background || location}>
         <Route path="/" element={<LayoutPage />}>
