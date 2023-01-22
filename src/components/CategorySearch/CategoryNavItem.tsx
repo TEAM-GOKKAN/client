@@ -36,7 +36,7 @@ const CategoryNavItem = ({ secondDepthCategory }: CategoryNavItemProptype) => {
   // 해당 element가 view안에 들어오도록 조정함
   useEffect(() => {
     if (focused && containerRef) {
-      containerRef.current?.scrollIntoView();
+      containerRef.current?.scrollIntoView({ block: 'end', inline: 'nearest' });
     }
   }, [focused, containerRef]);
 

@@ -29,7 +29,9 @@ const SuccessfulLotListElement = ({ lotInfo }: PropType) => {
       <div className="end-time">
         {getElapsedTime(lotInfo.auctionEndDateTime, '남은시간')}
       </div>
-      <button onClick={handlePaymentClick}>결제하기</button>
+      <button className="commit-price" onClick={handlePaymentClick}>
+        결제하기
+      </button>
     </Container>
   );
 };
@@ -41,9 +43,10 @@ const Container = styled.div`
   flex-direction: column;
   width: calc(50vw - 24px);
   height: 45vh;
+  min-height: 350px;
   img {
-    min-height: 70%;
-    max-height: 70%;
+    min-height: 60%;
+    max-height: 60%;
     width: 100%;
     margin-bottom: 12px;
     object-fit: cover;
@@ -87,7 +90,7 @@ const Container = styled.div`
     font-weight: 400;
     font-size: var(--font-small);
   }
-  button {
+  .commit-price {
     width: 100%;
     padding: 4px 0px;
     background-color: var(--color-orange);
