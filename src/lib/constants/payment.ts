@@ -5,6 +5,18 @@ export const PGS = [
     value: 'kakaopay',
     label: '카카오페이',
   },
+  {
+    value: 'tosspay',
+    label: '토스페이',
+  },
+  {
+    value: 'payco',
+    label: '페이코',
+  },
+  {
+    value: 'html5_inicis',
+    label: '신용카드',
+  },
 ];
 
 export const METHOD_FOR_CARD = [
