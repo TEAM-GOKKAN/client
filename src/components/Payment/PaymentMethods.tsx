@@ -44,7 +44,7 @@ export default function PaymentMethods({ pg, onSetPg }: IProps) {
 const PaymentButton = styled.button`
   height: 42px;
   padding: 0 12px;
-  border: 1px solid var(--color-brown300);
+  border: 1px solid var(--color-brown200);
   color: var(--color-brown300);
   margin-right: 10px;
 
