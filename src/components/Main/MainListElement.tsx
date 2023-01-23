@@ -49,18 +49,19 @@ interface MainListElementPropType {
 const Container = styled.div`
   min-width: calc((50vw - 24px) * 1.05);
   height: calc(45vh * 1.05);
-  min-height: 350px;
+  min-height: 400px;
   margin-right: 14px;
   display: flex;
   flex-direction: column;
   img {
-    height: 70%;
+    min-height: 70%;
+    max-height: 70%;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     object-fit: cover;
   }
   .lot-name {
-    margin-bottom: 11px;
+    margin-bottom: 20px;
     font-weight: 400;
     font-size: var(--font-regular);
     line-height: 17.5px;
@@ -81,7 +82,7 @@ const Container = styled.div`
       .unit {
         font-weight: 400;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 24px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -96,7 +97,7 @@ const Container = styled.div`
     }
   }
   .end-time {
-    margin-top: 3px;
+    margin-top: 12px;
     color: var(--color-brown300);
     font-weight: 400;
     font-size: var(--font-small);

@@ -52,6 +52,7 @@ const Container = styled.li`
   height: 45vh;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
   img {
     min-height: 70%;
     max-height: 70%;
@@ -94,6 +95,6 @@ const Container = styled.li`
     margin-top: 12px;
     color: var(--color-brown300);
     font-weight: 400;
-    font-size: 12px;
+    font-size: var(--font-small);
   }
 `;

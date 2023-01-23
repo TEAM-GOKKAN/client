@@ -58,6 +58,7 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       color: var(--color-brown300);
+      background-color: var(--color-brown100);
       padding-right: 11px;
     }
   }
