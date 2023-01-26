@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { convertDateFormat } from '../../../utils/convertDateFormat';
+import { insertCommas } from '../../../utils/handleCommas';
 
 interface Iprops {
   lotName: string;
@@ -26,7 +27,10 @@ export default function LotPreview({
         <LotTitle>{lotName}</LotTitle>
         <CurrentPrice>
           <div>현재가</div>
-          <div>{currentPrice}</div>
+          <div>
+            <span>{insertCommas(String(currentPrice))}</span>
+            <span>원</span>
+          </div>
         </CurrentPrice>
         <CloseTime>
           <div>마감시간</div>
@@ -72,14 +76,14 @@ const LotInfo = styled.div`
 
 const LotTitle = styled.div`
   width: 100%;
-  font-size: var(--font-regular);
+  font-size: var(--font-medium);
   white-space: pre-line;
 `;
 
 const CurrentPrice = styled.div`
   /* margin-top: 24px; */
   position: absolute;
-  bottom: 48px;
+  bottom: 52px;
   font-size: var(--font-x-large);
   font-weight: 500;
 
@@ -91,7 +95,7 @@ const CurrentPrice = styled.div`
 `;
 
 const CloseTime = styled.div`
-  font-size: var(--font-small);
+  font-size: var(--font-regular);
   font-weight: 500;
   color: var(--color-brown400);
 
@@ -99,5 +103,6 @@ const CloseTime = styled.div`
     font-size: var(--font-micro);
     color: var(--color-brown300);
     letter-spacing: -0.0625em;
+    margin-bottom: 2px;
   }
 `;

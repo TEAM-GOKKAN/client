@@ -13,6 +13,8 @@ import styled from 'styled-components';
 import useInput from '../../../lib/hooks/useInput';
 import { bidErrMsgAtom } from '../../../store/bidAtom';
 import { insertCommas, removeCommas } from '../../../utils/handleCommas';
+import { AiOutlineWarning } from 'react-icons/ai';
+import { MdOutlineErrorOutline } from 'react-icons/md';
 
 interface Iprops {
   currentPrice: number | string | undefined;
@@ -43,21 +45,23 @@ export default function BidSection({
   };
 
   // 모달 띄우기
-  const openConfirmModal = (price: string) => {
+  const openConfirmModal = (price: string, isButton = false) => {
     setBidErrMsg('');
 
-    // 토큰이 없을 경우 에러 메세지
-    const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-      setBidErrMsg(`로그인 후 응찰해주세요.`);
-      return;
-    }
+    if (!isButton) {
+      // 토큰이 없을 경우 에러 메세지
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        setBidErrMsg(`로그인 후 응찰해주세요.`);
+        return;
+      }
 
-    // 응찰가가 현재가보다 낮을 경우 에러 메세지
-    if (Number(removeCommas(price)) < recommendedBidPrices[0]) {
-      const minBidPriceWithCommas = insertCommas(recommendedBidPrices[0]);
-      setBidErrMsg(`${minBidPriceWithCommas}원 이상부터 응찰 가능합니다.`);
-      return;
+      // 응찰가가 현재가보다 낮을 경우 에러 메세지
+      if (Number(removeCommas(price)) < recommendedBidPrices[0]) {
+        const minBidPriceWithCommas = insertCommas(recommendedBidPrices[0]);
+        setBidErrMsg(`${minBidPriceWithCommas}원 이상부터 응찰 가능합니다.`);
+        return;
+      }
     }
 
     const bidPriceWithoutCommas = Number(removeCommas(price));
@@ -80,10 +84,11 @@ export default function BidSection({
     e: MouseEvent<HTMLButtonElement>
   ) => {
     if (e.target instanceof HTMLButtonElement && e.target.textContent) {
+      setBidErrMsg('');
       onSetAutoBid(false);
 
       const bidPrice = e.target.textContent.slice(0, -1);
-      openConfirmModal(bidPrice);
+      openConfirmModal(bidPrice, true);
     }
   };
 
@@ -111,7 +116,7 @@ export default function BidSection({
             key={price}
             onClick={handleClickRecommendedBidButton}
           >
-            {insertCommas(price) + '원'}
+            {insertCommas(price)}
           </button>
         ))}
       </PriceButtonsContainer>
@@ -120,8 +125,15 @@ export default function BidSection({
           placeholder={`${insertCommas(Number(currentPrice) + 10000)}원 이상`}
           value={value}
           onChange={handleInputChange}
+          className={bidErrMsg ? 'error' : ''}
         />
-        {bidErrMsg && <div>{bidErrMsg}</div>}
+
+        {bidErrMsg && (
+          <>
+            <StyledWarningIcon />
+            <div>{bidErrMsg}</div>
+          </>
+        )}
       </PriceInputContainer>
       <BidButtonsContainer>
         <BidOnceButton type="button" onClick={handleClickBidButton}>
@@ -153,13 +165,15 @@ const PriceButtonsContainer = styled.div`
     line-height: var(--font-regular);
     color: var(--color-brown100);
     background: var(--color-brown400);
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: normal;
+    font-family: 'Poppins', sans-serif;
   }
 `;
 
 const PriceInputContainer = styled.div`
   margin-bottom: 10px;
+  position: relative;
 
   & > input {
     padding-left: 12px;
@@ -167,6 +181,11 @@ const PriceInputContainer = styled.div`
     line-height: var(--font-regular);
     color: var(--color-brown500);
     letter-spacing: normal;
+    font-family: 'Poppins', sans-serif;
+
+    &.error {
+      border: 1px solid var(--color-orange);
+    }
   }
 
   & > div {
@@ -174,6 +193,15 @@ const PriceInputContainer = styled.div`
     font-size: var(--font-micro);
     color: var(--color-orange);
   }
+`;
+
+const StyledWarningIcon = styled(MdOutlineErrorOutline)`
+  position: absolute;
+  top: 21px;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--color-orange);
 `;
 
 const BidButtonsContainer = styled.div`

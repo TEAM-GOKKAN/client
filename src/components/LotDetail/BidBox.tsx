@@ -15,6 +15,7 @@ export default function BidBox({ closeTime, currentPrice }: Iprops) {
 
   const [remainingTime, setRemainingTime] = useState('');
   const [currPrice, setCurrPrice] = useState('');
+  const [priceTitle, setPriceTitle] = useState('현재가');
 
   // 남은 시간 업데이트 함수
   const updateRemainingTime = () => {
@@ -33,31 +34,39 @@ export default function BidBox({ closeTime, currentPrice }: Iprops) {
     updateRemainingTime();
     const timeoutId = setInterval(updateRemainingTime, 1000);
 
+    if (remainingTime === '마감') {
+      setPriceTitle('낙찰가');
+      clearInterval(timeoutId);
+    }
+
     // 타이머 해제
     return () => clearInterval(timeoutId);
-  }, [closeTime]);
+  }, [closeTime, remainingTime]);
 
   // 가격 변동 시마다 콤마 삽입
   useEffect(() => {
     getPriceWithCommas(currentPrice);
   }, [currentPrice]);
 
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
-
   return (
-    <Container>
+    <Container className={remainingTime === '마감' ? 'inactive' : ''}>
       <CurrentPrice>
-        <div>현재가</div>
+        <div>{priceTitle}</div>
         <div>
           <Price>{currPrice}</Price>
           <span> 원</span>
         </div>
       </CurrentPrice>
-      <RemainingTime>{remainingTime}</RemainingTime>
+      <RemainingTime className={remainingTime === '마감' ? 'inactive' : ''}>
+        {remainingTime}
+      </RemainingTime>
       <Link to="bid" state={{ background: location }}>
-        <PlaceBidButton type="button">응찰하기</PlaceBidButton>
+        <PlaceBidButton
+          type="button"
+          className={remainingTime === '마감' ? 'inactive' : ''}
+        >
+          응찰하기
+        </PlaceBidButton>
       </Link>
     </Container>
   );
@@ -74,6 +83,10 @@ const Container = styled.div`
   color: var(--color-brown100);
   background: var(--color-brown500);
   padding: 16px;
+
+  &.inactive {
+    background: var(--color-brown300);
+  }
 `;
 
 const CurrentPrice = styled.div`
@@ -95,6 +108,10 @@ const RemainingTime = styled.div`
   font-size: var(--font-small);
   color: var(--color-brown300);
   letter-spacing: normal;
+
+  &.inactive {
+    color: var(--color-brown200);
+  }
 `;
 
 const PlaceBidButton = styled.button`
@@ -106,4 +123,8 @@ const PlaceBidButton = styled.button`
   position: absolute;
   right: 16px;
   bottom: 30px;
+
+  &.inactive {
+    display: none;
+  }
 `;
