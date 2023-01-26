@@ -86,9 +86,7 @@ export default function BidSection({
     if (e.target instanceof HTMLButtonElement && e.target.textContent) {
       setBidErrMsg('');
       onSetAutoBid(false);
-
-      const bidPrice = e.target.textContent.slice(0, -1);
-      openConfirmModal(bidPrice, true);
+      openConfirmModal(e.target.textContent, true);
     }
   };
 
