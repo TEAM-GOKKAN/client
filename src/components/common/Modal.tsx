@@ -47,7 +47,7 @@ const ModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgba(75, 67, 61, 0.7);
-  z-index: 9999;
+  z-index: 9998;
 `;
 
 const Container = styled.div`
@@ -59,7 +59,7 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  z-index: 9999;
+  z-index: 9998;
 `;
 
 const Dialog = styled.dialog`
