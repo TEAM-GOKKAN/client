@@ -58,7 +58,7 @@ const Container = styled.nav`
   .title {
     font-weight: 700;
     font-size: 15px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
   }
   ul {
     display: flex;

@@ -107,14 +107,14 @@ const Container = styled.div`
   .title {
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   ul {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 48px;
     width: 200px;
     li {
       padding: 6px 10px;

@@ -86,7 +86,7 @@ const Container = styled.div`
   .title {
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 48px;
   }
 `;
 const LoadingWrapper = styled.div`

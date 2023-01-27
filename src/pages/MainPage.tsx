@@ -10,9 +10,9 @@ const MainWrapper = styled.div`
   flex-direction: column;
   .banner {
     width: calc(100% + 32px);
-    height: 27vh;
+    height: calc(100vw * 0.6);
     background-color: var(--color-brown100);
-    margin-bottom: 48px;
+    margin-bottom: 64px;
     margin-left: -16px;
     margin-right: -16px;
     margin-top: -32px;
