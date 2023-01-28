@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { insertCommas } from '../../utils/handleCommas';
 import { getElapsedTime } from '../../utils/getDiffTime';
-
+// 확인
 const SuccessfulLotListElement = ({ lotInfo }: PropType) => {
   const navigate = useNavigate();
 
