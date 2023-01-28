@@ -47,7 +47,7 @@ interface MainListElementPropType {
 }
 
 const Container = styled.div`
-  width: calc((50vw - 24px) * 1.05);
+  min-width: calc((50vw - 24px) * 1.05);
   margin-right: 16px;
   display: flex;
   flex-direction: column;
