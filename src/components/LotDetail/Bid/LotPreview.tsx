@@ -79,7 +79,9 @@ const LotInfo = styled.div`
 const LotTitle = styled.div`
   width: 100%;
   font-size: var(--font-medium);
-  white-space: pre-line;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const CurrentPrice = styled.div`
