@@ -7,6 +7,7 @@ const NameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 36px;
+  font-family: Poppins, 'Noto Sans KR', sans-serif;
   label {
     font-weight: 500;
     font-size: 14px;
