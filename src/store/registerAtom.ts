@@ -128,6 +128,18 @@ const productSetInfoAtom = atom(
       productAgeAtom,
     ];
 
+    // setting unknown or 직접 입력
+    if (brand !== '') {
+      set(productBrandFirstAtom, '직접입력');
+    } else {
+      set(productBrandFirstAtom, 'UnKnown');
+    }
+    if (designer !== '') {
+      set(productDesignerFirstAtom, '직접입력');
+    } else {
+      set(productDesignerFirstAtom, 'UnKnown');
+    }
+
     // string type check and set
     stringTypeProductInfo.forEach((infoItem, index) => {
       if (infoItem !== '') {

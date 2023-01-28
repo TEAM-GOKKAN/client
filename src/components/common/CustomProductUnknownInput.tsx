@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CategorySelector from './CategorySelector';
 import styled from 'styled-components';
 import { PrimitiveAtom, useAtom } from 'jotai';
