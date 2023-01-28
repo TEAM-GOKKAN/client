@@ -47,6 +47,8 @@ const Container = styled.div`
     font-weight: 400;
     font-size: var(--font-regular);
     line-height: 17.5px;
+    width: 100%;
+    white-space: pre-line;
   }
   .price {
     display: flex;
