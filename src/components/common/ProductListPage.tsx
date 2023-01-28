@@ -16,6 +16,8 @@ const ProductListPageWrapper = styled.div`
     margin-bottom: 24px;
     line-height: 23px;
     letter-spacing: -4%;
+    width: 100%;
+    white-space: pre-line;
   }
 `;
 

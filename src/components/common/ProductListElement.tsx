@@ -7,14 +7,12 @@ const ListElementContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50vw - 24px);
-  height: 45vh;
   img {
     object-fit: cover;
   }
   img,
   .none-image {
-    min-height: 70%;
-    max-height: 70%;
+    height: calc((50vw - 24px) * 1.5);
     width: 100%;
     margin-bottom: 12px;
     border: 0.5px solid var(--color-brown200);

@@ -47,15 +47,12 @@ interface MainListElementPropType {
 }
 
 const Container = styled.div`
-  min-width: calc((50vw - 24px) * 1.05);
-  height: calc(40vh * 1.05);
-  min-height: 350px;
+  width: calc((50vw - 24px) * 1.05);
   margin-right: 16px;
   display: flex;
   flex-direction: column;
   img {
-    min-height: 64%;
-    max-height: 64%;
+    height: calc((50vw - 24px) * 1.05 * 1.5);
     width: 100%;
     margin-bottom: 12px;
     object-fit: cover;
