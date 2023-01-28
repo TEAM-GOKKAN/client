@@ -1,6 +1,4 @@
-import { Client } from '@stomp/stompjs';
 import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
 import React, {
   ChangeEvent,
   Dispatch,
@@ -13,11 +11,12 @@ import styled from 'styled-components';
 import useInput from '../../../lib/hooks/useInput';
 import { bidErrMsgAtom } from '../../../store/bidAtom';
 import { insertCommas, removeCommas } from '../../../utils/handleCommas';
-import { AiOutlineWarning } from 'react-icons/ai';
 import { MdOutlineErrorOutline } from 'react-icons/md';
+import SignInPage from '../../../pages/SignInPage';
 
 interface Iprops {
   currentPrice: number | string | undefined;
+  hasBid: boolean;
   onConfirmOpen: () => void;
   onSetBidPrice: (price: number) => void;
   onSetAutoBid: Dispatch<SetStateAction<boolean>>;
@@ -25,6 +24,7 @@ interface Iprops {
 
 export default function BidSection({
   currentPrice,
+  hasBid,
   onConfirmOpen,
   onSetBidPrice,
   onSetAutoBid,
@@ -32,10 +32,13 @@ export default function BidSection({
   const [recommendedBidPrices, setRecommendedBidPrices] = useState<number[]>(
     []
   );
-
   const [bidErrMsg, setBidErrMsg] = useAtom(bidErrMsgAtom);
-
   const [value, , setValue] = useInput<string>('');
+  const [loginModal, setLoginModal] = useState(false);
+
+  const closeLoginModal = () => {
+    setLoginModal(false);
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setBidErrMsg('');
@@ -53,6 +56,7 @@ export default function BidSection({
       const accessToken = localStorage.getItem('accessToken');
       if (!accessToken) {
         setBidErrMsg(`로그인 후 응찰해주세요.`);
+        setLoginModal(true);
         return;
       }
 
@@ -97,7 +101,9 @@ export default function BidSection({
   useEffect(() => {
     if (!currentPrice) return;
 
-    const minBidPrice = Number(currentPrice) + 10000;
+    const minBidPrice = hasBid
+      ? Number(currentPrice) + 10000
+      : Number(currentPrice);
     setRecommendedBidPrices([
       minBidPrice,
       minBidPrice + 10000,
@@ -106,42 +112,44 @@ export default function BidSection({
   }, [currentPrice]);
 
   return (
-    <Container>
-      <PriceButtonsContainer>
-        {recommendedBidPrices.map((price) => (
-          <button
-            type="button"
-            key={price}
-            onClick={handleClickRecommendedBidButton}
-          >
-            {insertCommas(price)}
-          </button>
-        ))}
-      </PriceButtonsContainer>
-      <PriceInputContainer>
-        <input
-          placeholder={`${insertCommas(Number(currentPrice) + 10000)}원 이상`}
-          value={value}
-          onChange={handleInputChange}
-          className={bidErrMsg ? 'error' : ''}
-        />
-
-        {bidErrMsg && (
-          <>
-            <StyledWarningIcon />
-            <div>{bidErrMsg}</div>
-          </>
-        )}
-      </PriceInputContainer>
-      <BidButtonsContainer>
-        <BidOnceButton type="button" onClick={handleClickBidButton}>
-          1회 응찰
-        </BidOnceButton>
-        <BidAutoButton type="button" onClick={handleClickAutoBidButton}>
-          자동 응찰
-        </BidAutoButton>
-      </BidButtonsContainer>
-    </Container>
+    <>
+      <Container>
+        <PriceButtonsContainer>
+          {recommendedBidPrices.map((price) => (
+            <button
+              type="button"
+              key={price}
+              onClick={handleClickRecommendedBidButton}
+            >
+              {insertCommas(price)}
+            </button>
+          ))}
+        </PriceButtonsContainer>
+        <PriceInputContainer>
+          <input
+            placeholder={`${insertCommas(recommendedBidPrices[0] || 0)}원 이상`}
+            value={value}
+            onChange={handleInputChange}
+            className={bidErrMsg ? 'error' : ''}
+          />
+          {bidErrMsg && (
+            <>
+              <StyledWarningIcon />
+              <div>{bidErrMsg}</div>
+            </>
+          )}
+        </PriceInputContainer>
+        <BidButtonsContainer>
+          <BidOnceButton type="button" onClick={handleClickBidButton}>
+            1회 응찰
+          </BidOnceButton>
+          <BidAutoButton type="button" onClick={handleClickAutoBidButton}>
+            자동 응찰
+          </BidAutoButton>
+        </BidButtonsContainer>
+      </Container>
+      {loginModal && <SignInPage onClose={closeLoginModal} />}
+    </>
   );
 }
 

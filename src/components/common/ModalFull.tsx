@@ -40,15 +40,18 @@ const Container = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 9991;
+  margin-top: 60px;
 `;
 
 const Nav = styled.nav`
   width: 100%;
   height: 60px;
-  background: var(--color-white);
   padding: 16px;
   margin: 0 auto;
-  position: relative;
+  background: var(--color-white);
+  position: fixed;
+  top: 0;
+  z-index: 9992;
 `;
 
 const NavTitle = styled.h2`

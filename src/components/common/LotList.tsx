@@ -40,7 +40,7 @@ export default LotList;
 
 const Container = styled.div`
   .total-count {
-    margin-bottom: 19px;
+    margin-bottom: 18px;
     font-size: 14px;
     font-weight: 500;
     display: flex;

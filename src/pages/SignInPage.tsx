@@ -3,6 +3,33 @@ import KakaoButton from '../components/SignIn/KakaoButton';
 import styled from 'styled-components';
 import Modal from '../components/common/Modal';
 
+type SiginInType = {
+  setSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+interface IProps {
+  onClose?: () => void;
+}
+
+const SignInPage = ({ onClose }: IProps) => {
+  return (
+    <Modal onClose={onClose}>
+      <SignInWrapper>
+        <div className="content-holder">
+          <div className="login-title">
+            <p className="highlight">로그인</p> 또는
+            <p className="highlight">회원가입</p>
+          </div>
+          <div className="content">
+            큐레이팅된 빈티지 가구들로 곳간을 채워보세요
+          </div>
+          <KakaoButton />
+        </div>
+      </SignInWrapper>
+    </Modal>
+  );
+};
+
 const SignInWrapper = styled.div`
   .content-holder {
     display: flex;
@@ -32,28 +59,5 @@ const SignInWrapper = styled.div`
     }
   }
 `;
-
-const SignInPage = () => {
-  return (
-    <Modal>
-      <SignInWrapper>
-        <div className="content-holder">
-          <div className="login-title">
-            <p className="highlight">로그인</p> 또는
-            <p className="highlight">회원가입</p>
-          </div>
-          <div className="content">
-            큐레이팅된 빈티지 가구들로 곳간을 채워보세요
-          </div>
-          <KakaoButton />
-        </div>
-      </SignInWrapper>
-    </Modal>
-  );
-};
-
-type SiginInType = {
-  setSignIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
 export default SignInPage;

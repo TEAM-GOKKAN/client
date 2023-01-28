@@ -32,4 +32,6 @@ const Container = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: var(--font-regular);
+  font-weight: var(--weight-semi-bold);
 `;

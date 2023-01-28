@@ -85,13 +85,13 @@ interface LotInfoType {
 }
 
 const Container = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 42px;
   .title {
     font-weight: 500;
     font-size: 16px;
     line-height: 23px;
     letter-spacing: -4%;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .scroll-container {
     width: 100%;

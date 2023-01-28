@@ -78,10 +78,12 @@ export default function BidModal() {
         thumbnail={thumbnail}
         currentPrice={auctionInfo?.currentPrice}
         closeTime={auctionInfo?.auctionEndDateTime || ''}
+        hasBid={bidHistory?.length ? true : false}
       />
       {!isAuctionClosed && (
         <BidSection
           currentPrice={auctionInfo?.currentPrice}
+          hasBid={bidHistory?.length ? true : false}
           onSetBidPrice={handleSetBidPrice}
           onConfirmOpen={handleOpenConfirmModal}
           onSetAutoBid={setIsAutoBid}

@@ -131,6 +131,7 @@ export default function LotDetail({ auctionId }: IProps) {
         currentPrice={auctionInfo?.currentPrice || 0}
         closeTime={bidCloseTime}
         isTimeAdded={isTimeAdded}
+        hasBid={bidHistory?.length ? true : false}
       />
     </div>
   );
