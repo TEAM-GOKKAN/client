@@ -22,7 +22,7 @@ export default function CategoryInfo({ category }: Iprops) {
 }
 
 const Conatiner = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
 

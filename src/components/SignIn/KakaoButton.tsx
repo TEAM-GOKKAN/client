@@ -21,7 +21,7 @@ export default function KakaoButton() {
   const navigate = useNavigate();
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const url =
-    'http://3.38.59.40:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:5173/signInCheck';
+    'http://3.38.59.40:8080/oauth2/authorization/kakao?redirect_uri=http://gokkan.s3-website.ap-northeast-2.amazonaws.com/signInCheck';
 
   const handleKakaoButtonClick = (e: React.MouseEvent<HTMLImageElement>) => {
     // 토큰이 null이 아닐 때(회원 정보를 받아옴)

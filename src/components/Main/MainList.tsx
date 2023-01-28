@@ -85,7 +85,7 @@ interface LotInfoType {
 }
 
 const Container = styled.div`
-  margin-bottom: 64px;
+  margin-bottom: 42px;
   .title {
     font-weight: 500;
     font-size: 16px;

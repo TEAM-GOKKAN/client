@@ -8,9 +8,10 @@ interface Iprops {
   closeTime: string;
   currentPrice: number | string;
   isTimeAdded: boolean;
+  hasBid: boolean;
 }
 
-export default function BidBox({ closeTime, currentPrice }: Iprops) {
+export default function BidBox({ closeTime, currentPrice, hasBid }: Iprops) {
   const location = useLocation();
 
   const [remainingTime, setRemainingTime] = useState('');
@@ -47,6 +48,10 @@ export default function BidBox({ closeTime, currentPrice }: Iprops) {
   useEffect(() => {
     getPriceWithCommas(currentPrice);
   }, [currentPrice]);
+
+  useEffect(() => {
+    if (!hasBid) setPriceTitle('시작가');
+  }, [hasBid]);
 
   return (
     <Container className={remainingTime === '마감' ? 'inactive' : ''}>

@@ -38,16 +38,18 @@ export default function BidHistory({ bidHistory }: Iprops) {
         </Bid>
       );
     });
-  }, [showMore]);
+  }, [showMore, bidHistory]);
 
   return (
     <Container>
       <Title>입찰 내역</Title>
       <BidList>{bidHistoryList}</BidList>
-      <ShowMoreBtn type="button" onClick={toggleShowMoreBtn}>
-        <span>더보기</span>
-        <IoIosArrowDown className={showMore ? 'active' : ''} />
-      </ShowMoreBtn>
+      {bidHistory.length > 3 && (
+        <ShowMoreBtn type="button" onClick={toggleShowMoreBtn}>
+          <span>더보기</span>
+          <IoIosArrowDown className={showMore ? 'active' : ''} />
+        </ShowMoreBtn>
+      )}
     </Container>
   );
 }

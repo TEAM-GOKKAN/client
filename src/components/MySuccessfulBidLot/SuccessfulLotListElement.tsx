@@ -92,7 +92,7 @@ const Container = styled.div`
   }
   .commit-price {
     width: 100%;
-    padding: 4px 0px;
+    padding: 6px 0px;
     background-color: var(--color-orange);
     color: var(--color-brown100);
     display: flex;

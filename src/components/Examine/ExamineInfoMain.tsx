@@ -32,19 +32,18 @@ export default function ExamineInfoMain(props: Iprops) {
         ))}
       </ImageSlider>
       <ProductName>{itemName}</ProductName>
-      <LotNumber>{`No.${itemNumber}`}</LotNumber>
     </Container>
   );
 }
 
 const Container = styled.div`
-  margin-bottom: 18px;
+  margin-bottom: 42px;
   .img-title {
-    margin: 10px 0px 8px 0px;
+    margin: 36px 0px 10px 0px;
   }
   img {
     height: 255px;
-    object-fit: fill;
+    object-fit: cover;
   }
 `;
 

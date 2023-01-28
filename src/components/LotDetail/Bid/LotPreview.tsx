@@ -8,6 +8,7 @@ interface Iprops {
   thumbnail: string | undefined;
   currentPrice: number | string | undefined;
   closeTime: string;
+  hasBid: boolean;
 }
 
 export default function LotPreview({
@@ -15,6 +16,7 @@ export default function LotPreview({
   thumbnail,
   currentPrice,
   closeTime,
+  hasBid,
 }: Iprops) {
   const { month, day, hour, min } = convertDateFormat(closeTime);
 
@@ -26,7 +28,7 @@ export default function LotPreview({
       <LotInfo>
         <LotTitle>{lotName}</LotTitle>
         <CurrentPrice>
-          <div>현재가</div>
+          <div>{hasBid ? '현재가' : '시작가'}</div>
           <div>
             <span>{insertCommas(String(currentPrice))}</span>
             <span>원</span>
