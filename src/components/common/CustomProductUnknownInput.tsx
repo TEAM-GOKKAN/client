@@ -34,23 +34,18 @@ const CustomProductUnknownInput = ({
   title,
   storeAtom,
   placeHolder,
+  firstStoreAtom,
 }: UnknownInputPropsType) => {
-  const [category, setCategory] = useState('');
   const [storeValue, setStoreValue] = useAtom(storeAtom);
+  const [firstStoreValue, setFirstStoreValue] = useAtom(firstStoreAtom);
 
   const handleFirstCategoryChange = (newValue: unknown) => {
-    setCategory(Object(newValue)?.value);
+    setFirstStoreValue(Object(newValue)?.value);
   };
 
   const handleTargetInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStoreValue(e.target.value);
   };
-
-  useEffect(() => {
-    if (storeValue !== '') {
-      setCategory('직접입력');
-    }
-  }, [storeValue]);
 
   return (
     <CustomUnknownInputWrapper>
@@ -58,9 +53,9 @@ const CustomProductUnknownInput = ({
       <CategorySelector
         options={firstCategoryOptions}
         onChange={handleFirstCategoryChange}
-        targetValue={{ value: category, label: category }}
+        targetValue={{ value: firstStoreValue, label: firstStoreValue }}
       />
-      {category === '직접입력' && (
+      {firstStoreValue === '직접입력' && (
         <input
           placeholder={placeHolder}
           value={storeValue}
@@ -75,6 +70,7 @@ type UnknownInputPropsType = {
   title: string;
   storeAtom: PrimitiveAtom<string>;
   placeHolder: string;
+  firstStoreAtom: PrimitiveAtom<string>;
 };
 
 export default CustomProductUnknownInput;
