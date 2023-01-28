@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useAtom, PrimitiveAtom } from 'jotai';
 
@@ -9,6 +9,7 @@ interface ExaminePriceInputType {
 
 const ExaminePriceInput = ({ title, targetAtom }: ExaminePriceInputType) => {
   const [price, setPrice] = useAtom(targetAtom);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleStartValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     let targetValue = e.target.value;
@@ -17,14 +18,20 @@ const ExaminePriceInput = ({ title, targetAtom }: ExaminePriceInputType) => {
     setPrice(targetValue);
   };
 
+  const handleInputFocus = () => {
+    if (!containerRef.current) return;
+    containerRef.current.scrollIntoView({ block: 'start', inline: 'nearest' });
+  };
+
   return (
-    <Container>
+    <Container ref={containerRef}>
       <div className="title">{title}</div>
       <div className="price-holder">
         <input
           type="text"
           pattern="\d*"
           onChange={handleStartValue}
+          onFocus={handleInputFocus}
           value={price}
           placeholder={'0'}
         />

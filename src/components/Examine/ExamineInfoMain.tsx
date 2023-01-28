@@ -54,6 +54,7 @@ const ProductName = styled.h1`
   letter-spacing: normal;
   width: 100%;
   white-space: pre-line;
+  line-height: 1.2;
 `;
 
 const LotNumber = styled.span`
