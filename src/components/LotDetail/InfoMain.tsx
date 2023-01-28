@@ -36,9 +36,12 @@ const Container = styled.div`
 
 const ProductName = styled.h1`
   font-size: var(--font-x-large);
+  line-height: calc(var(--font-x-large) * 1.2);
   margin-top: 32px;
   margin-bottom: 6px;
   letter-spacing: normal;
+  width: 100%;
+  white-space: pre-line;
 `;
 
 const LotNumber = styled.span`
