@@ -49,13 +49,10 @@ interface CategorySearchListItemPropType {
 
 const Container = styled.li`
   width: calc(50vw - 24px);
-  height: 45vh;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
   img {
-    min-height: 70%;
-    max-height: 70%;
+    height: calc((50vw - 24px) * 1.5);
     width: 100%;
     margin-bottom: 12px;
     object-fit: cover;
@@ -65,6 +62,8 @@ const Container = styled.li`
     font-weight: 400;
     font-size: 14px;
     line-height: 17.5px;
+    width: 100%;
+    white-space: pre-line;
   }
   .price {
     display: flex;
