@@ -50,5 +50,4 @@ const LotListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   column-gap: 16px;
-  row-gap: 48px;
 `;

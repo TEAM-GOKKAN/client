@@ -7,6 +7,7 @@ const ListElementContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50vw - 24px);
+  margin-bottom: 48px;
   img {
     object-fit: cover;
   }

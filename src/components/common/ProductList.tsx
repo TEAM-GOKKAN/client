@@ -16,7 +16,7 @@ const ProductListWrapper = styled.div`
 const ProductListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  column-gap: 15px;
+  column-gap: 16px;
 `;
 
 const ProductList = ({

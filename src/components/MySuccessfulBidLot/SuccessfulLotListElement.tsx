@@ -42,6 +42,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50vw - 24px);
+  margin-bottom: 48px;
   img {
     height: calc((50vw - 24px) * 1.5);
     width: 100%;
