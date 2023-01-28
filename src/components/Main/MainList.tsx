@@ -98,6 +98,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
+    overflow-y: hidden;
+    height: 100%;
     /* hide scrollbar */
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
