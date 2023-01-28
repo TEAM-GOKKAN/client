@@ -28,6 +28,7 @@ const AddressWrapper = styled.div`
       font-size: 15px;
       line-height: 22px;
       letter-spacing: -4%;
+      overflow-x: scroll;
     }
     button {
       width: 80px;

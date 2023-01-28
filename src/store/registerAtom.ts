@@ -20,7 +20,9 @@ const firstDepthCategoryAtom = atom('');
 const secondDepthCategoryAtom = atom('');
 const productNameAtom = atom('');
 const productBrandAtom = atom('');
+const productBrandFirstAtom = atom('');
 const productDesignerAtom = atom('');
+const productDesignerFirstAtom = atom('');
 
 // register page three
 const productStyleAtom = atom<string[]>([]);
@@ -191,6 +193,8 @@ const resetProductInfoAtom = atom(null, (get, set, data) => {
   set(productDetailConditionAtom, '');
   set(productDescriptionAtom, '');
   set(productStartPriceAtom, '');
+  set(productBrandFirstAtom, '');
+  set(productDesignerFirstAtom, '');
 });
 
 export {
@@ -220,6 +224,8 @@ export {
   productGetInfoAtom,
   productSetInfoAtom,
   resetProductInfoAtom,
+  productBrandFirstAtom,
+  productDesignerFirstAtom,
 };
 
 type ImageUrl = {

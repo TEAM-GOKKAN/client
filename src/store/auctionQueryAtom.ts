@@ -1,6 +1,5 @@
 import { atomsWithInfiniteQuery } from 'jotai-tanstack-query';
 import { atom } from 'jotai';
-import customAxios from '../utils/customAxios';
 import axios from 'axios';
 
 const categoryAtom = atom('');
