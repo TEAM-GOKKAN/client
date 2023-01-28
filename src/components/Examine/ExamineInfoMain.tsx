@@ -52,6 +52,8 @@ const ProductName = styled.h1`
   margin-top: 32px;
   margin-bottom: 6px;
   letter-spacing: normal;
+  width: 100%;
+  white-space: pre-line;
 `;
 
 const LotNumber = styled.span`
