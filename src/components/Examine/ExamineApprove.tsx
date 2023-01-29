@@ -86,6 +86,8 @@ const Container = styled.div`
     }
   }
   .expected-price {
+    position: fixed;
+    width: calc(100% - 32px);
     &::before {
       content: '';
       width: 100%;
