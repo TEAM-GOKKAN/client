@@ -40,7 +40,7 @@ const ExamineDeny = () => {
 export default ExamineDeny;
 
 const Container = styled.div`
-  padding-bottom: 70vh;
+  padding-bottom: 30vh;
   .comment-holder {
     display: flex;
     flex-direction: column;
