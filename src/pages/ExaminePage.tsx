@@ -26,6 +26,7 @@ export default ExaminePage;
 
 const Container = styled.div`
   position: fixed;
-  width: 100%;
+  width: calc(100% - 32px);
   bottom: 0;
+  height: calc(100% - 84px);
 `;
