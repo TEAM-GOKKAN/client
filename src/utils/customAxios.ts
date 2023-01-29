@@ -51,10 +51,7 @@ customAxios.interceptors.response.use(
           localStorage.setItem('refreshToken', refreshToken);
           localAccessToken = accessToken;
           localRefreshToken = refreshToken;
-          console.log(accessToken);
-          console.log(refreshToken);
           originalConfig.headers.Authorization = 'Bearer ' + accessToken;
-
           return customAxios(originalConfig);
         } catch (_error) {
           // refreshToken이 만료되었을 때, 로그아웃이 되도록 함
