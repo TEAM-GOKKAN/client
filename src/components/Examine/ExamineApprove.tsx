@@ -55,6 +55,7 @@ const ExamineApprove = () => {
 export default ExamineApprove;
 
 const Container = styled.div`
+  padding-bottom: 70vh;
   .comment-holder {
     display: flex;
     flex-direction: column;

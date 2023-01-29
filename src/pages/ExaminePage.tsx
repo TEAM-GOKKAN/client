@@ -12,21 +12,12 @@ const ExaminePage = () => {
   const [isApprove] = useAtom(examineCheckAtom);
   return (
     <ModalFull title="감정평가">
-      <Container>
-        <Examinecheck />
-        {isApprove === 'COMPLETE' && <ExamineApprove />}
-        {isApprove === 'RETURN' && <ExamineDeny />}
-        <ExamineSubmitButton />
-      </Container>
+      <Examinecheck />
+      {isApprove === 'COMPLETE' && <ExamineApprove />}
+      {isApprove === 'RETURN' && <ExamineDeny />}
+      <ExamineSubmitButton />
     </ModalFull>
   );
 };
 
 export default ExaminePage;
-
-const Container = styled.div`
-  position: fixed;
-  width: calc(100% - 32px);
-  bottom: 0;
-  height: calc(100% - 84px);
-`;
