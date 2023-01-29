@@ -55,6 +55,7 @@ const ExamineApprove = () => {
 export default ExamineApprove;
 
 const Container = styled.div`
+  position: sticky;
   .comment-holder {
     display: flex;
     flex-direction: column;
@@ -86,8 +87,6 @@ const Container = styled.div`
     }
   }
   .expected-price {
-    position: fixed;
-    width: calc(100% - 32px);
     &::before {
       content: '';
       width: 100%;
