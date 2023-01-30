@@ -13,6 +13,7 @@ const StyleFilter = () => {
     'Space Age',
     'Memphis',
     'Industrial',
+    'Contemporary',
   ];
 
   const handleStyleItemClick = (item: string) => {
