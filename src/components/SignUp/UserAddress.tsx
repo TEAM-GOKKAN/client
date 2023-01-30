@@ -23,13 +23,14 @@ const AddressWrapper = styled.div`
     .address {
       width: calc(100% - 84px);
       height: 42px;
-      border: 1px solid var(--color-brown100);
       padding: 10px 12px;
       font-weight: 400;
       font-size: 15px;
       line-height: 22px;
       letter-spacing: -4%;
       overflow-x: scroll;
+      overflow-y: hidden;
+      background-color: var(--color-brown100);
     }
     button {
       width: 80px;
